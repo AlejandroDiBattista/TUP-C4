@@ -1,0 +1,39 @@
+#titulo-principal {
+    color:green;
+    font-size: 40px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.angosto {
+    width: 20em;
+}
+.verde {
+    color: green;
+}
+p.angosto {
+    width: 300px;
+}
+
+h1.angosto {
+    width: 200px;
+}
+
+
+h1 > b {
+    color: blue
+}
+ul b {
+    color: red;
+}
+.principal {
+    color: blue;
+}
+.secundario {
+    color: green;
+}
+button {
+    margin: 10px;
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 16px;
+}
