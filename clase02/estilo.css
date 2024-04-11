@@ -11,9 +11,10 @@ main {
 
 .persona {
     border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px;
     border-radius: 5px;
+    width: 200px;
+    padding: 16px;
+    margin-bottom: 10px;
 }
 
 .etiqueta {
