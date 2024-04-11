@@ -1,39 +1,25 @@
-#titulo-principal {
-    color:green;
-    font-size: 40px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.angosto {
-    width: 20em;
-}
-.verde {
-    color: green;
-}
-p.angosto {
-    width: 300px;
-}
-
-h1.angosto {
-    width: 200px;
-}
-
-
-h1 > b {
-    color: blue
-}
-ul b {
-    color: red;
-}
-.principal {
-    color: blue;
-}
-.secundario {
-    color: green;
-}
-button {
-    margin: 10px;
+main {
+    margin: 0 auto;
     padding: 20px;
-    border-radius: 15px;
-    font-size: 16px;
+}
+
+.persona {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 200px;
+    padding: 16px;
+    margin-bottom: 10px;
+}
+
+.etiqueta {
+    font-weight: lighter;
+    color: gray;
+    width: 100px;
+    /* display: block; */
 }

@@ -1,33 +1,21 @@
-function hijo(i) {
-    return `<p>Hijo ${i}</>`
-}
-
 function valor(etiqueta, valor) {
-    return `<div class="etiqueta">${etiqueta}: <b>${valor}</b></<div>`
+    return `
+    <div>
+        <span class="etiqueta">${etiqueta}:</span> ${valor}</b>
+    </div>
+    `
 }
 
 function persona(p) {
-    return valor("Apellido", p.persona) + valor("Nombre", p.nombre)
+    return `
+    <div class="persona">
+        ${valor("Apellido", p.apellido)}
+        ${valor("Nombre", p.nombre)}
+    </div>
+    `
 }
 
-function saludar() {
-    let s = document.getElementById("saludo")
-    
-    let nombres = [
-        {
-            nombre: "JUna", apellido: "PErez"
-        },
-        {
-            nombre: "Maria", apellido: "Diaz"
-        },
-        {
-            nombre: "Jose", apellido: "Diaz"
-        },
-        {
-            nombre: "Maria", apellido: "Luz"
-        }
-    ]
-    s.innerHTML = nombres.map(persona).join()
+function generarListado(personas) {
+    let s = document.getElementById("lista")
+    s.innerHTML = personas.map(persona).join('')
 }
-
-console.log("Hola Mundo")
