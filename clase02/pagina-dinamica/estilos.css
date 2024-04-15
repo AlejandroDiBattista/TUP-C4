@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
@@ -5,14 +9,21 @@ body {
 
 main {
     margin: 0 auto;
-    padding: 20px;
+    padding: 16px;
     width: 300px;
+}
+
+#busqueda {
+    margin-bottom: 10px; 
+    width: 275px; 
+    border: 1px solid;
+    border-radius: 50px;
+    padding: 5px 12px;
 }
 
 .persona {
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 200px;
     padding: 16px;
     margin-bottom: 10px;
 }
@@ -21,5 +32,5 @@ main {
     font-weight: lighter;
     color: gray;
     width: 100px;
-    /* display: block; */
+    display: block;
 }
