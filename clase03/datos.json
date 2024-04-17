@@ -1,0 +1,12 @@
+[
+    { "id": 1, "nombre": "Coca", "precio": 10 },
+    { "id": 2, "nombre": "Pepsi", "precio": 13 },
+    { "id": 3, "nombre": "Fanta", "precio": 12 },
+    { "id": 4, "nombre": "Sprite", "precio": 11 },
+    { "id": 5, "nombre": "7up", "precio": 10 },
+    { "id": 6, "nombre": "Mirinda", "precio": 14 },
+    { "id": 7, "nombre": "Manzanita", "precio": 15 },
+    { "id": 8, "nombre": "Boing", "precio": 9 },
+    { "id": 9, "nombre": "Jumex", "precio": 8 },
+    { "id": 10, "nombre": "Del Valle", "precio": 10 }
+]
