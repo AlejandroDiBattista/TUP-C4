@@ -4,8 +4,10 @@ let a = "Hola"          // Comillas dobles
 let b = 'Chau'          // Comillas simples
 let c = `Hola  Mundo`   // Comillas invertidas | Template string
 
-let textoMultiLinea = `Hola
-Mundo`
+let textoMultiLinea = `
+Hola
+Mundo
+`
 
 let e = "1 + 2 = " + (1 + 2) //> 1 + 2 = 3
 e = `1 + 2 = ${1 + 2}`       //> 1 + 2 = 3 
