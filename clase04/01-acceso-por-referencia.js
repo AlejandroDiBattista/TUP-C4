@@ -56,8 +56,6 @@ for(let clave in persona)       // for(in)
 
 copiaPersona = {...persona} // Copia objeto 
 
-
-
 function copiarArray(lista){
     return [...lista]
 }
@@ -145,6 +143,3 @@ f = crearOperacion("*")
 f(2,3) //> 6
 
 sumar2(5,7) //> 12
-
-
-

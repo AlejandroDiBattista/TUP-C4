@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <title>Demo DOM</title>
+    <style>
+        table {
+            width: 100%;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        h1 {
+            color: red;
+        }
+
+        h2 {
+            color: green;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        let dibujar = true;
+        let productos = [
+            { id: 1, nombre: "Coca Cola", precio: 100, cantidad: 2 },
+            { id: 2, nombre: "Pepsi", precio: 90, cantidad: 3 },
+            { id: 3, nombre: "Fanta", precio: 80, cantidad: 30 },
+        ]
+        let carrito = [
+            { id: 1, cantidad: 2 },
+            { id: 2, cantidad: 3 },
+        ]
+
+        function total() {
+            let total = 0
+            for (let i = 0; i < carrito.length; i++) {
+                let item = carrito[i]
+                let producto = productos.find(p => p.id == item.id)
+                total += producto.precio * item.cantidad
+            }
+            return total
+        }
+
+        function agregarCarrito(id) {
+            let item = carrito.find(i => i.id == id)
+            if (item) {
+                item.cantidad++
+            } else {
+                carrito.push({ id: id, cantidad: 1 })
+            }
+            // Decrementa cantidad en productos
+            let producto = productos.find(p => p.id == id)
+            producto.cantidad--
+            // dibujar = true 
+            mostrarTodo()
+        }
+
+        function mostrarCarrito() {
+            let html = "<ul>";
+            for (let i = 0; i < carrito.length; i++) {
+                let item = carrito[i];
+                let producto = productos.find(p => p.id == item.id);
+                html += `<li>${producto.nombre} - ${item.cantidad} - ${producto.precio * item.cantidad}</li>`;
+            }
+            html += "</ul>";
+            html += `<p>Total: ${total()}</p>`;
+            return html;
+        }
+        function mostrarProductos() {
+            let html = "<ul>";
+            for (let producto of productos.filter(p => p.cantidad > 0)) {
+                html += `<li>${producto.nombre} - ${producto.precio} 
+                            <div>Hay ${producto.cantidad}</div>
+                         <button onclick="agregarCarrito(${producto.id})">Comprar</button>
+                         </li>`;
+            }
+            html += "</ul>";
+            return html;
+        }
+        function mostrarTodo(){
+            let listado = document.getElementById("listado");
+            listado.innerHTML = mostrarProductos();
+            console.log(mostrarProductos())
+            let carrito = document.getElementById("carrito");
+            carrito.innerHTML = mostrarCarrito();
+        }
+        setInterval(()=>{
+            if(dibujar){
+                mostrarTodo();
+            }
+            dibujar = false
+        }, 1);
+            </script>
+</head>
+
+<body style="color:blue">
+    <h1>Supermecadito</h1>
+    <table>
+        <tr>
+            <td>
+                <h2>Productos</h2>
+                <div id="listado"></div>
+            </td>
+            <td>
+                <h2>Carrito</h2>
+                <div id="carrito"></div>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
