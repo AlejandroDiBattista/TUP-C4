@@ -42,12 +42,13 @@
         }
     </style>
     <script>
-        let dibujar = true;
+        let debeActualizar = true;
         let productos = [
             { id: 1, nombre: "Coca Cola", precio: 100, cantidad: 2 },
             { id: 2, nombre: "Pepsi", precio: 90, cantidad: 3 },
             { id: 3, nombre: "Fanta", precio: 80, cantidad: 30 },
         ]
+
         let carrito = [
             { id: 1, cantidad: 2 },
             { id: 2, cantidad: 3 },
@@ -55,67 +56,67 @@
 
         function total() {
             let total = 0
-            for (let i = 0; i < carrito.length; i++) {
-                let item = carrito[i]
-                let producto = productos.find(p => p.id == item.id)
-                total += producto.precio * item.cantidad
+            for (let item of carrito) {
+                let producto = productos.find(p => p.id == item.id);
+                total += producto.precio * item.cantidad;
             }
             return total
         }
 
         function agregarCarrito(id) {
-            let item = carrito.find(i => i.id == id)
+            let item = carrito.find(item => item.id == id)
             if (item) {
                 item.cantidad++
             } else {
                 carrito.push({ id: id, cantidad: 1 })
             }
-            // Decrementa cantidad en productos
+
             let producto = productos.find(p => p.id == id)
             producto.cantidad--
-            // dibujar = true 
-            mostrarTodo()
+            
+            actualizar()
         }
 
-        function mostrarCarrito() {
-            let html = "<ul>";
-            for (let i = 0; i < carrito.length; i++) {
-                let item = carrito[i];
-                let producto = productos.find(p => p.id == item.id);
-                html += `<li>${producto.nombre} - ${item.cantidad} - ${producto.precio * item.cantidad}</li>`;
+        // Genera el HTML del carrito
+        function Carrito() {
+            let html = `<ul>`
+            for(let item of carrito) {
+                let producto = productos.find(p => p.id == item.id)
+                html += `<li>${item.cantidad} ${producto.nombre} $${producto.precio * item.cantidad}</li>`
             }
-            html += "</ul>";
-            html += `<p>Total: ${total()}</p>`;
-            return html;
+            html += `</ul>`
+            html += `<p>Total: <b>$${total()}</b></p>`
+            return html
         }
-        function mostrarProductos() {
-            let html = "<ul>";
+
+        // Genera el HTML de los productos
+        function Productos() {
+            let html = `<ul>`
             for (let producto of productos.filter(p => p.cantidad > 0)) {
-                html += `<li>${producto.nombre} - ${producto.precio} 
-                            <div>Hay ${producto.cantidad}</div>
-                         <button onclick="agregarCarrito(${producto.id})">Comprar</button>
-                         </li>`;
+                html += `<li>${producto.nombre} a $${producto.precio} 
+                            <div>Quedan ${producto.cantidad} unidades</div>
+                            <button onclick="agregarCarrito(${producto.id})">Comprar</button>
+                         </li>`
             }
-            html += "</ul>";
-            return html;
+            html += `</ul>`
+            return html
         }
-        function mostrarTodo(){
-            let listado = document.getElementById("listado");
-            listado.innerHTML = mostrarProductos();
-            console.log(mostrarProductos())
-            let carrito = document.getElementById("carrito");
-            carrito.innerHTML = mostrarCarrito();
+
+        function actualizar(){
+            if(!debeActualizar) return
+            let listado = document.getElementById(`listado`)
+            listado.innerHTML = Productos()
+
+            let carrito = document.getElementById(`carrito`)
+            carrito.innerHTML = Carrito()
+            debeActualizar = false
         }
-        setInterval(()=>{
-            if(dibujar){
-                mostrarTodo();
-            }
-            dibujar = false
-        }, 1);
-            </script>
+    
+        setInterval(actualizar, 1);
+    </script>
 </head>
 
-<body style="color:blue">
+<body>
     <h1>Supermecadito</h1>
     <table>
         <tr>
