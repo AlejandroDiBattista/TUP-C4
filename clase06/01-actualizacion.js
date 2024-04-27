@@ -1,3 +1,5 @@
+// Funciones para agregar, cambiar y borrar productos usando inmutabilidad
+
 let productos = [
     {id: 1, nombre: "Coca Cola",  precio: 200},
     {id: 2, nombre: "Pepsi Cola", precio: 150},
@@ -5,8 +7,6 @@ let productos = [
     {id: 4, nombre: "Mirinda",    precio: 120},
     {id: 5, nombre: "Sprite",     precio: 180},
 ]
-
-// Funciones para agregar, cambiar y borrar productos usando inmutabilidad
 
 const agregar = (productos, producto)=>
     [...productos, producto]

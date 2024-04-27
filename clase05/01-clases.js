@@ -11,9 +11,11 @@ class Contacto {
     get tieneTelefono(){
         return this.telefonos.length > 0;
     }
+
     agregarDomicilio(domicilio) {
         this.domicilios.push(domicilio);
     }
+
     get tieneDomicilio(){
         return this.domicilios.length > 0;
     }
@@ -58,9 +60,11 @@ class Telefono {
         this.numero = numero;
         this.tipo = tipo;
     }
+
     toString() {
         return `${this.numero} - ${this.tipo}`;
     }
+
     render(){
         return `<div>${this.numero} - ${this.tipo}</div>`;
     }
@@ -72,9 +76,11 @@ class Domicilio {
         this.numero = numero;
         this.localidad = localidad;
     }
+
     toString() {
         return `${this.calle} ${this.numero} - ${this.localidad}`;
     }
+    
     render(){
         return `<div>${this.calle} ${this.numero} - ${this.localidad}</div>`;
     }

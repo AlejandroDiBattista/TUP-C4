@@ -1,5 +1,7 @@
 /// Objetos (Coleccion de propiedades o atributos) | Diccionarios | Hash | Map
-
+// import { datos } from "./datos.json"
+let datos = require("./datos.json")
+console.log(datos)
 
 // Tres variables relacionas 
 let nombre = "Juan"

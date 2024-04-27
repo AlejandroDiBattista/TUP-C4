@@ -28,7 +28,6 @@ true.toString()         //> "true"
 
 juan.toString()
 
-
 nombreCompleto({nombre: "Maria", apellido: "De las nieve"})
 // Maria De las nieves
 
