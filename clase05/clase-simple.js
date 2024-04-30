@@ -1,6 +1,6 @@
 class Punto2D {
-    #x = 0;
-    #y = 0; 
+    #x = 0
+    #y = 0
     constructor(x, y) {
         this.#x = x;
         this.#y = y;
@@ -15,22 +15,23 @@ class Punto2D {
     }
 
     get longitud() {
-        return Math.sqrt(this.#x ** 2 + this.#y ** 2);
+        return Math.sqrt(this.#x ** 2 + this.#y ** 2)
     }
 
     distancia(otro){
-        return Math.sqrt((this.#x - otro.#x) ** 2 + (this.#y - otro.#y) ** 2);#
+        return Math.sqrt((this.#x - otro.#x) ** 2 + (this.#y - otro.#y) ** 2)
     }
 
     desplazar(dx, dy){
-        return new Punto2D(x + dx, y + dy);
+        return new Punto2D(x + dx, y + dy)
     }
 }
 
 class Punto3D extends Punto2D {
+    #z = 0;
     constructor(x, y, z){
         super(x, y);
-        this.#z = z;
+        this.#z = z
     }
 
     get longitud(){

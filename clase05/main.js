@@ -7,7 +7,8 @@ const Linea = ({ id, cantidad, nombre, precio }) =>
      </li>`
 
 const Carrito = () =>
-    `<ul>
+    `<h4>Carrito</h4>
+    <ul>
         ${listaCarrito().map(item => Linea(item)).join('')}
      </ul>
      <p>Total: <b>$${total()}</b></p>`

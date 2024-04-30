@@ -1,8 +1,9 @@
 function Telefono({ numero, tipo }){
-    return `<p>${numero} (${tipo})</p>`;
+    return `<p>${numero} (${tipo})</p>`
 }
+
 function Domicilio({ calle, numero, localidad }){
-    return `<p>${calle} ${numero} (${localidad})</p>`;
+    return `<p>${calle} ${numero} (${localidad})</p>`
 }
 
 function Persona({ nombre, apellido, telefonos, domicilios }){
@@ -18,7 +19,7 @@ function Persona({ nombre, apellido, telefonos, domicilios }){
             <h3>Domicilios</h3>
             ${domicilios.map(domicilio => `<li>${Domicilio(domicilio)}</li>`).join('')}
         </ul>`}
-    `;
+    `
 }
 
 let persona = {
