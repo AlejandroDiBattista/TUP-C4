@@ -5,3 +5,36 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.contactos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    font-weight: bold;
+}
+
+.contacto-card {
+    background-color: #cccdff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    text-align: center;
+    width: calc(20% - 30px); /* Restamos el espacio entre las tarjetas */
+}
+
+.contacto-card h2 {
+    margin-bottom: 10px;
+}
+
+.contacto-card p {
+    margin: 0;
+}
