@@ -1,7 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Inconsolata:wght@200..900&display=swap');
+:root{
+    --lightblue: #c8d3d8;
+    --blue: #003865;
+    --grey: #e3ecf1;
+}
 body {
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    background-color: var(--gray);
     margin: 0;
     padding: 0;
+    font-family: "Inconsolata";
     box-sizing: border-box;
+}
+.title {
+    color: white;
+    font-family:"Fugaz One";
+}
+.card {
+    background-color: white;
+    color: var(--blue);
+    width: calc(50% - 20px);
+    margin: 8px;
+    transition: .5s;
+    border-radius: 30px;
+}
+.card:hover {
+    color: white;
+    font-weight: bold;
+    background-color: var(--blue);
+    transform: scale(1.05);
+    border: 2px solid white
+}
+.contactos-container{
+    width: 60vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.agenda-container {
+    background-color: var(--blue);
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
