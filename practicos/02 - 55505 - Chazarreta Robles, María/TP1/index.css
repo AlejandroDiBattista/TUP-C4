@@ -1,7 +1,45 @@
+
 body {
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+    
+  
+  .agenda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  
+  .contact-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px; 
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif; 
+    color: #333;
+  }
+  
+  /* Estilos para el nombre del contacto */
+  .contact-card h2 {
+    margin-bottom: 10px;
+    font-size: 20px; /* Tamaño de fuente ajustado */
+    color: #222; /* Color de texto más oscuro */
+  }
+  
+  /* Estilos para el teléfono del contacto */
+  .contact-card p {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    color: #555; /* Color de texto más oscuro */
+  }
+  
+  h1{font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333; /* Color de texto más formal */
+
+  }
