@@ -2,14 +2,14 @@ import React from 'react';
 import './App.css';
 
 const contactos = [
-  { id: 1, nombre: 'Ldesma', apellido: 'Facundo', tel: "3813839933" },
-  { id: 2, nombre: 'Ana', apellido: 'Gómez', tel: "3813839933"},
-  { id: 3, nombre: 'Flor', apellido: 'Chazarreta', tel: "3813839933" },
+  { id: 1, nombre: 'Ledesma', apellido: 'Facundo', tel: '3813839933' },
+  { id: 2, nombre: 'Ana', apellido: 'Gómez', tel: '3813839933'},
+  { id: 3, nombre: 'Flor', apellido: 'Chazarreta', tel: '3813839933' },
 ];
 
-const Contacto = ({ contacto: { nombre, apellido } }) => (
+const Contacto = ({ contacto: { nombre, apellido,tel } }) => (
   <li>
-    {nombre} <b>{apellido}</b>
+    {nombre} <b>{apellido}</b><b>{tel}</b>
   </li>
 );
 
