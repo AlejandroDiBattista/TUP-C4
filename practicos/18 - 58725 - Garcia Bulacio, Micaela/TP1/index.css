@@ -1,7 +1,47 @@
 body {
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; 
+    font-family:"Georgia", serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
+  }
+  
+  .Agenda {
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+    background-color: #eff3fb; 
+    padding: 20px;
+    border: 1px solid #ddd; 
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .contactos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .Tarjeta {
+    background-color: #fff; 
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #a8a5ff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .Tarjeta h2 {
+    font-weight: bold;
+    margin-top: 0;
+    color: #333; 
+  }
+  
+  .Tarjeta p {
+    font-size: 16px;
+    color: #666; 
+  }
+  
