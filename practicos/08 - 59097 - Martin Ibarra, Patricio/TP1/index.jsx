@@ -11,7 +11,7 @@ const contactos = [
 const Contacto = ({nombre, apellido, telefono}) => (
     <div>
         <h2>{nombre} <b>{apellido}</b></h2>
-        <p>Telefeno: {telefono}</p>
+        <p>Telefono: {telefono}</p>
     </div>
 ) 
 
@@ -27,7 +27,7 @@ const App = () =>  (
     <div>
         <div class="tarjeta">
         <h1>Trabajo Practico</h1>
-        <p>¡hecho con React!</p>
+        <p>¡Hecho con React!</p>
         <h1>Agenda</h1>       
         </div>
 
