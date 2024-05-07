@@ -12,7 +12,6 @@
 
     <title>Demo 1</title>
     <style>
-        /* reset */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -41,29 +40,29 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: start;
+        }
 
-            >div {
-                text-align: center;
-                width: 240px;
-                height: 96px;
-                position: relative;
+        .agenda > div {
+            text-align: center;
+            width: 240px;
+            height: 96px;
+            position: relative;
+        }
 
-                span {
-                    position: absolute;
-                    top: 8px;
-                    right: 8px;
-                }
+        .agenda > div span {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
 
-                div {
-                    margin-top: 25px;
-                    font-size: 20px;
-                }
+        .agenda > div div {
+            margin-top: 25px;
+            font-size: 20px;
+        }
 
-                div:last-child {
-                    text-align: right;
-                    font-size: 14px;
-                }
-            }
+        .agenda > div div:last-child {
+            text-align: right;
+            font-size: 14px;
         }
 
         form {
@@ -71,35 +70,35 @@
             padding: 16px;
             margin: 8px;
             border-radius: 8px;
+        }
 
-            label {
-                display: block;
-                font-size: 12px;
-                color: #aaa;
-            }
+        form label {
+            display: block;
+            font-size: 12px;
+            color: #aaa;
+        }
 
-            input {
-                width: calc(100% - 8px);
-                border-radius: 4px;
-                margin: 4px 0;
-                border: 1px solid #ccc;
-                padding: 4px;
-                font-size: 16px;
-            }
+        form input {
+            width: calc(100% - 8px);
+            border-radius: 4px;
+            margin: 4px 0;
+            border: 1px solid #ccc;
+            padding: 4px;
+            font-size: 16px;
+        }
 
-            div {
-                display: flex;
-                justify-content: space-between;
-                margin-top: 16px;
+        form div {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
 
-                button {
-                    padding: 8px 16px;
-                    border: none;
-                    border-radius: 4px;
-                    font-size: 14px;
-                    cursor: pointer;
-                }
-            }
+        form button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -128,31 +127,152 @@
             { id: 18, nombre: 'Matias', apellido: 'Luna', telefono: '(381) 123-4567', favorito: false },
             { id: 19, nombre: 'Cecilia', apellido: 'Carrizo', telefono: '(381) 123-4567', favorito: true },
             { id: 20, nombre: 'Facundo', apellido: 'Paez', telefono: '(381) 123-4567', favorito: false }
-        ]
+        ];
     </script>
 
     <script type="text/babel">
-        const { createRoot } = ReactDOM
+        const { useState } = React;
+        const { render } = ReactDOM;
 
-        const Contacto = ({ nombre, apellido, telefono }) =>
-            <div className="card">
-                <div>{nombre} <b>{apellido}</b></div>
-                <div>{telefono}</div>
-            </div>
-
-        const Agenda = ({ datos }) =>
-            <div className="agenda">
-                {datos.map(contacto => <Contacto key={contacto.id} {...contacto} />)}
-            </div>
-
-        const App = () =>
-            <div>
-                <h1>Agenda</h1>
-                <Agenda datos={datos} />
-            </div>
-
-        const root = createRoot(document.getElementById('root'))
-        root.render(<App />);
+        const Contacto = ({ contacto, eliminarContacto, toggleFavorito, editarContacto }) => {
+            const [editing, setEditing] = useState(false);
+            const [editedNombre, setEditedNombre] = useState(contacto.nombre);
+            const [editedTelefono, setEditedTelefono] = useState(contacto.telefono);
+          
+            const handleEditar = () => {
+              setEditing(true);
+            };
+          
+            const handleGuardar = () => {
+              editarContacto(contacto.id, editedNombre, editedTelefono);
+              setEditing(false);
+            };
+          
+            return (
+              <div className="contacto">
+                {editing ? (
+                  <div>
+                    <input
+                      type="text"
+                      value={editedNombre}
+                      onChange={(e) => setEditedNombre(e.target.value)}
+                    />
+                    <input
+                      type="text"
+                      value={editedTelefono}
+                      onChange={(e) => setEditedTelefono(e.target.value)}
+                    />
+                    <button onClick={handleGuardar}>Guardar</button>
+                  </div>
+                ) : (
+                  <>
+                    <p>{contacto.nombre} - {contacto.telefono}</p>
+                    <div>
+                      <button onClick={() => toggleFavorito(contacto.id)}>
+                        {contacto.esFavorito ? 'Quitar de favoritos' : 'Marcar como favorito'}
+                      </button>
+                      <button onClick={handleEditar}>Editar</button>
+                      <button onClick={() => eliminarContacto(contacto.id)}>Eliminar</button>
+                    </div>
+                  </>
+                )}
+                {contacto.esFavorito && <span className="favorito-indicador">⭐</span>}
+              </div>
+            );
+          };
+          
+          const FormularioAgregarContacto = ({ agregarContacto }) => {
+            const [nombre, setNombre] = useState('');
+            const [telefono, setTelefono] = useState('');
+          
+            const handleSubmit = (event) => {
+              event.preventDefault();
+              if (!nombre || !telefono) return;
+              agregarContacto(nombre, telefono);
+              setNombre('');
+              setTelefono('');
+            };
+          
+            return (
+              <div>
+                <h2>Agregar Contacto</h2>
+                <form onSubmit={handleSubmit}>
+                  <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} placeholder="Nombre" />
+                  <input type="text" value={telefono} onChange={(e) => setTelefono(e.target.value)} placeholder="Teléfono" />
+                  <button type="submit">Agregar</button>
+                </form>
+              </div>
+            );
+          };
+          
+          const App = () => {
+            const [contactos, setContactos] = useState(datos);
+          
+            const agregarContacto = (nombre, telefono) => {
+              const nuevoContacto = {
+                id: Date.now(),
+                nombre,
+                telefono,
+                esFavorito: false,
+              };
+              setContactos((prevContactos) => [...prevContactos, nuevoContacto]);
+            };
+          
+            const eliminarContacto = (id) => {
+              setContactos((prevContactos) => prevContactos.filter((contacto) => contacto.id !== id));
+            };
+          
+            const toggleFavorito = (id) => {
+              setContactos((prevContactos) =>
+                prevContactos.map((contacto) =>
+                  contacto.id === id ? { ...contacto, esFavorito: !contacto.esFavorito } : contacto
+                )
+              );
+            };
+          
+            const editarContacto = (id, nombre, telefono) => {
+              setContactos((prevContactos) =>
+                prevContactos.map((contacto) =>
+                  contacto.id === id ? { ...contacto, nombre, telefono } : contacto
+                )
+              );
+            };
+          
+            const contactosOrdenados = contactos.slice().sort((a, b) => a.nombre.localeCompare(b.nombre));
+          
+            return (
+              <div className="App">
+                <h1>Agenda de Contactos</h1>
+                <FormularioAgregarContacto agregarContacto={agregarContacto} />
+                <h2>Contactos Favoritos</h2>
+                {contactosOrdenados
+                  .filter((contacto) => contacto.favorito)
+                  .map((contacto) => (
+                    <Contacto
+                      key={contacto.id}
+                      contacto={contacto}
+                      eliminarContacto={eliminarContacto}
+                      toggleFavorito={toggleFavorito}
+                      editarContacto={editarContacto}
+                    />
+                  ))}
+                <h2>Otros Contactos</h2>
+                {contactosOrdenados
+                  .filter((contacto) => !contacto.favorito)
+                  .map((contacto) => (
+                    <Contacto
+                      key={contacto.id}
+                      contacto={contacto}
+                      eliminarContacto={eliminarContacto}
+                      toggleFavorito={toggleFavorito}
+                      editarContacto={editarContacto}
+                    />
+                  ))}
+              </div>
+            );
+          };
+          
+          render(<App />, document.getElementById('root'));
     </script>
 </body>
 
