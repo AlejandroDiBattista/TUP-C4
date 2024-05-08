@@ -14,6 +14,8 @@ Modifica la aplicación de **Agenda** para que permita marcar contactos como fav
 
 ### Instrucciones para la presentación del trabajo:
 
+**USANDO GitHub Desktop**
+
 1. Bajar la última versión del repositorio del curso. (fetch)
 2. Crear una nueva rama para tus cambios (new branch).
 3. Abrir la carpeta correspondiente a tu nombre de usuario (practicos/{alumno}/tp2).
