@@ -223,8 +223,8 @@
             return (
                 <div className="agenda">
 
-                    <div style={{ textAlign: "center", width: "50%", display: "block", fontSize: "30", color: "green" }}>Hay {favoritos.length} favoritos</div>
-                    <div style={{ textAlign: "center", width: "50%", display: "block", fontSize: "30", color: "red" }}>Hay {resto.length} no favoritos</div>
+                    <div style={{ width: "50%", display: "block", fontSize: 24, color: "green" }}>Hay {favoritos.length} favoritos</div>
+                    <div style={{ width: "50%", display: "block", fontSize: 24, color: "red" }}>Hay {resto.length} no favoritos</div>
 
                     {favoritos.map((contacto) => (
                         <Contacto key={contacto.id} {...contacto} onChange={mostrar} />
