@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Fugaz+One&family=Inconsolata:wght@200..900&display=swap');
-
-:root {
+:root{
     --lightblue: #c8d3d8;
     --blue: #003865;
     --grey: #e3ecf1;
 }
-
 body {
     background-color: var(--gray);
     margin: 0;
@@ -13,12 +11,10 @@ body {
     font-family: "Inconsolata";
     box-sizing: border-box;
 }
-
 .title {
     color: white;
-    font-family: "Fugaz One";
+    font-family:"Fugaz One";
 }
-
 .card {
     background-color: white;
     color: var(--blue);
@@ -27,7 +23,6 @@ body {
     transition: .5s;
     border-radius: 30px;
 }
-
 .card:hover {
     color: white;
     font-weight: bold;
@@ -35,8 +30,7 @@ body {
     transform: scale(1.05);
     border: 2px solid white
 }
-
-.contactos-container {
+.contactos-container{
     width: 60vw;
     flex-wrap: wrap;
     justify-content: center;

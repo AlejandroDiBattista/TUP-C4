@@ -8,6 +8,7 @@ const contactos = [
     { id: 7, nombre: "Marcos", apellido: "Garcia", tel: 38152781934 },
     { id: 8, nombre: "Luciano", apellido: "Garcia", tel: 381586819539 },
     { id: 9, nombre: "Veronica", apellido: "Espinosa", tel: 381586819539 },
+
 ];
 
 const Contacto = ({ contacto }) => (
@@ -37,5 +38,12 @@ contactos.sort((a, b) => {
     if (a.apellido > b.apellido) return 1;
     return 0;
 });
-
+ReactDOM.render(<App />, document.getElementById('root'))
+contactos.sort((a, b) => {
+    if (a.nombre < b.nombre) return -1;
+    if (a.nombre > b.nombre) return 1;
+    if (a.apellido < b.apellido) return -1;
+    if (a.apellido > b.apellido) return 1;
+    return 0;
+});
 ReactDOM.render(<App />, document.getElementById('root'))
