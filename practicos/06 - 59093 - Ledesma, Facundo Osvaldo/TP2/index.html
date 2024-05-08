@@ -21,8 +21,6 @@
             background-color: #f0f0f0;
         }
 
-
-
         #root {
             max-width: 1280px;
             display: flex;
@@ -32,7 +30,6 @@
         }
 
         .card {
-
             padding: 16px;
             margin: 4px;
             border-radius: 8px;
@@ -52,7 +49,6 @@
                 height: 96px;
                 position: relative;
 
-
                 span {
                     position: absolute;
                     top: 8px;
@@ -65,15 +61,11 @@
                 }
 
                 div:last-child {
-
                     text-align: right;
                     font-size: 14px;
                 }
-
             }
-
         }
-
 
         form {
             width: 240px;
@@ -100,7 +92,6 @@
                 display: flex;
                 justify-content: space-between;
                 margin-top: 16px;
-
 
                 button {
                     padding: 8px 16px;
@@ -138,15 +129,13 @@
             { id: 18, nombre: 'Matias', apellido: 'Luna', telefono: '(381) 123-4567', favorito: false },
             { id: 19, nombre: 'Cecilia', apellido: 'Carrizo', telefono: '(381) 123-4567', favorito: true },
             { id: 20, nombre: 'Facundo', apellido: 'Paez', telefono: '(381) 123-4567', favorito: false }
-        ];
+        ]
+        
     </script>
 
     <script type="text/babel">
-
         const { createRoot } = ReactDOM;
         const { useState } = React;
-
-
 
         const Contacto = ({
             id,
@@ -156,11 +145,11 @@
             favorito,
             onChange,
         }) => {
-            const [marca, setMarca] = useState(favorito);
+            const [marca, setMarca] = useState(favorito)
 
-            const mostrar = (c) => {
-                setMarca(!marca);
-                onChange({ id, favorito: !marca });
+            const mostrar = () => {
+                setMarca(!marca)
+                onChange({ id, favorito: !marca })
             };
 
             return (
@@ -171,33 +160,28 @@
                     </div>
                     <div>{telefono}</div>
                 </div>
-            );
-        };
-
-
+            )
+        }
 
         const Favorito = ({ favorito, onChange }) => {
             const emitir = () => {
                 onChange();
             };
 
-            let estilo = { fontSize: "20px" };
-            let amarillo = { color: "gold" };
-            let icono;
+            const estilo = { fontSize: "20px" };
+            const amarillo = { color: "gold" };
+            const icono = favorito ? (
+                <i className="fas fa-star" style={amarillo}></i>
+            ) : (
+                <i className="far fa-star"></i>
+            );
 
-            if (favorito) {
-                icono = <i className="fas fa-star" style={amarillo}></i>;
-            } else {
-                icono = <i className="far fa-star"></i>;
-            }
             return (
                 <span onClick={emitir} style={estilo}>
                     {icono}
                 </span>
             );
         };
-
-
 
         const Agenda = ({ datos }) => {
             const [contactos, setContactos] = useState(datos);
@@ -207,24 +191,41 @@
                     contacto.id === cambios.id
                         ? { ...contacto, favorito: cambios.favorito }
                         : contacto
-                );
-                setContactos(copia);
-            };
+                )
+                setContactos(copia)
+            }
 
             const contactosOrdenados = [...contactos].sort(
                 (a, b) =>
                     a.nombre.localeCompare(b.nombre) ||
                     a.apellido.localeCompare(b.apellido)
-            );
+            )
 
-            const favoritos = contactosOrdenados.filter((c) => c.favorito);
-            const resto = contactosOrdenados.filter((c) => !c.favorito);
+            const favoritos = contactosOrdenados.filter((c) => c.favorito)
+            const resto = contactosOrdenados.filter((c) => !c.favorito)
 
             return (
                 <div className="agenda">
-
-                    <div style={{ width: "50%", display: "block", fontSize: 24, color: "green" }}>Hay {favoritos.length} favoritos</div>
-                    <div style={{ width: "50%", display: "block", fontSize: 24, color: "red" }}>Hay {resto.length} no favoritos</div>
+                    <div
+                        style={{
+                            width: "50%",
+                            display: "block",
+                            fontSize: 24,
+                            color: "green",
+                        }}
+                    >
+                        Hay {favoritos.length} favoritos
+                    </div>
+                    <div
+                        style={{
+                            width: "50%",
+                            display: "block",
+                            fontSize: 24,
+                            color: "red",
+                        }}
+                    >
+                        Hay {resto.length} no favoritos
+                    </div>
 
                     {favoritos.map((contacto) => (
                         <Contacto key={contacto.id} {...contacto} onChange={mostrar} />
@@ -233,23 +234,19 @@
                         <Contacto key={contacto.id} {...contacto} onChange={mostrar} />
                     ))}
                 </div>
-            );
-        };
-
-
+            )
+        }
 
         const App = () => (
             <div>
-                <h1 style={{ textAlign: "center" }} >Agenda</h1>
+                <h1 style={{ textAlign: "center" }}>Agenda</h1>
 
                 <Agenda datos={datos} />
             </div>
-        );
+        )
 
-
-
-        const root = createRoot(document.getElementById("root"));
-        root.render(<App />);
+        const root = createRoot(document.getElementById("root"))
+        root.render(<App />)
     </script>
 </body>
 
