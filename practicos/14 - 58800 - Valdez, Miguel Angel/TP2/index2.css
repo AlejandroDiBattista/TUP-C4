@@ -1,0 +1,97 @@
+
+  .stylecard {
+    padding: 20px;
+    margin-bottom: 20px;
+     border-radius: 1px;
+  }
+
+ .title{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 40px;
+    display: flex;
+    justify-content: center; 
+ }
+ .star {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color:  #d7dbdd;
+
+  }
+  
+  .cardBox {
+    width: 250px;
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .cardBox:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
+  }
+  
+  .card {
+    background-color:  #fef5e7 ;
+    padding: 20px;
+  }
+  #1 {
+    order: 1; 
+}
+
+#2 {
+    order: 2; 
+}
+
+.newContactForm {
+    background-color:  #fef5e7 ;
+    padding: 20px;
+    width: 200px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  .newContactForm input[type="text"] {
+    margin-bottom: 10px; /
+    width: calc(100% - 20px); 
+  }
+
+  .favorito {
+    color:gold;
+  }
+  .favoritosContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between; 
+  }
+  
+  .noFavoritosContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between; 
+
+  }
+  .noFavoritosContainer h2{
+        margin-bottom: 10px;
+        width: calc(100% - 20px);
+        text-align: center; 
+  }
+
+  .favoritosContainer h2{
+    margin-bottom: 10px;
+    width: calc(100% - 20px);
+    text-align: center; 
+}
+
+  
+  

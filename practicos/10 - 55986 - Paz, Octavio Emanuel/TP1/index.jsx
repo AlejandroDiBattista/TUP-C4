@@ -8,7 +8,7 @@ const contactos = [
     { id: 7, nombre: "Bejamin", apellido: "Gomez", tel: 3815752949 },
     { id: 8, nombre: "Luisa", apellido: "Toraño", tel: 3814962212 },
     { id: 9, nombre: "Florencia", apellido: "Bernasconi", tel: 3815157964 }
-];
+]
 
 const Contacto = ({ contacto }) => (
     <div className="contacto-card">
@@ -26,6 +26,6 @@ const App = () => (
             ))}
         </div>
     </div>
-);
+)
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'))
