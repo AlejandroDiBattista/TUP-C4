@@ -10,7 +10,7 @@
     <!-- Iconos FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-    <title>Demo 1</title>
+    <title>Legajo: 50694</title>
     <style>
         /* reset */
         body {
@@ -22,84 +22,81 @@
 
         #root {
             max-width: 1280px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 20px;
+            margin: 20px auto;
         }
 
         .card {
             padding: 16px;
-            margin: 4px;
+            margin: 8px;
             border-radius: 8px;
             background-color: #ffffff;
             box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card i {
+            margin-left: 8px;
+            font-size: 18px;
+            color: gold;
+            cursor: pointer;
+        }
+
+        .card div {
+            flex: 1;
+            font-size: 16px;
         }
 
         .agenda {
-            margin-top: 16px;
             display: flex;
             flex-wrap: wrap;
-            justify-content: start;
-
-            >div {
-                text-align: center;
-                width: 240px;
-                height: 96px;
-                position: relative;
-
-                span {
-                    position: absolute;
-                    top: 8px;
-                    right: 8px;
-                }
-
-                div {
-                    margin-top: 25px;
-                    font-size: 20px;
-                }
-
-                div:last-child {
-                    text-align: right;
-                    font-size: 14px;
-                }
-            }
+            margin-top: 16px;
+            justify-content: space-around;
+            width: 100%;
         }
 
-        form {
+        .section {
             width: 240px;
             padding: 16px;
-            margin: 8px;
+            margin-right: 16px;
+            margin-bottom: 16px;
             border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
 
-            label {
-                display: block;
-                font-size: 12px;
-                color: #aaa;
-            }
+        .section span {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: gold;
+            cursor: pointer;
+        }
 
-            input {
-                width: calc(100% - 8px);
-                border-radius: 4px;
-                margin: 4px 0;
-                border: 1px solid #ccc;
-                padding: 4px;
-                font-size: 16px;
-            }
+        .section div {
+            margin-top: 25px;
+            font-size: 18px;
+        }
 
-            div {
-                display: flex;
-                justify-content: space-between;
-                margin-top: 16px;
+        .section div:last-child {
+            text-align: right;
+            font-size: 14px;
+            color: #aaa;
+        }
 
-                button {
-                    padding: 8px 16px;
-                    border: none;
-                    border-radius: 4px;
-                    font-size: 14px;
-                    cursor: pointer;
-                }
-            }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        h2 {
+            margin-top: 40px;
+            font-size: 20px;
+            color: #333;
         }
     </style>
 </head>
@@ -134,22 +131,60 @@
     <script type="text/babel">
         const { createRoot } = ReactDOM
 
-        const Contacto = ({ nombre, apellido, telefono }) =>
+        const compararApellidosYNombres = (a, b) => {
+            const apellido = a.apellido.toLowerCase().localeCompare(b.apellido.toLowerCase());
+
+            //si los apellidos son iguales, compara por nombre
+            if (apellido === 0) {
+                const nombre = a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase());
+                return nombre;
+            }
+
+            return apellido;
+        }
+
+        const Contacto = ({ id, nombre, apellido, telefono, favorito, setFavorito }) =>
             <div className="card">
                 <div>{nombre} <b>{apellido}</b></div>
                 <div>{telefono}</div>
+                <span onClick={() => setFavorito(id, !favorito)}>
+                    <i className={favorito ? 'fas fa-star' : 'far fa-star'}></i>
+                </span>
             </div>
 
-        const Agenda = ({ datos }) =>
+        const Agenda = ({ datos, setFavorito }) => {
+            const contactosFavoritos = datos.filter(contacto => contacto.favorito).sort(compararApellidosYNombres);
+            const contactosNormales = datos.filter(contacto => !contacto.favorito).sort(compararApellidosYNombres);
+            return (
             <div className="agenda">
-                {datos.map(contacto => <Contacto key={contacto.id} {...contacto} />)}
+                <article>
+                    <h2>Favoritos</h2>
+                    { contactosFavoritos.map(contacto => <Contacto key={contacto.id} setFavorito={setFavorito} {...contacto} />) }
+                </article>
+                <article>  
+                    <h2>Contactos</h2>
+                    { contactosNormales.map(contacto => <Contacto key={contacto.id} setFavorito={setFavorito} {...contacto} />) }
+                </article>
             </div>
+            )
+        }
 
-        const App = () =>
-            <div>
+        const App = () => {
+            const [contactos, setContactos] = React.useState(datos.sort(compararApellidosYNombres))
+
+            const setFavorito = (id, esFavorito) =>{
+                setContactos((prev) => 
+                    [...prev.map(contacto => contacto.id === id ? {...contacto, favorito: esFavorito} : contacto)]
+                )
+            }
+
+            return(           
+            <main>
                 <h1>Agenda</h1>
-                <Agenda datos={datos} />
-            </div>
+                <Agenda datos={contactos} setFavorito={setFavorito}/>
+            </main>
+            )
+        }
 
         const root = createRoot(document.getElementById('root'))
         root.render(<App />);
