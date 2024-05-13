@@ -101,6 +101,14 @@
                 }
             }
         }
+        
+        .star-favorito {
+                color: gold
+            }
+
+            .star-nofavorito {
+                color: gold;
+            }
     </style>
 </head>
 
@@ -134,22 +142,57 @@
     <script type="text/babel">
         const { createRoot } = ReactDOM
 
-        const Contacto = ({ nombre, apellido, telefono }) =>
+        const Contacto = ({ nombre, apellido, telefono, favorito, alternarFavorito }) =>
             <div className="card">
                 <div>{nombre} <b>{apellido}</b></div>
                 <div>{telefono}</div>
+                <span onClick={alternarFavorito}>
+                    {favorito ? <i className="fa-solid fa-star star-favorito"></i> : <i className="fa-regular fa-star star-nofavorito"></i>}
+                    </span>
             </div>
 
-        const Agenda = ({ datos }) =>
+        const Agenda = ({ datos, alternarFavorito }) =>
             <div className="agenda">
-                {datos.map(contacto => <Contacto key={contacto.id} {...contacto} />)}
+                {datos.map(contacto => 
+                    <Contacto 
+                    key={contacto.id} 
+                    {...contacto} 
+                    alternarFavorito = {() => alternarFavorito(contacto.id)} 
+                    />
+                  )
+                }
             </div>
 
-        const App = () =>
+        const App = () => { 
+            
+            const contactosOrdenadosaf = [ ...datos].sort((a, b) => {
+            
+                if (a.favorito && !b.favorito) return -1;
+                if(!a.favorito && b.favorito) return 1;
+
+                const nombreCompletoA1 = `${a.apellido} ${a.nombre}`;
+                const nombreCompletoB1 = `${b.apellido} ${b.nombre}`;
+
+                return nombreCompletoA1.localeCompare(nombreCompletoB1);
+        
+            });
+            
+            const [contactos, stContactos] = React.useState(contactosOrdenadosaf.map(contacto => ({ ...contacto})));
+
+            const alternarFavorito = (id) => {
+                stContactos(prevContactos => 
+                    prevContactos.map(contacto => 
+                        contacto.id === id ? { ...contacto, favorito: !contacto.favorito } : contacto
+                    )
+                );
+        };
+            return(
             <div>
                 <h1>Agenda</h1>
-                <Agenda datos={datos} />
+                <Agenda datos={contactos} alternarFavorito = {alternarFavorito} />
             </div>
+        );
+        };
 
         const root = createRoot(document.getElementById('root'))
         root.render(<App />);
