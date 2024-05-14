@@ -29,8 +29,8 @@
         }
 
         .card {
-            padding: 16px;
-            margin: 4px;
+            padding: 20px;
+            margin: 27px;
             border-radius: 8px;
             background-color: #ffffff;
             box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
@@ -42,7 +42,7 @@
             flex-wrap: wrap;
             justify-content: start;
 
-            >div {
+            > div {
                 text-align: center;
                 width: 240px;
                 height: 96px;
@@ -52,6 +52,7 @@
                     position: absolute;
                     top: 8px;
                     right: 8px;
+                    color: yellow;
                 }
 
                 div {
@@ -106,52 +107,139 @@
 
 <body>
     <div id="root"></div>
-    <script>
-        const datos = [
-            { id: 1, nombre: 'Juan', apellido: 'Perez', telefono: '(381) 123-4567', favorito: true },
-            { id: 2, nombre: 'Maria', apellido: 'Gomez', telefono: '(381) 123-4567', favorito: false },
-            { id: 3, nombre: 'Pedro', apellido: 'Gonzalez', telefono: '(381) 123-4567', favorito: true },
-            { id: 4, nombre: 'Ana', apellido: 'Fernandez', telefono: '(381) 123-4567', favorito: false },
-            { id: 5, nombre: 'Lucas', apellido: 'Rodriguez', telefono: '(381) 123-4567', favorito: true },
-            { id: 6, nombre: 'Carla', apellido: 'Lopez', telefono: '(381) 123-4567', favorito: false },
-            { id: 7, nombre: 'Jorge', apellido: 'Diaz', telefono: '(381) 123-4567', favorito: true },
-            { id: 8, nombre: 'Luis', apellido: 'Martinez', telefono: '(381) 123-4567', favorito: false },
-            { id: 9, nombre: 'Florencia', apellido: 'Paz', telefono: '(381) 123-4567', favorito: true },
-            { id: 10, nombre: 'Miguel', apellido: 'Rojas', telefono: '(381) 123-4567', favorito: false },
-            { id: 11, nombre: 'Sofia', apellido: 'Acosta', telefono: '(381) 123-4567', favorito: true },
-            { id: 12, nombre: 'Carlos', apellido: 'Vera', telefono: '(381) 123-4567', favorito: false },
-            { id: 13, nombre: 'Valeria', apellido: 'Gimenez', telefono: '(381) 123-4567', favorito: true },
-            { id: 14, nombre: 'Pablo', apellido: 'Sosa', telefono: '(381) 123-4567', favorito: false },
-            { id: 15, nombre: 'Romina', apellido: 'Rios', telefono: '(381) 123-4567', favorito: true },
-            { id: 16, nombre: 'Ezequiel', apellido: 'Molina', telefono: '(381) 123-4567', favorito: false },
-            { id: 17, nombre: 'Agustina', apellido: 'Ortiz', telefono: '(381) 123-4567', favorito: true },
-            { id: 18, nombre: 'Matias', apellido: 'Luna', telefono: '(381) 123-4567', favorito: false },
-            { id: 19, nombre: 'Cecilia', apellido: 'Carrizo', telefono: '(381) 123-4567', favorito: true },
-            { id: 20, nombre: 'Facundo', apellido: 'Paez', telefono: '(381) 123-4567', favorito: false }
-        ]
-    </script>
-
     <script type="text/babel">
-        const { createRoot } = ReactDOM
+        const { useState } = React;
 
-        const Contacto = ({ nombre, apellido, telefono }) =>
-            <div className="card">
-                <div>{nombre} <b>{apellido}</b></div>
-                <div>{telefono}</div>
-            </div>
+        const Contacto = ({ id, nombre, apellido, telefono, favorito, toggleFavorito, eliminarContacto, editarContacto }) => {
+            const [editando, setEditando] = useState(false);
+            const [nuevoNombre, setNuevoNombre] = useState(nombre);
+            const [nuevoApellido, setNuevoApellido] = useState(apellido);
+            const [nuevoTelefono, setNuevoTelefono] = useState(telefono);
 
-        const Agenda = ({ datos }) =>
-            <div className="agenda">
-                {datos.map(contacto => <Contacto key={contacto.id} {...contacto} />)}
-            </div>
+            const handleEditar = () => {
+                setEditando(true);
+            };
 
-        const App = () =>
-            <div>
-                <h1>Agenda</h1>
-                <Agenda datos={datos} />
-            </div>
+            const handleGuardar = () => {
+                editarContacto(id, nuevoNombre, nuevoApellido, nuevoTelefono);
+                setEditando(false);
+            };
 
-        const root = createRoot(document.getElementById('root'))
+            return (
+                <div className="card" onClick={() => setEditando(true)}>
+                    <span style={{ display: favorito ? 'block' : 'none' }}><i className="fas fa-star"></i></span>
+                    <div>
+                        {editando ? (
+                            <>
+                                <input type="text" value={nuevoNombre} onChange={(e) => setNuevoNombre(e.target.value)} />
+                                <input type="text" value={nuevoApellido} onChange={(e) => setNuevoApellido(e.target.value)} />
+                            </>
+                        ) : (
+                            <>
+                                {nombre} <b>{apellido}</b>
+                            </>
+                        )}
+                    </div>
+                    <div>
+                        {editando ? (
+                            <input type="text" value={nuevoTelefono} onChange={(e) => setNuevoTelefono(e.target.value)} />
+                        ) : (
+                            <>
+                                {telefono}
+                            </>
+                        )}
+                    </div>
+                    <div>
+                        {editando ? (
+                            <button onClick={handleGuardar}>Guardar</button>
+                        ) : (
+                            <>
+                                <button onClick={() => toggleFavorito(id)}>{favorito ? 'Quitar de Favoritos' : 'Agregar a Favoritos'}</button>
+                                <button onClick={() => eliminarContacto(id)}><i className="fas fa-trash-alt"></i></button>
+                            </>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        const Agenda = ({ datos, toggleFavorito, eliminarContacto, editarContacto }) => {
+            const favoritos = datos.filter(contacto => contacto.favorito);
+            const noFavoritos = datos.filter(contacto => !contacto.favorito);
+
+            const ordenarAlfabeticamente = (a, b) => {
+                if (a.apellido < b.apellido) return -1;
+                if (a.apellido > b.apellido) return 1;
+                return a.nombre.localeCompare(b.nombre);
+            };
+
+            const listaContactos = [...favoritos.sort(ordenarAlfabeticamente), ...noFavoritos.sort(ordenarAlfabeticamente)];
+
+            return (
+                <div className="agenda">
+                    {listaContactos.map(contacto => (
+                        <Contacto
+                            key={contacto.id}
+                            {...contacto}
+                            toggleFavorito={toggleFavorito}
+                            eliminarContacto={eliminarContacto}
+                            editarContacto={editarContacto}
+                        />
+                    ))}
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [datos, setDatos] = useState([
+                { id: 1, nombre: 'Juan', apellido: 'Perez', telefono: '(381) 123-4567', favorito: true },
+                { id: 2, nombre: 'Maria', apellido: 'Gomez', telefono: '(381) 123-4567', favorito: false },
+                { id: 3, nombre: 'Pedro', apellido: 'Gonzalez', telefono: '(381) 123-4567', favorito: true },
+                { id: 4, nombre: 'Ana', apellido: 'Fernandez', telefono: '(381) 123-4567', favorito: false },
+                { id: 5, nombre: 'Lucas', apellido: 'Rodriguez', telefono: '(381) 123-4567', favorito: true },
+                { id: 6, nombre: 'Carla', apellido: 'Lopez', telefono: '(381) 123-4567', favorito: false },
+                { id: 7, nombre: 'Jorge', apellido: 'Diaz', telefono: '(381) 123-4567', favorito: true },
+                { id: 8, nombre: 'Luis', apellido: 'Martinez', telefono: '(381) 123-4567', favorito: false },
+                { id: 9, nombre: 'Florencia', apellido: 'Paz', telefono: '(381) 123-4567', favorito: true },
+                { id: 10, nombre: 'Miguel', apellido: 'Rojas', telefono: '(381) 123-4567', favorito: false },
+                { id: 11, nombre: 'Sofia', apellido: 'Acosta', telefono: '(381) 123-4567', favorito: true },
+                { id: 12, nombre: 'Carlos', apellido: 'Vera', telefono: '(381) 123-4567', favorito: false },
+                { id: 13, nombre: 'Valeria', apellido: 'Gimenez', telefono: '(381) 123-4567', favorito: true },
+                { id: 14, nombre: 'Pablo', apellido: 'Sosa', telefono: '(381) 123-4567', favorito: false },
+                { id: 15, nombre: 'Romina', apellido: 'Rios', telefono: '(381) 123-4567', favorito: true },
+                { id: 16, nombre: 'Ezequiel', apellido: 'Molina', telefono: '(381) 123-4567', favorito: false },
+                { id: 17, nombre: 'Agustina', apellido: 'Ortiz', telefono: '(381) 123-4567', favorito: true },
+                { id: 18, nombre: 'Matias', apellido: 'Luna', telefono: '(381) 123-4567', favorito: false },
+                { id: 19, nombre: 'Cecilia', apellido: 'Carrizo', telefono: '(381) 123-4567', favorito: true },
+                { id: 20, nombre: 'Facundo', apellido: 'Paez', telefono: '(381) 123-4567', favorito: false }
+            ]);
+
+            const toggleFavorito = (id) => {
+                setDatos(datos.map(contacto => contacto.id === id ? { ...contacto, favorito: !contacto.favorito } : contacto));
+            };
+
+            const eliminarContacto = (id) => {
+                setDatos(datos.filter(contacto => contacto.id !== id));
+            };
+
+            const editarContacto = (id, nombre, apellido, telefono) => {
+                setDatos(datos.map(contacto => contacto.id === id ? { ...contacto, nombre, apellido, telefono } : contacto));
+            };
+
+            return (
+                <div>
+                    <h1>Agenda</h1>
+                    <Agenda
+                        datos={datos}
+                        toggleFavorito={toggleFavorito}
+                        eliminarContacto={eliminarContacto}
+                        editarContacto={editarContacto}
+                    />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
         root.render(<App />);
     </script>
 </body>
