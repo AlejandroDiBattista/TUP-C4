@@ -133,21 +133,82 @@
 
     <script type="text/babel">
         const { createRoot } = ReactDOM
+        const { useState } = React
 
-        const Contacto = ({ nombre, apellido, telefono }) =>
-            <div className="card">
+        
+
+        const Contacto = ({ id, nombre, apellido, telefono, favorito, onChange }) => {
+            const [marca, setMarca] = useState(favorito)
+            const mostrar = (e) => {
+                setMarca(!marca)
+                onChange({id, favorito: !marca})
+                
+            }
+            return <div className="card">
+                
+                <Favorito favorito={marca} onChange={mostrar} />
                 <div>{nombre} <b>{apellido}</b></div>
                 <div>{telefono}</div>
             </div>
+        }    
 
-        const Agenda = ({ datos }) =>
-            <div className="agenda">
-                {datos.map(contacto => <Contacto key={contacto.id} {...contacto} />)}
+        const Agenda = ({ datos }) => {
+            const [contactos, setContactos] = useState(datos)
+
+            const mostrar = (cambios) => {
+                console.log(cambios)
+                
+                const copia = contactos.map(c => c.id === cambios.id ? { ...c, ...cambios } : c)
+                setContactos(copia)
+            }
+            const favoritos = contactos.filter(c=> c.favorito)
+            const resto = contactos.filter(c => !c.favorito)
+            return <div className="agenda">
+                <div>Hay {favoritos.length} favoritos</div>
+                <div>Hay {resto.length} no favoritos</div>
+                {favoritos.map(contacto => <Contacto key={contacto.id} {...contacto} 
+                onChange={mostrar} />)}
+                {resto.map(contacto => <Contacto key={contacto.id} {...contacto} 
+                onChange={mostrar} />)}
             </div>
+        }
 
+        const Mostrar = (props) => {
+            console.log(props)
+           return <div>
+                <h2>Mostrar</h2>
+            </div>
+        }
+
+        const Favorito = ({ favorito, onchange }) => {
+          const emitir = () => {
+             onChange()
+          }    
+          let estilo = { fontSize: '20px' }
+          let amarillo = { color: 'gold' }
+          let icono               
+          if (favorito) {
+            icono= <i className="fas fa-star" style={amarillo}></i>
+          } else {
+            icono= <i className="far fa-star"></i>
+          }
+          return <span onClick={emitir} style={estilo}>{icono}</span>
+        }
+
+        const Contador = () => {
+            let [contador, setContador] = useState(0)
+            const incrementar = () => {
+                setContador(contador + 1)
+                console.log(contador)
+            }
+            return <h3 >{contador} <button onClick={incrementar}>+1</button></h3>
+        }
+
+        const contador = <Contador />
+        
         const App = () =>
             <div>
-                <h1>Agenda</h1>
+                <h1>Agenda</h1>   
                 <Agenda datos={datos} />
             </div>
 
