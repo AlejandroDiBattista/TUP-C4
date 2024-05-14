@@ -39,11 +39,3 @@ contactos.sort((a, b) => {
     return 0;
 });
 ReactDOM.render(<App />, document.getElementById('root'))
-contactos.sort((a, b) => {
-    if (a.nombre < b.nombre) return -1;
-    if (a.nombre > b.nombre) return 1;
-    if (a.apellido < b.apellido) return -1;
-    if (a.apellido > b.apellido) return 1;
-    return 0;
-});
-ReactDOM.render(<App />, document.getElementById('root'))
