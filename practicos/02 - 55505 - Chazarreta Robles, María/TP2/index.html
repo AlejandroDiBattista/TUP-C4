@@ -2,17 +2,13 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <!-- Enlaces a React, ReactDOM y Babel -->
+    <meta charset="UTF-8" />
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Iconos FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
     <title>Demo 1</title>
     <style>
-        /* reset */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -34,6 +30,9 @@
             border-radius: 8px;
             background-color: #ffffff;
             box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
         }
 
         .agenda {
@@ -41,29 +40,6 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: start;
-
-            >div {
-                text-align: center;
-                width: 240px;
-                height: 96px;
-                position: relative;
-
-                span {
-                    position: absolute;
-                    top: 8px;
-                    right: 8px;
-                }
-
-                div {
-                    margin-top: 25px;
-                    font-size: 20px;
-                }
-
-                div:last-child {
-                    text-align: right;
-                    font-size: 14px;
-                }
-            }
         }
 
         form {
@@ -71,35 +47,42 @@
             padding: 16px;
             margin: 8px;
             border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+        }
 
-            label {
-                display: block;
-                font-size: 12px;
-                color: #aaa;
-            }
+        label {
+            display: block;
+            font-size: 12px;
+            color: #aaa;
+        }
 
-            input {
-                width: calc(100% - 8px);
-                border-radius: 4px;
-                margin: 4px 0;
-                border: 1px solid #ccc;
-                padding: 4px;
-                font-size: 16px;
-            }
+        input {
+            width: calc(100% - 8px);
+            border-radius: 4px;
+            margin: 4px 0;
+            border: 1px solid #ccc;
+            padding: 4px;
+            font-size: 16px;
+        }
 
-            div {
-                display: flex;
-                justify-content: space-between;
-                margin-top: 16px;
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
 
-                button {
-                    padding: 8px 16px;
-                    border: none;
-                    border-radius: 4px;
-                    font-size: 14px;
-                    cursor: pointer;
-                }
-            }
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .delete-icon {
+            color: red;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -132,26 +115,215 @@
     </script>
 
     <script type="text/babel">
-        const { createRoot } = ReactDOM
+        const { createRoot } = ReactDOM;
+        const { useState } = React;
 
-        const Contacto = ({ nombre, apellido, telefono }) =>
-            <div className="card">
-                <div>{nombre} <b>{apellido}</b></div>
-                <div>{telefono}</div>
-            </div>
+        const Contacto = ({ contacto, onFavoritoChange, onDelete, onEdit }) => {
+            const [marca, setMarca] = useState(contacto.favorito);
 
-        const Agenda = ({ datos }) =>
-            <div className="agenda">
-                {datos.map(contacto => <Contacto key={contacto.id} {...contacto} />)}
-            </div>
+            const toggleFavorito = (e) => {
+                e.stopPropagation();
+                setMarca(!marca);
+                onFavoritoChange(contacto.id, !marca);
+            };
 
-        const App = () =>
+            const handleDelete = (e) => {
+                e.stopPropagation();
+                onDelete(contacto.id);
+            };
+
+            return (
+                <div className="card" onClick={() => onEdit(contacto)}>
+                    <div>
+                        <Favorito favorito={marca} onChange={toggleFavorito} />
+                        <div>
+                            {contacto.nombre} <b>{contacto.apellido}</b>
+                        </div>
+                        <div>{contacto.telefono}</div>
+                    </div>
+                    <span className="delete-icon" onClick={handleDelete}>🗑</span>
+                </div>
+            );
+        };
+
+        const Favorito = ({ favorito, onChange }) => {
+            const icono = favorito ? (
+                <i className="fas fa-star" style={{ color: "gold" }}></i>
+            ) : (
+                <i className="far fa-star"></i>
+            );
+
+            return (
+                <span onClick={onChange} style={{ fontSize: "20px" }}>
+                    {icono}
+                </span>
+            );
+        };
+
+        const FormularioContacto = ({ contactoInicial, onSubmit, onCancel }) => {
+            const [contacto, setContacto] = useState(contactoInicial);
+
+            const handleChange = (e) => {
+                const { name, value } = e.target;
+                setContacto((prev) => ({ ...prev, [name]: value }));
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                onSubmit(contacto);
+            };
+
+            return (
+                <form onSubmit={handleSubmit}>
+                    <label>Nombre</label>
+                    <input
+                        name="nombre"
+                        value={contacto.nombre}
+                        onChange={handleChange}
+                        required
+                    />
+                    <label>Apellido</label>
+                    <input
+                        name="apellido"
+                        value={contacto.apellido}
+                        onChange={handleChange}
+                        required
+                    />
+                    <label>Teléfono</label>
+                    <input
+                        name="telefono"
+                        value={contacto.telefono}
+                        onChange={handleChange}
+                        required
+                    />
+                    <div className="form-buttons">
+                        <button type="submit">Guardar</button>
+                        <button type="button" onClick={onCancel}>Cancelar</button>
+                    </div>
+                </form>
+            );
+        };
+
+        const Agenda = ({ datos }) => {
+            const [contactos, setContactos] = useState(datos);
+            const [modoEdicion, setModoEdicion] = useState(false);
+            const [contactoEdicion, setContactoEdicion] = useState(null);
+
+            const handleFavoritoChange = (id, favorito) => {
+                setContactos((prev) =>
+                    prev.map((contacto) =>
+                        contacto.id === id ? { ...contacto, favorito } : contacto
+                    )
+                );
+            };
+
+            const handleDelete = (id) => {
+                setContactos((prev) => prev.filter((contacto) => contacto.id !== id));
+            };
+
+            const handleEdit = (contacto) => {
+                setContactoEdicion(contacto);
+                setModoEdicion(true);
+            };
+
+            const handleFormSubmit = (contacto) => {
+                if (contacto.id) {
+                    setContactos((prev) =>
+                        prev.map((c) => (c.id === contacto.id ? contacto : c))
+                    );
+                } else {
+                    setContactos((prev) => [
+                        ...prev,
+                        { ...contacto, id: Date.now(), favorito: false },
+                    ]);
+                }
+                setModoEdicion(false);
+                setContactoEdicion(null);
+            };
+
+            const handleFormCancel = () => {
+                setModoEdicion(false);
+                setContactoEdicion(null);
+            };
+
+            const handleAgregarClick = () => {
+                setContactoEdicion({ nombre: "", apellido: "", telefono: "" });
+                setModoEdicion(true);
+            };
+
+            const contactosOrdenados = [...contactos].sort(
+                (a, b) =>
+                    a.nombre.localeCompare(b.nombre) ||
+                    a.apellido.localeCompare(b.apellido)
+            );
+
+            const favoritos = contactosOrdenados.filter((c) => c.favorito);
+            const resto = contactosOrdenados.filter((c) => !c.favorito);
+
+            return (
+                <div className="agenda">
+                    <button onClick={handleAgregarClick}>Agregar</button>
+                    <div>
+                        <div
+                            style={{
+                                width: "50%",
+                                display: "block",
+                                fontSize: 24,
+                                color: "black",
+                            }}
+                        >
+                            Hay {favoritos.length} favoritos
+                        </div>
+                        <div
+                            style={{
+                                width: "50%",
+                                display: "block",
+                                fontSize: 24,
+                                color: "black",
+                            }}
+                        >
+                            Hay {resto.length} no favoritos
+                        </div>
+                    </div>
+
+                    {modoEdicion && (
+                        <FormularioContacto
+                            contactoInicial={contactoEdicion}
+                            onSubmit={handleFormSubmit}
+                            onCancel={handleFormCancel}
+                        />
+                    )}
+
+                    {favoritos.map((contacto) => (
+                        <Contacto
+                            key={contacto.id}
+                            contacto={contacto}
+                            onFavoritoChange={handleFavoritoChange}
+                            onDelete={handleDelete}
+                            onEdit={handleEdit}
+                        />
+                    ))}
+                    {resto.map((contacto) => (
+                        <Contacto
+                            key={contacto.id}
+                            contacto={contacto}
+                            onFavoritoChange={handleFavoritoChange}
+                            onDelete={handleDelete}
+                            onEdit={handleEdit}
+                        />
+                    ))}
+                </div>
+            );
+        };
+
+        const App = () => (
             <div>
-                <h1>Agenda</h1>
+                <h1 style={{ textAlign: "center" }}>Agenda</h1>
                 <Agenda datos={datos} />
             </div>
+        );
 
-        const root = createRoot(document.getElementById('root'))
+        const root = createRoot(document.getElementById("root"));
         root.render(<App />);
     </script>
 </body>
