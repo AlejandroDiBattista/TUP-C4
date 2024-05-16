@@ -9,9 +9,6 @@ Modifica la aplicación de **Agenda** para que permita marcar contactos como fav
 2. **Orden de visualización**: Los contactos marcados como favoritos deben mostrarse primero, seguidos por el resto de los contactos en un grupo separado.
 3. **Indicador de favoritos**: Los contactos marcados como favoritos deben mostrar una ⭐ en la esquina superior derecha.
 4. **Orden alfabético**: Todos los contactos deben estar ordenados alfabéticamente por apellido y nombre.
-5. **Alta de contactos**: Agregar un botón "Agregar" que muestre un formulario para agregar nuevos contactos y permita su edición.
-6. **Borrado de contactos**: Agregar un icono en cada contacto que permita borrar el contacto (representado por un 🗑).
-7. **Edición de contactos**: Si se pulsa en cualquier lugar del contacto (excepto en los botones de favorito o borrar), se debe habilitar la edición del contacto.
 
 ### Instrucciones para la presentación del trabajo:
 
