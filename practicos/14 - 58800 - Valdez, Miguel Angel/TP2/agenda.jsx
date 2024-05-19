@@ -1,6 +1,6 @@
 const { useState } = React;
 
-const Contacto = ({ contacto, eliminarContacto, toggleFavorito, editarContacto, handleAgregar }) => {
+const Contacto = ({ contacto, eliminarContacto, toggleFavorito, editarContacto }) => {
   const [editing, setEditing] = useState(false);
   const [editedContacto, setEditedContacto] = useState({ ...contacto });
 
@@ -28,7 +28,6 @@ const Contacto = ({ contacto, eliminarContacto, toggleFavorito, editarContacto, 
           <div className="star">
             <i className="fa-solid fa-trash" onClick={handleEliminar}></i>
             <i className="fa-regular fa-pen-to-square" onClick={handleEditar}></i>
-            <i className="fa-solid fa-plus" onClick={handleAgregar}></i> 
             <i className={contacto.favorito ? "fas fa-star favorito" : "far fa-star"} onClick={handleToggleFavorito}></i>
           </div>
           {editing ? (
@@ -44,6 +43,7 @@ const Contacto = ({ contacto, eliminarContacto, toggleFavorito, editarContacto, 
               <p style={{ fontWeight: 'bold' }}>Nombre: {contacto.nombre} </p>
               <p style={{ fontWeight: 'bold' }}>Apellido: {contacto.apellido}</p>
               <p style={{ fontWeight: 'bold' }}>Teléfono: {contacto.telefono}</p>
+              
             </div>
           )}
         </div>
@@ -73,8 +73,7 @@ const Agenda = () => {
     { id: 17, nombre: 'Agustina', apellido: 'Ortiz', telefono: '(381) 123-4567', favorito: true },
     { id: 18, nombre: 'Matias', apellido: 'Luna', telefono: '(381) 123-4567', favorito: false },
     { id: 19, nombre: 'Cecilia', apellido: 'Carrizo', telefono: '(381) 123-4567', favorito: true },
-    { id: 20, nombre: 'Facundo', apellido: 'Paez', telefono: '(381) 123-4567', favorito: false },
-    { id: 21, nombre: 'Pedrito', apellido: 'Paez', telefono: '(381) 123-4567', favorito: false }
+    { id: 20, nombre: 'Facundo', apellido: 'Paez', telefono: '(381) 123-4567', favorito: false }
   ]);
 
   const [agregandoContacto, setAgregandoContacto] = useState(false);
@@ -124,6 +123,9 @@ const Agenda = () => {
   const favoritos = contactos.filter(contacto => contacto.favorito);
   const noFavoritos = contactos.filter(contacto => !contacto.favorito);
 
+  const favoritosOrdenados = favoritos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+  const noFavoritosOrdenados = noFavoritos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
   return (
     <div className="TableCard">
       {agregandoContacto && (
@@ -134,31 +136,31 @@ const Agenda = () => {
           <button onClick={handleGuardarNuevoContacto}>Guardar</button>
         </div>
       )}
-    
+
+      <button onClick={handleAgregar}>Agregar Contacto</button>
+
       <div className="favoritosContainer">
         <h2>Favoritos ({favoritos.length})</h2>
-        {favoritos.map((contacto) => (
+        {favoritosOrdenados.map((contacto) => (
           <Contacto
             key={contacto.id}
             contacto={contacto}
             eliminarContacto={eliminarContacto}
             toggleFavorito={toggleFavorito}
             editarContacto={editarContacto}
-            handleAgregar={handleAgregar}
           />
         ))}
       </div>
 
-      <div  className="noFavoritosContainer">
+      <div className="noFavoritosContainer">
         <h2>No Favoritos ({noFavoritos.length})</h2>
-        {noFavoritos.map((contacto) => (
+        {noFavoritosOrdenados.map((contacto) => (
           <Contacto
             key={contacto.id}
             contacto={contacto}
             eliminarContacto={eliminarContacto}
             toggleFavorito={toggleFavorito}
             editarContacto={editarContacto}
-            handleAgregar={handleAgregar}
           />
         ))}
       </div>
