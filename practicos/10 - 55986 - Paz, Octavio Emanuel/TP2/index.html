@@ -10,7 +10,7 @@
     <!-- Iconos FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-    <title>Demo 1</title>
+    <title>Agenda</title>
     <style>
         /* reset */
         body {
@@ -28,76 +28,63 @@
             margin: 0 20px;
         }
 
+        .h1Agenda{
+            text-align: center;
+            font-size: 40px;
+        }
+
         .card {
-            padding: 16px;
-            margin: 4px;
-            border-radius: 8px;
-            background-color: #ffffff;
-            box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 10px;
+            background-color: #accaf5;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 1);
+            border: 1px solid black;
         }
 
         .agenda {
             margin-top: 16px;
             display: flex;
             flex-wrap: wrap;
-            justify-content: start;
+            justify-content: center;
 
             >div {
                 text-align: center;
                 width: 240px;
-                height: 96px;
+                height: 90px;
                 position: relative;
 
                 span {
                     position: absolute;
-                    top: 8px;
+                    top: 0;
                     right: 8px;
+                    font-size: 20px;
+                    color: #FFE81F;
                 }
 
                 div {
-                    margin-top: 25px;
+                    display: flex;
+                    justify-content: center;
+                    align-content: center;
                     font-size: 20px;
+                    gap: 5px;
                 }
 
                 div:last-child {
                     text-align: right;
                     font-size: 14px;
                 }
-            }
-        }
 
-        form {
-            width: 240px;
-            padding: 16px;
-            margin: 8px;
-            border-radius: 8px;
-
-            label {
-                display: block;
-                font-size: 12px;
-                color: #aaa;
-            }
-
-            input {
-                width: calc(100% - 8px);
-                border-radius: 4px;
-                margin: 4px 0;
-                border: 1px solid #ccc;
-                padding: 4px;
-                font-size: 16px;
-            }
-
-            div {
-                display: flex;
-                justify-content: space-between;
-                margin-top: 16px;
-
-                button {
-                    padding: 8px 16px;
-                    border: none;
-                    border-radius: 4px;
-                    font-size: 14px;
-                    cursor: pointer;
+                .botonFav{
+                    background-color: #60677161;
+                    border-radius: 5px;
+                    font-weight: bold;
+                    width: 180px;
                 }
             }
         }
@@ -134,22 +121,57 @@
     <script type="text/babel">
         const { createRoot } = ReactDOM
 
-        const Contacto = ({ nombre, apellido, telefono }) =>
+
+        const Contacto = ({ id, nombre, apellido, telefono, favorito, onAlternarFavorito }) => (
             <div className="card">
+                {favorito && <span className="fav">&#9733;</span>}  
                 <div>{nombre} <b>{apellido}</b></div>
                 <div>{telefono}</div>
+                <button className="botonFav" onClick={() => onAlternarFavorito(id)}>
+                    {favorito ? 'Desmarcar' : 'Marcar'} como favorito
+                </button>
             </div>
+        );
 
-        const Agenda = ({ datos }) =>
-            <div className="agenda">
-                {datos.map(contacto => <Contacto key={contacto.id} {...contacto} />)}
-            </div>
 
-        const App = () =>
-            <div>
-                <h1>Agenda</h1>
-                <Agenda datos={datos} />
-            </div>
+        const Agenda = ({ datos, onAlternarFavorito }) => {
+            const favoritos = datos.filter(contacto => contacto.favorito)
+            const noFavoritos = datos.filter(contacto => !contacto.favorito)
+            const contactosOrdenados = [...favoritos.sort((a, b) => a.apellido.localeCompare(b.apellido)), ...noFavoritos.sort((a, b) => a.apellido.localeCompare(b.apellido))]
+
+            return (
+                <div className="agenda">
+                    {contactosOrdenados.map(contacto => (
+                        <Contacto
+                            key={contacto.id}
+                            {...contacto}
+                            onAlternarFavorito={onAlternarFavorito}
+                        />
+                    ))}
+                </div>
+            )
+        };
+
+        const App = () => {
+            const [contactos, setContactos] = React.useState(datos)
+
+            const AlternarFavorito = (id) => {
+                const contactosActualizados = contactos.map(contacto => {
+                    if (contacto.id === id) {
+                        return { ...contacto, favorito: !contacto.favorito } //si favorito era true, ahora será false, y viceversa
+                    }
+                    return contacto
+                })
+                setContactos(contactosActualizados);
+            }
+
+            return (
+                <div>
+                    <h1 className="h1Agenda">Agenda</h1>
+                    <Agenda datos={contactos} onAlternarFavorito={AlternarFavorito} />
+                </div>
+            )
+        }
 
         const root = createRoot(document.getElementById('root'))
         root.render(<App />);
