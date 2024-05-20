@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Enlaces a React, ReactDOM y Babel -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <title>TP1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        #main {
+            margin: 0 auto;
+            width: 450px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            align-items: center;
+        }
+        h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 span {
+            font-size: 2rem;
+            display: inline-block;
+            color: #999;
+            width: 40px;
+        }
+
+        .alumno {
+            background-color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin: 10px auto;
+        }
+
+        .ver {
+            font-size: 1rem;
+            color: #333;
+            padding-left: 45px;
+        }
+
+        .ver a {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .falta {
+            color: red;
+        }
+
+        .alumno .ver .copia {
+            float: right;
+            font-size: 0.8rem;
+            color: #999;
+        }
+    </style>
+    <script>
+        const datos = [
+  {
+    "id": "C4-01",
+    "comision": "C4",
+    "orden": 1,
+    "legajo": 59263,
+    "nombre": "Acosta, Facundo",
+    "inicial": "FAC",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./01 - 59263 - Acosta, Facundo/TP3/index.html",
+    "TP2": false,
+    "TP3": false
+  },
+  {
+    "id": "C4-02",
+    "comision": "C4",
+    "orden": 2,
+    "legajo": 55505,
+    "nombre": "Chazarreta Robles, María",
+    "inicial": "MCR",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./02 - 55505 - Chazarreta Robles, María/TP3/index.html",
+    "TP2": true,
+    "TP3": false
+  },
+  {
+    "id": "C4-03",
+    "comision": "C4",
+    "orden": 3,
+    "legajo": 50694,
+    "nombre": "Ferrari, Stefano",
+    "inicial": "SFE",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./03 - 50694 - Ferrari, Stefano/TP3/index.html",
+    "TP2": true,
+    "TP3": false
+  },
+  {
+    "id": "C4-04",
+    "comision": "C4",
+    "orden": 4,
+    "legajo": 50704,
+    "nombre": "Juarez, Pablo Agustín",
+    "inicial": "PAJ",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./04 - 50704 - Juarez, Pablo Agustín/TP3/index.html",
+    "TP2": false,
+    "TP3": false
+  },
+  {
+    "id": "C4-05",
+    "comision": "C4",
+    "orden": 5,
+    "legajo": 55896,
+    "nombre": "Lacroix, Cristian Josué",
+    "inicial": "CJL",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./05 - 55896 - Lacroix, Cristian Josué/TP3/index.html",
+    "TP2": false,
+    "TP3": false
+  },
+  {
+    "id": "C4-06",
+    "comision": "C4",
+    "orden": 6,
+    "legajo": 59093,
+    "nombre": "Ledesma, Facundo Osvaldo",
+    "inicial": "FOL",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./06 - 59093 - Ledesma, Facundo Osvaldo/TP3/index.html",
+    "TP2": true,
+    "TP3": false
+  },
+  {
+    "id": "C4-07",
+    "comision": "C4",
+    "orden": 7,
+    "legajo": 59200,
+    "nombre": "López, Tiago Gabriel",
+    "inicial": "TGL",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./07 - 59200 - López, Tiago Gabriel/TP3/index.html",
+    "TP2": true,
+    "TP3": false
+  },
+  {
+    "id": "C4-08",
+    "comision": "C4",
+    "orden": 8,
+    "legajo": 59097,
+    "nombre": "Martin Ibarra, Patricio",
+    "inicial": "PEMI",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./08 - 59097 - Martin Ibarra, Patricio/TP3/index.html",
+    "TP2": true,
+    "TP3": false
+  },
+  {
+    "id": "C4-09",
+    "comision": "C4",
+    "orden": 9,
+    "legajo": 55466,
+    "nombre": "Medina, Álvaro Ignacio",
+    "inicial": "ÁIM",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./09 - 55466 - Medina, Álvaro Ignacio/TP3/index.html",
+    "TP2": true,
+    "TP3": false
+  },
+  {
+    "id": "C4-10",
+    "comision": "C4",
+    "orden": 10,
+    "legajo": 55986,
+    "nombre": "Paz, Octavio Emanuel",
+    "inicial": "OEP",
+    "TP1": true,
+    "cambio": false,
+    "ubicacion": "./10 - 55986 - Paz, Octavio Emanuel/TP3/index.html",
+    "TP2": true,
+    "TP3": false
+  },
+  {
+    "id": "C4-11",
+    "comision": "C4",
+    "orden": 11,
+    "legajo": 50657,
+    "nombre": "Rmírez, Giselle Evelyn",
+    "inicial": "GER",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./11 - 50657 - Rmírez, Giselle Evelyn/TP3/index.html",
+    "TP2": false,
+    "TP3": false
+  },
+  {
+    "id": "C4-12",
+    "comision": "C4",
+    "orden": 12,
+    "legajo": 59690,
+    "nombre": "Rios, Yanina Gisele",
+    "inicial": "YGR",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./12 - 59690 - Rios, Yanina Gisele/TP3/index.html",
+    "TP2": false,
+    "TP3": false
+  },
+  {
+    "id": "C4-13",
+    "comision": "C4",
+    "orden": 13,
+    "legajo": 58798,
+    "nombre": "Salazar, Santiago",
+    "inicial": "SSA",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./13 - 58798 - Salazar, Santiago/TP3/index.html",
+    "TP2": false,
+    "TP3": false
+  },
+  {
+    "id": "C4-14",
+    "comision": "C4",
+    "orden": 14,
+    "legajo": 58800,
+    "nombre": "Valdez, Miguel Angel",
+    "inicial": "MAV",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./14 - 58800 - Valdez, Miguel Angel/TP3/index.html",
+    "TP2": true,
+    "TP3": false
+  },
+  {
+    "id": "C4-15",
+    "comision": "C4",
+    "orden": 15,
+    "legajo": 50753,
+    "nombre": "Villafañe Assef, Oscar",
+    "inicial": "OVA",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./15 - 50753 - Villafañe Assef, Oscar/TP3/index.html",
+    "TP2": false,
+    "TP3": false
+  },
+  {
+    "id": "C4-16",
+    "comision": "C4",
+    "orden": 16,
+    "legajo": 59265,
+    "nombre": "Cavanna, Victoria",
+    "inicial": "VC",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./16 - 59265 - Cavanna, Victoria/TP3/index.html",
+    "TP2": true,
+    "TP3": false
+  },
+  {
+    "id": "C4-17",
+    "comision": "C4",
+    "orden": 17,
+    "legajo": 59417,
+    "nombre": "Gómez Iturre, Joaquín",
+    "inicial": "JGI",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./17 - 59417 - Gómez Iturre, Joaquín/TP3/index.html",
+    "TP2": false,
+    "TP3": false
+  },
+  {
+    "id": "C4-18",
+    "comision": "C4",
+    "orden": 18,
+    "legajo": 58725,
+    "nombre": "Garcia Bulacio, Micaela",
+    "inicial": "MGB",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./18 - 58725 - Garcia Bulacio, Micaela/TP3/index.html",
+    "TP2": true,
+    "TP3": false
+  }
+]
+    </script>
+
+    <script type="text/babel">
+
+        const comision = datos[0].comision
+
+        const Ver = ({ alumno }) =>
+            <span className="ver">
+                {alumno.cambio ? 
+                    <a href={alumno.ubicacion}>Ver Entrega</a> : 
+                    <span class="falta">No entregado</span>}
+                {alumno.copia && <span className="copia">😲 {alumno.copia}</span>}
+            </span>
+        
+        const Alumno = ({ alumno }) => (
+            <div className="alumno">
+                <h2><span>{alumno.orden}</span> {alumno.nombre}</h2>
+                <Ver alumno={alumno} />
+            </div>
+        )
+
+        const App = () => (
+            <div id="main">
+                <h1>| {comision} | Listado de alumnos</h1>
+                <div>
+                    <div>Entregó: {datos.filter(alumno => alumno.cambio).length}</div>
+                    <div>Falta entregar: {datos.filter(alumno => !alumno.cambio).length}</div>
+                </div>
+                {datos.map(alumno => <Alumno key={alumno.id} alumno={alumno} />)}
+            </div>
+        )
+
+        ReactDOM.render(<App />, document.getElementById('root'))
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+
+</html>
