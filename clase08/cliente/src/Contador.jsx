@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useContador } from './useContador';
 
 function Contador() {
-  const [count, setCount] = useState(0);
-
+  const [count, incrementar, decrementar] = useContador();
+  
   return (
-    <button onClick={() => setCount((count) => count + 1)}>
-      Contador es {count}
-    </button>
+    <>
+      contar(6)
+      <div className='contador'>
+        <button onClick={decrementar}>-</button>
+        <span>{count}</span>
+        <button onClick={incrementar}>+</button>
+      </div>
+    </>
   );
 }
 

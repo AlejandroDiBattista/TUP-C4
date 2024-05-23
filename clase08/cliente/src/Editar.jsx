@@ -7,21 +7,13 @@ export function Editar(contacto, alAceptar, alCancelar) {
   let [apellido, setApellido] = useState(contacto.apellido);
   let [telefono, setTelefono] = useState(contacto.telefono);
 
-  const cambiarNombre = (e) => {
-    setNombre(e.target.value);
-  };
-
-  const cambiarApellido = (e) => {
-    setApellido(e.target.value);
-  };
-
-  const cambiarTelefono = (e) => {
-    setTelefono(e.target.value);
-  };
-
+  const cambiarNombre = e => setNombre(e.target.value);
+  const cambiarApellido = e => setApellido(e.target.value);
+  const cambiarTelefono = e => setTelefono(e.target.value);
+  
   const aceptar = (e) => {
     e.preventDefault();
-    alAceptar({...contacto, nombre, apellido, telefono });
+    alAceptar({ ...contacto, nombre, apellido, telefono });
   }
 
   const cancelar = (e) => {
