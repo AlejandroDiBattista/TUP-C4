@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Enlaces a React, ReactDOM y Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Stock Gaseosas</title>
+    <style>
+        /* reset */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            margin: 0;
+        }
+
+        .btn-agregar-p {
+            cursor: pointer;
+        }
+
+        .lista-productos {
+            width: 300px;
+            margin-top: 10px;
+        }
+
+        .card-producto {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 1.5);
+            cursor: pointer;
+        }
+
+        .item-detalle {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .item-detalle input {
+            width: 100px;
+        }
+
+        .cantidad-producto {
+            font-size: 40px;
+            color: blue;
+            margin-left: 10px;
+        }
+
+        .contenedor-nombre {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .p-producto-nombre {
+            font-size: 25px;
+            font-weight: bold;
+            margin: 0px;
+        }
+
+        .p-producto-ean {
+            margin: 5px;
+        }
+
+        /*botones editar y eliminar */
+        .acciones {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .fa-trash {
+            color: red;
+            cursor: pointer;
+        }
+
+        .fa-pen {
+            color: blue;
+            cursor: pointer;
+        }
+
+        /*Form Agregar Producto*/
+        .agregar-producto {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .agregar-producto input {
+            border-radius: 5px;
+            width: 80%;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .botones-agregar-producto {
+            margin-top: 5px;
+        }
+
+        .agregar-producto button {
+            border-radius: 5px;
+            padding: 6px 10px;
+            margin-left: 5px;
+        }
+
+        /*Form edicion */
+        .formulario-edicion {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            box-shadow: 0 0 3px rgba(0, 0, 0, 1.5);
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-top: 15px;
+        }
+
+        .inputs-container {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .formulario-edicion input {
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .botones-editar-producto {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState, useEffect } = React;
+
+        const productosIniciales = [
+            { nombre: "7up", ean: "7799876543210", cantidad: 7 },
+            { nombre: "Coca-Cola", ean: "7791234567890", cantidad: 92 },
+            { nombre: "Fanta", ean: "7793219876540", cantidad: 5 },
+            { nombre: "Mirinda", ean: "7797894561230", cantidad: 6 },
+            { nombre: "Sprite", ean: "7796543219870", cantidad: 4 }
+        ];
+
+
+        function cargarProductosIniciales() {
+            const productosGuardados = localStorage.getItem("productos");
+            return productosGuardados ? JSON.parse(productosGuardados) : productosIniciales;
+        }
+
+        function MostrarProductos({ mostrarFormularioAgregar, setMostrarFormularioAgregar }) {
+            const [productos, setProductos] = useState(cargarProductosIniciales);
+            const [nuevoProducto, setNuevoProducto] = useState({ nombre: "", ean: "", cantidad: "" });
+            const [indiceEdicion, setIndiceEdicion] = useState(null);
+            const [productoEdicion, setProductoEdicion] = useState({ nombre: "", ean: "", cantidad: "" });
+
+            useEffect(() => {
+                localStorage.setItem("productos", JSON.stringify(productos));
+            }, [productos]);
+
+
+            function incrementarCantidad(indice) {
+                const productosActualizados = productos.map((producto, i) =>
+                    i === indice ? { ...producto, cantidad: parseInt(producto.cantidad) + 1 } : producto
+                );
+                setProductos(productosActualizados);
+            }
+
+            return (
+                <div className="lista-productos">
+
+                    {mostrarFormularioAgregar && (
+                        <div className="agregar-producto">
+                            <input
+                                type="text"
+                                name="nombre"
+                                placeholder="Nombre"
+                                value={nuevoProducto.nombre}
+                                onChange={(e) => manejarCambioInput(e, setNuevoProducto)}
+                            />
+                            <input
+                                type="text"
+                                name="ean"
+                                placeholder="EAN"
+                                value={nuevoProducto.ean}
+                                onChange={(e) => manejarCambioInput(e, setNuevoProducto)}
+                            />
+                            <input
+                                type="number"
+                                name="cantidad"
+                                placeholder="Cantidad"
+                                value={nuevoProducto.cantidad}
+                                onChange={(e) => manejarCambioInput(e, setNuevoProducto)}
+                            />
+                            <div className="botones-agregar-producto">
+                                <button onClick={() => {
+                                    agregarProducto(nuevoProducto, setProductos, setNuevoProducto, setMostrarFormularioAgregar)
+                                    ocultarFormulario(setMostrarFormularioAgregar)
+                                }}>Aceptar</button>
+                                <button onClick={() => ocultarFormulario(setMostrarFormularioAgregar)}>Cancelar</button>
+                            </div>
+                        </div>
+                    )}
+
+
+                    {productos.sort((a, b) => a.nombre.localeCompare(b.nombre)).map((producto, indice) => (
+                        <div key={indice}>
+                            {indiceEdicion !== indice ?
+                                (
+                                    //TARJETA DE PRODUCTO
+                                    <div className="card-producto" onClick={() => incrementarCantidad(indice)}>
+                                        <div className="item-detalle">
+                                            <span className="cantidad-producto">{producto.cantidad}</span>
+                                            <div className="contenedor-nombre">
+                                                <p className="p-producto-nombre">{producto.nombre}</p>
+                                                <p className="p-producto-ean">{producto.ean}</p>
+                                            </div>
+                                        </div>
+                                        <div className="acciones">
+                                            <i className="fas fa-pen" onClick={(e) => { e.stopPropagation(); editarProducto(indice, setIndiceEdicion, setProductoEdicion, productos); }}></i>
+                                            <i className="fas fa-trash" onClick={(e) => { e.stopPropagation(); eliminarProducto(indice, setProductos, productos); }}></i>
+                                        </div>
+                                    </div>
+
+                                ) : (
+
+                                    //FORMULARIO DE EDICION DE TARJETA
+                                    <div className="formulario-edicion">
+                                        <div className="inputs-container">
+                                            <input
+                                                type="text"
+                                                name="nombre"
+                                                placeholder="Nombre"
+                                                value={productoEdicion.nombre}
+                                                onChange={(e) => manejarCambioInput(e, setProductoEdicion)}
+                                            />
+                                            <input
+                                                type="text"
+                                                name="ean"
+                                                placeholder="EAN"
+                                                value={productoEdicion.ean}
+                                                onChange={(e) => manejarCambioInput(e, setProductoEdicion)}
+                                            />
+                                            <input
+                                                type="number"
+                                                name="cantidad"
+                                                placeholder="Cantidad"
+                                                value={productoEdicion.cantidad}
+                                                onChange={(e) => manejarCambioInput(e, setProductoEdicion)}
+                                            />
+                                        </div>
+                                        <div className="botones-editar-producto">
+                                            <button onClick={() => guardarProducto(setProductos, productos, indiceEdicion, productoEdicion, setIndiceEdicion, setProductoEdicion)}>Aceptar</button>
+                                            <button onClick={() => setIndiceEdicion(null)}>Cancelar</button>
+                                        </div>
+                                    </div>
+
+                                )}
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        function ocultarFormulario(setMostrarFormularioAgregar) {
+            setMostrarFormularioAgregar(false);
+        }
+
+        //setter actualiza el estado del componente
+        function manejarCambioInput(e, setter) {
+            const { name, value } = e.target;
+            setter(prev => ({ ...prev, [name]: value })); // Toma el estado previo y actualiza por el nuevo valor del campo de entrada
+        }
+
+        function agregarProducto(nuevoProducto, setProductos, setNuevoProducto) {
+            if (nuevoProducto.nombre && nuevoProducto.ean) {
+                setProductos(productosPrevios => [...productosPrevios, { ...nuevoProducto, cantidad: parseInt(nuevoProducto.cantidad) }]);
+                setNuevoProducto({ nombre: "", ean: "", cantidad: "" }); //resetea form luego de agregar
+            } else {
+                alert("Debés completar los campos para guardar un nuevo producto")
+            }
+        }
+
+        function editarProducto(indice, setIndiceEdicion, setProductoEdicion, productos) {
+            setIndiceEdicion(indice);
+            setProductoEdicion(productos[indice]); //mostrar datos actuales del producto
+        }
+
+        function guardarProducto(setProductos, productos, indiceEdicion, productoEdicion, setIndiceEdicion, setProductoEdicion) {
+            const productosActualizados = productos.map((producto, indice) =>
+                indice === indiceEdicion ? productoEdicion : producto
+            );
+            setProductos(productosActualizados); //actualiza el estado de los productos con el nuevo array 
+            setIndiceEdicion(null);
+            setProductoEdicion({ nombre: "", ean: "", cantidad: 1 });
+        }
+
+        function eliminarProducto(indice, setProductos, productos) {
+            const productosActualizados = productos.filter((_, i) => i !== indice);
+            setProductos(productosActualizados);
+        }
+
+        function App() {
+            const [mostrarFormularioAgregar, setMostrarFormularioAgregar] = useState(false);
+            return (
+                <div className="container">
+                    <div className="header">
+                        <h1>Control Depósito</h1>
+                        <button className="btn-agregar-p"
+                            onClick={() => setMostrarFormularioAgregar(true)}>
+                            <i className="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <MostrarProductos
+                        mostrarFormularioAgregar={mostrarFormularioAgregar}
+                        setMostrarFormularioAgregar={setMostrarFormularioAgregar}
+                    />
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
