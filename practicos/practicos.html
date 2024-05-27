@@ -124,6 +124,58 @@
     <script>
         const datos = [
   {
+    "id": "C4-03",
+    "comision": "C4",
+    "orden": 3,
+    "legajo": 50694,
+    "nombre": "Ferrari, Stefano",
+    "inicial": "SFE",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./03 - 50694 - Ferrari, Stefano",
+    "TP2": true,
+    "TP3": true
+  },
+  {
+    "id": "C4-06",
+    "comision": "C4",
+    "orden": 6,
+    "legajo": 59093,
+    "nombre": "Ledesma, Facundo Osvaldo",
+    "inicial": "FOL",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./06 - 59093 - Ledesma, Facundo Osvaldo",
+    "TP2": true,
+    "TP3": true
+  },
+  {
+    "id": "C4-10",
+    "comision": "C4",
+    "orden": 10,
+    "legajo": 55986,
+    "nombre": "Paz, Octavio Emanuel",
+    "inicial": "OEP",
+    "TP1": true,
+    "cambio": false,
+    "ubicacion": "./10 - 55986 - Paz, Octavio Emanuel",
+    "TP2": true,
+    "TP3": true
+  },
+  {
+    "id": "C4-14",
+    "comision": "C4",
+    "orden": 14,
+    "legajo": 58800,
+    "nombre": "Valdez, Miguel Angel",
+    "inicial": "MAV",
+    "TP1": false,
+    "cambio": false,
+    "ubicacion": "./14 - 58800 - Valdez, Miguel Angel",
+    "TP2": true,
+    "TP3": true
+  },
+  {
     "id": "C4-01",
     "comision": "C4",
     "orden": 1,
@@ -146,19 +198,6 @@
     "TP1": false,
     "cambio": false,
     "ubicacion": "./02 - 55505 - Chazarreta Robles, María",
-    "TP2": true,
-    "TP3": false
-  },
-  {
-    "id": "C4-03",
-    "comision": "C4",
-    "orden": 3,
-    "legajo": 50694,
-    "nombre": "Ferrari, Stefano",
-    "inicial": "SFE",
-    "TP1": false,
-    "cambio": false,
-    "ubicacion": "./03 - 50694 - Ferrari, Stefano",
     "TP2": true,
     "TP3": false
   },
@@ -186,19 +225,6 @@
     "cambio": false,
     "ubicacion": "./05 - 55896 - Lacroix, Cristian Josué",
     "TP2": false,
-    "TP3": false
-  },
-  {
-    "id": "C4-06",
-    "comision": "C4",
-    "orden": 6,
-    "legajo": 59093,
-    "nombre": "Ledesma, Facundo Osvaldo",
-    "inicial": "FOL",
-    "TP1": false,
-    "cambio": false,
-    "ubicacion": "./06 - 59093 - Ledesma, Facundo Osvaldo",
-    "TP2": true,
     "TP3": false
   },
   {
@@ -241,19 +267,6 @@
     "TP3": false
   },
   {
-    "id": "C4-10",
-    "comision": "C4",
-    "orden": 10,
-    "legajo": 55986,
-    "nombre": "Paz, Octavio Emanuel",
-    "inicial": "OEP",
-    "TP1": true,
-    "cambio": false,
-    "ubicacion": "./10 - 55986 - Paz, Octavio Emanuel",
-    "TP2": true,
-    "TP3": false
-  },
-  {
     "id": "C4-11",
     "comision": "C4",
     "orden": 11,
@@ -290,19 +303,6 @@
     "cambio": false,
     "ubicacion": "./13 - 58798 - Salazar, Santiago",
     "TP2": false,
-    "TP3": false
-  },
-  {
-    "id": "C4-14",
-    "comision": "C4",
-    "orden": 14,
-    "legajo": 58800,
-    "nombre": "Valdez, Miguel Angel",
-    "inicial": "MAV",
-    "TP1": false,
-    "cambio": false,
-    "ubicacion": "./14 - 58800 - Valdez, Miguel Angel",
-    "TP2": true,
     "TP3": false
   },
   {
@@ -376,12 +376,18 @@
             return `${origen}/${practico}/index.html`
         }
 
-        const Ver = ({ alumno, entrega }) =>
-            <div className="ver">
-                {alumno[entrega] ?
-                    <a href={ubicar(alumno.ubicacion, entrega)}>Ver {entrega}</a> :
-                    <span class="falta">{entrega} ❌</span>}
-            </div>
+        const Ver = ({ alumno, entrega }) => {
+            const nota = alumno["nota_tp3"]
+            const comentario = alumno["comentario_tp3"]
+
+            return (
+                <div className="ver">
+                    {alumno[entrega] ?
+                        <a href={ubicar(alumno.ubicacion, entrega)}>Ver {entrega}  (nota {nota})</a> :
+                        <span className="falta">{entrega} ❌</span>}
+                </div>
+            )
+        }
 
         const Alumno = ({ alumno }) => {
             const [apellido, nombre] = alumno.nombre.split(', ')
