@@ -1,128 +1,162 @@
+const { createRoot } = ReactDOM;
 const { useState, useEffect } = React;
 
-const App = () => {
-  const [products, setProducts] = useState([]);
-  const [newProduct, setNewProduct] = useState({ name: '', ean: '', quantity: 1 });
-  const [editIndex, setEditIndex] = useState(null);
-  const [editedProduct, setEditedProduct] = useState({ name: '', ean: '', quantity: 1 });
-  const [isEditing, setIsEditing] = useState(false);
+const App = () => (
+  <main className="flex flex-center w-full">
+    <Storage />
+  </main>
+);
+
+const Storage = () => {
+  const [productList, setProductList] = useState([]);
+  const [editingProductIdList, setEditingProductIdList] = useState([]);
 
   useEffect(() => {
-    const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
-    setProducts(savedProducts);
+    const storedProducts = localStorage.getItem("productList");
+    if (storedProducts) {
+      setProductList(JSON.parse(storedProducts));
+    }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('products', JSON.stringify(products));
-  }, [products]);
+    localStorage.setItem("productList", JSON.stringify(productList));
+  }, [productList]);
 
-  const AddProduct = () => {
-    if (newProduct.name && newProduct.ean) {
-      const existingProductIndex = products.findIndex(product => product.name.toLowerCase() === newProduct.name.toLowerCase());
-      if (existingProductIndex !== -1) {
-        const updatedProducts = [...products];
-        updatedProducts[existingProductIndex].quantity += newProduct.quantity;
-        setProducts(updatedProducts);
-      } else {
-        setProducts([...products, newProduct]);
-      }
-      setNewProduct({ name: '', ean: '', quantity: 1 });
+  const handleCardClick = (id) => {
+    setProductList(
+      productList.map((product) =>
+        product.id === id ? { ...product, quantity: parseInt(product.quantity) + 1 } : product
+      )
+    );
+  };
+
+  const handleAdd = () => {
+    const id = productList.length > 0 ? Math.max(...productList.map((product) => product.id)) + 1 : 1;
+    const newItem = { id, name: "", code: "", quantity: "0" };
+    setProductList([...productList, newItem]);
+    setEditingProductIdList([...editingProductIdList, id]);
+  };
+
+  const handleEdit = (id) => setEditingProductIdList([...editingProductIdList, id]);
+
+  const handleDelete = (id) => setProductList(productList.filter((product) => product.id !== id));
+
+  const handleSave = (updatedProduct) => {
+    setProductList(productList.map((product) => (product.id === updatedProduct.id ? updatedProduct : product)));
+    setEditingProductIdList(editingProductIdList.filter((productId) => productId !== updatedProduct.id));
+  };
+
+  const handleCancel = (id) => {
+    const existingProduct = productList.find((product) => product.id === id);
+    if (existingProduct.name === "" && existingProduct.code === "" && existingProduct.quantity === "0") {
+      setProductList(productList.filter((product) => product.id !== id));
     }
+    setEditingProductIdList(editingProductIdList.filter((productId) => productId !== id));
   };
 
-  const EditProduct = index => {
-    setEditIndex(index);
-    setEditedProduct(products[index]);
-    setIsEditing(true);
-  };
-
-  const SaveEdit = index => {
-    const updatedProducts = [...products];
-    updatedProducts[index] = editedProduct;
-    setProducts(updatedProducts);
-    setEditIndex(null);
-    setEditedProduct({ name: '', ean: '', quantity: 1 });
-    setIsEditing(false);
-  };
-
-  const CancelEdit = () => {
-    setEditIndex(null);
-    setEditedProduct({ name: '', ean: '', quantity: 1 });
-    setIsEditing(false);
-  };
-
-  const DeleteProduct = index => {
-    const updatedProducts = products.filter((_, i) => i !== index);
-    setProducts(updatedProducts);
-  };
-
-  const incrementQuantity = index => {
-    const updatedProducts = [...products];
-    updatedProducts[index].quantity += 1;
-    setProducts(updatedProducts);
-  };
-
-  const sortedProducts = [...products].sort((a, b) => a.name.localeCompare(b.name));
+  productList.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
-    <div className="app">
-      <h1>Control Depósito</h1>
-      <div className={`product-add ${isEditing ? 'hidden' : ''}`}>
-        <input
-          type="text"
-          placeholder="Nombre del producto"
-          value={newProduct.name}
-          onChange={e => setNewProduct({ ...newProduct, name: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Código EAN"
-          value={newProduct.ean}
-          onChange={e => setNewProduct({ ...newProduct, ean: e.target.value })}
-        />
-        <button onClick={AddProduct}>Agregar</button>
+    <section className="flex flex-col flex-center w-full">
+      <div className="flex flex-row flex-center">
+        <h1>Control Depósito</h1>
+        <button className="add-button" onClick={handleAdd}>
+          <i className="fa-regular fa-square-plus" />
+        </button>
       </div>
-      <div className={`product-list ${isEditing ? 'hidden' : ''}`}>
-        {sortedProducts.map((product, index) => (
-          <div key={index} className="product-item-container">
-            <div className="product-item" onClick={() => incrementQuantity(index)}>
-              <span className="detail product-name">{product.name}</span>
-              <span className="detail">{product.ean}</span>
-              <div className="detail product-quantity">
-                <label>CANTIDAD:</label>
-                <span>{product.quantity}</span>
-              </div>
-            </div>
-            <div className="product-actions">
-              <button onClick={(e) => { e.stopPropagation(); EditProduct(index); }}>Editar</button>
-              <button onClick={(e) => { e.stopPropagation(); DeleteProduct(index); }}>Eliminar</button>
-            </div>
-          </div>
-        ))}
-      </div>
-      {isEditing && (
-        <div className="product-edit">
-          <input
-            type="text"
-            value={editedProduct.name}
-            onChange={e => setEditedProduct({ ...editedProduct, name: e.target.value })}
-          />
-          <input
-            type="text"
-            value={editedProduct.ean}
-            onChange={e => setEditedProduct({ ...editedProduct, ean: e.target.value })}
-          />
-          <input
-            type="number"
-            value={editedProduct.quantity}
-            onChange={e => setEditedProduct({ ...editedProduct, quantity: Number(e.target.value) })}
-          />
-          <button onClick={() => SaveEdit(editIndex)}>Aceptar</button>
-          <button onClick={CancelEdit}>Cancelar</button>
-        </div>
-      )}
-    </div>
+
+      {productList.map((product) => (
+        <Card
+          key={product.id}
+          product={product}
+          isEditing={editingProductIdList.includes(product.id)}
+          handleEdit={() => handleEdit(product.id)}
+          handleDelete={() => handleDelete(product.id)}
+          handleSave={handleSave}
+          handleCancel={() => handleCancel(product.id)}
+          handleCardClick={() => handleCardClick(product.id)}
+        />
+      ))}
+    </section>
   );
 };
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+const Form = ({ product, handleSave, handleCancel }) => {
+  const [name, setName] = useState(product.name);
+  const [code, setCode] = useState(product.code);
+  const [quantity, setQuantity] = useState(product.quantity);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const cleanedName = name.trim().replace(/^\w/, (c) => c.toUpperCase());
+    handleSave({ ...product, name: cleanedName, code, quantity });
+  };
+
+  const handleCodeChange = (e) => setCode(e.target.value.replace(/\D/g, ""));
+
+  return (
+    <form onSubmit={handleSubmit} className="card">
+      <div className="flex flex-col w-full">
+        <input
+          type="text"
+          name="name"
+          placeholder="Nombre"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <input
+          type="text"
+          minLength={13}
+          maxLength={13}
+          name="code"
+          placeholder="Código EAN (13 dígitos)"
+          value={code}
+          onChange={handleCodeChange}
+          required
+        />
+        <input
+          type="number"
+          name="quantity"
+          placeholder="Stock"
+          min={0}
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+          required
+        />
+      </div>
+      <div className="flex flex-col">
+        <button className="confirm-button" type="submit" disabled={name.trim().length === 0 || code.length < 13}>
+          Aceptar
+        </button>
+        <button type="button" className="cancel-button" onClick={handleCancel}>
+          Cancelar
+        </button>
+      </div>
+    </form>
+  );
+};
+
+const Card = ({ product, isEditing, handleEdit, handleDelete, handleSave, handleCancel, handleCardClick }) => (
+  isEditing ? (
+    <Form product={product} handleSave={handleSave} handleCancel={handleCancel} />
+  ) : (
+    <article className="card" onClick={handleCardClick}>
+      <div className="quantity text-ellipsis">{product.quantity}</div>
+      <div className="details">
+        <div className="name text-ellipsis">{product.name}</div>
+        <div className="code text-ellipsis">{product.code}</div>
+      </div>
+      <div className="flex flex-col flex-center">
+        <button className="edit-button" onClick={(e) => { e.stopPropagation(); handleEdit(); }}>
+          <i className="fa-regular fa-pen-to-square"></i>
+        </button>
+        <button className="delete-button" onClick={(e) => { e.stopPropagation(); handleDelete(); }}>
+          <i className="fa-regular fa-trash-can"></i>
+        </button>
+      </div>
+    </article>
+  )
+);
+
+createRoot(document.getElementById("root")).render(<App />);

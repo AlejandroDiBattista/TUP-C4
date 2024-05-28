@@ -1,184 +1,154 @@
 body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background-color: #f0f0f0;
 }
 
+#root {
+  max-width: 1280px;
+  margin: 20px auto;
+}
 
-.app {
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.w-full {
   width: 100%;
-  max-width: 600px;
-  margin: 20px;
-  text-align: center;
 }
 
 h1 {
-  font-size: 2em;
-  color: #4a4a4a;
-}
-
-
-
-.product-add {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.product-add input {
-  margin: 0 5px;
-  padding: 5px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.product-add button {
-  padding: 5px 10px;
-  font-size: 1em;
-  background-color: #32783c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.product-add button:hover {
-  background-color: #32783c;
-}
-
-.product-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-}
-
-.detail {
-  display: block;
-  padding: 10px;
-  font-size: 1em;
-  color: #555;
-}
-
-.product-item-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 600px;
-  margin: 10px 0;
-}
-
-.product-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-size: 22px;
   margin-right: 10px;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin-bottom: 20px;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex-grow: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  overflow: hidden;
+  min-height: 100px; 
 }
 
-.product-item input {
-  margin: 5px 0;
-  padding: 5px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: calc(100% - 22px);
-}
-
-.product-item button {
-  margin: 5px 0;
-  padding: 5px 10px;
-  font-size: 1em;
-  background-color: #6c757d;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.product-item button:hover {
-  background-color: #5a6268;
-}
-
-.product-name {
-  text-transform: uppercase;
+.quantity {
+  font-size: 32px;
+  color: blue;
+  margin: 0px 20px 0px 15px;
+  flex-shrink: 0;
+  max-width: 30%;
+  text-align: center;
   font-weight: bold;
 }
 
-.product-quantity {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.details {
+  flex-grow: 1;
+  min-width: 0;
 }
 
-.product-actions {
-  display: flex;
-  flex-direction: column;
+.name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
-.product-actions button {
-  margin: 5px 0;
-  padding: 5px 10px;
-  font-size: 1em;
-  background-color: #416f8a;
-  color: white;
+.code {
+  color: #555;
+}
+
+.edit-button,
+.delete-button,
+.add-button {
+  background: none;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-}
-
-.product-actions button:hover {
-  background-color: #416f8a;
-;
-}
-
-.hidden {
-  display: none;
-}
-
-.product-edit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.product-edit input {
-  margin: 5px 0;
   padding: 5px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: calc(100% - 22px);
+  margin: 2px 0;
 }
 
-.product-edit button {
-  margin: 5px 5px 0;
-  padding: 5px 10px;
-  font-size: 1em;
-  background-color: #f0383b;
-  color: white;
-  border: none;
-  border-radius: 5px;
+.edit-button i,
+.delete-button i,
+.add-button i {
+  font-size: 20px;
+  color: #000;
   cursor: pointer;
 }
 
-.product-edit button:hover {
-  background-color: #f0383b;
+.confirm-button,
+.cancel-button {
+  margin-bottom: 8px;
+  background-color: transparent;
+  padding: 4px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+}
+
+input {
+  margin-bottom: 5px;
+  padding: 4px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  outline: none;
+  width: 90%;
+}
+
+input:last-child {
+  margin-bottom: 0px;
+}
+
+input:focus {
+  border-color: #aaa;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    max-width: 80%;
+  }
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  overflow: hidden;
 }
