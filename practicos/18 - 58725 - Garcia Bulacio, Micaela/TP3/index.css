@@ -1,0 +1,183 @@
+body {
+    background-color: #e1ebfa;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2em;
+    color: #062644;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    font-size: 20px;
+    width: 100%;
+    max-width: 500px;
+    padding: 16px;
+    margin: 10px auto;
+    border-radius: 10px;
+    border: 2px solid #062644;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.259);
+}
+
+.card2 {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.242);
+}
+
+.titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.errores, .errores2, .errores4 {
+    color: #ff1900;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.Productos0 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.sin-productos {
+    text-align: center;
+    margin-top: 10px;
+    color: #c41515;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 26px; 
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #062644;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0e3a64;
+}
+
+.bt1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.edit-buttons button {
+    background-color: #062644;
+    color: white;
+}
+
+.edit-buttons button:hover {
+    background-color: #0e3a64;
+}
+
+input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 96%;
+}
+
+.input-1 {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.input-2 {
+    display: block;
+    margin-bottom: 10px;
+}
+
+i {
+    display: block;
+}
+
+p {
+    color: black;
+    margin: 0;
+}
+
+strong {
+    color: #000;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.btn {
+    padding-right: 16px;
+}
+
+.cantidad {
+    font-size: 20px;
+    color: #062644;
+    margin-right: 10px;
+}
+
+.codigo {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #585858;
+}
+
+.fa-plus {
+    cursor: pointer;
+}
+
+.fa-pencil-alt, .fa-trash {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #062644;
+}
+
+.agregarProd {
+    background-color: #062644;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.agregarProd:hover {
+    background-color: #0e3a64;
+}
+
