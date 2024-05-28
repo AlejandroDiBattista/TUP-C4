@@ -148,7 +148,9 @@
     "cambio": false,
     "ubicacion": "./02 - 55505 - Chazarreta Robles, María",
     "TP2": true,
-    "TP3": true
+    "TP3": true,
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-03",
@@ -161,7 +163,9 @@
     "cambio": false,
     "ubicacion": "./03 - 50694 - Ferrari, Stefano",
     "TP2": true,
-    "TP3": true
+    "TP3": true,
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-06",
@@ -174,7 +178,9 @@
     "cambio": false,
     "ubicacion": "./06 - 59093 - Ledesma, Facundo Osvaldo",
     "TP2": true,
-    "TP3": true
+    "TP3": true,
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-07",
@@ -187,7 +193,9 @@
     "cambio": false,
     "ubicacion": "./07 - 59200 - López, Tiago Gabriel",
     "TP2": true,
-    "TP3": true
+    "TP3": true,
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-09",
@@ -200,7 +208,9 @@
     "cambio": false,
     "ubicacion": "./09 - 55466 - Medina, Álvaro Ignacio",
     "TP2": true,
-    "TP3": true
+    "TP3": true,
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-10",
@@ -213,7 +223,9 @@
     "cambio": false,
     "ubicacion": "./10 - 55986 - Paz, Octavio Emanuel",
     "TP2": true,
-    "TP3": true
+    "TP3": true,
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-13",
@@ -226,7 +238,9 @@
     "cambio": false,
     "ubicacion": "./13 - 58798 - Salazar, Santiago",
     "TP2": false,
-    "TP3": true
+    "TP3": true,
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-14",
@@ -239,7 +253,9 @@
     "cambio": false,
     "ubicacion": "./14 - 58800 - Valdez, Miguel Angel",
     "TP2": true,
-    "TP3": true
+    "TP3": true,
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-16",
@@ -252,7 +268,9 @@
     "cambio": false,
     "ubicacion": "./16 - 59265 - Cavanna, Victoria",
     "TP2": true,
-    "TP3": true
+    "TP3": true,
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-18",
@@ -265,7 +283,9 @@
     "cambio": false,
     "ubicacion": "./18 - 58725 - Garcia Bulacio, Micaela",
     "TP2": true,
-    "TP3": true
+    "TP3": true,
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-01",
@@ -400,7 +420,7 @@
                 <div className="ver">
                     {
                     alumno[entrega] 
-                        ? <a href={ubicar(alumno.ubicacion, entrega)}>Ver Trabajo {(entrega == "TP3") && <b>(nota {nota})</b>}</a> 
+                        ? <a href={ubicar(alumno.ubicacion, entrega)}>{entrega} | Ver Trabajo {(entrega == "TP3") && nota && <b>(nota {nota})</b>}</a> 
                         : <span className="falta">{entrega} ❌</span>
                     }
                 </div>
