@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+    <title>Control de Stock</title>
+    <style>
+        .App {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .add-product-form, .edit-product-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .product-list {
+            list-style: none;
+            padding: 0;
+        }
+        .product-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            border-radius: 10px; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+        }
+        .product-stock {
+            font-size: 24px;
+            margin-right: 20px;
+            cursor: pointer;
+            color: blue; 
+        }
+        .product-details {
+            flex-grow: 1;
+        }
+        .product-details strong {
+            font-size: 18px;
+        }
+        .product-details span {
+            display: block;
+        }
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            color: blue;
+        }
+        .edit-icon::before {
+            content: '\270E'; /* Icono lapiz */
+        }
+        .delete-icon::before {
+            content: '\1F5D1'; /* Icono tachito */
+        }
+        .toggle-form-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const App = () => {
+            const loadProducts = () => {
+                const storedProducts = localStorage.getItem('products');
+                return storedProducts ? JSON.parse(storedProducts) : [];
+            };
+
+            const saveProducts = (products) => {
+                localStorage.setItem('products', JSON.stringify(products));
+            };
+
+            const [products, setProducts] = useState(loadProducts());
+            const [newProduct, setNewProduct] = useState({ name: '', ean: '', stock: 0 });
+            const [editingProduct, setEditingProduct] = useState(null);
+            const [showAddForm, setShowAddForm] = useState(true);
+
+            useEffect(() => {
+                saveProducts(products);
+            }, [products]);
+
+            const handleInputChange = (e) => {
+                const { name, value } = e.target;
+                setNewProduct({ ...newProduct, [name]: name === 'stock' ? parseInt(value) : value });
+            };
+
+            const addProduct = () => {
+                if (newProduct.name && newProduct.ean && newProduct.stock > 0 && newProduct.stock <= 100) {
+                    setProducts(prevProducts => [...prevProducts, { ...newProduct, id: Date.now() }].sort((a, b) => a.name.localeCompare(b.name)));
+                    setNewProduct({ name: '', ean: '', stock: 0 });
+                }
+            };
+
+            const deleteProduct = (id) => {
+                setProducts(products.filter(product => product.id !== id));
+            };
+
+            const startEditProduct = (product) => {
+                setEditingProduct(product);
+            };
+
+            const handleEditInputChange = (e) => {
+                const { name, value } = e.target;
+                setEditingProduct({ ...editingProduct, [name]: name === 'stock' ? parseInt(value) : value });
+            };
+
+            const saveEditProduct = () => {
+                if (editingProduct.name && editingProduct.ean && editingProduct.stock > 0 && editingProduct.stock <= 100) {
+                    setProducts(products.map(product => (product.id === editingProduct.id ? editingProduct : product)));
+                    setEditingProduct(null);
+                }
+            };
+
+            const incrementStock = (id) => {
+                setProducts(products.map(product => {
+                    if (product.id === id) {
+                        return { ...product, stock: product.stock + 1 };
+                    }
+                    return product;
+                }));
+            };
+
+            const toggleAddForm = () => {
+                setShowAddForm(!showAddForm);
+            };
+
+            return (
+                <div className="App">
+                    <h1>Control de Stock <button className="toggle-form-button" onClick={toggleAddForm}>+</button></h1>
+                    {showAddForm && (
+                        <div className="add-product-form">
+                            <input type="text" name="name" value={newProduct.name} placeholder="Nombre" onChange={handleInputChange} />
+                            <input type="text" name="ean" value={newProduct.ean} placeholder="Código EAN" onChange={handleInputChange} />
+                            <input type="number" name="stock" value={newProduct.stock} placeholder="Stock" onChange={handleInputChange} />
+                            <button onClick={addProduct}>Agregar Producto</button>
+                        </div>
+                    )}
+                    <ul className="product-list">
+                        {products.map(product => (
+                            <li key={product.id} className="product-item">
+                                <span className="product-stock" onClick={() => incrementStock(product.id)}>{product.stock}</span>
+                                <span className="product-details">
+                                    <strong>{product.name}</strong>
+                                    <span>{product.ean}</span>
+                                </span>
+                                <button className="edit-icon" onClick={() => startEditProduct(product)}></button>
+                                <button className="delete-icon" onClick={() => deleteProduct(product.id)}></button>
+                            </li>
+                        ))}
+                    </ul>
+                    {editingProduct && (
+                        <div className="edit-product-form">
+                            <h2>Editar Producto</h2>
+                            <input type="text" name="name" value={editingProduct.name} onChange={handleEditInputChange} />
+                            <input type="text" name="ean" value={editingProduct.ean} onChange={handleEditInputChange} />
+                            <input type="number" name="stock" value={editingProduct.stock} onChange={handleEditInputChange} />
+                            <button onClick={saveEditProduct}>Guardar</button>
+                            <button onClick={() => setEditingProduct(null)}>Cancelar</button>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
