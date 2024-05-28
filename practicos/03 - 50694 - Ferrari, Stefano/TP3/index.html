@@ -71,6 +71,10 @@
         overflow: hidden;
       }
 
+      .cursor-pointer {
+        cursor: pointer;
+      }
+
       .quantity {
         font-size: 32px;
         color: blue;
@@ -171,7 +175,7 @@
       const Storage = () => {
         const [editingProductIdList, setEditingProductIdList] = useState([]);
         const [productList, setProductList] = useState([
-          { id: 1, name: "7up", code: "7799876543210", quantity: "31" },
+          { id: 1, name: "7up", code: "7799876543210", quantity: 31 },
         ]);
 
         const handleAdd = () => {
@@ -183,18 +187,20 @@
             id,
             name: "",
             code: "",
-            quantity: "0",
+            quantity: 0,
           };
 
           setProductList([...productList, item]);
           setEditingProductIdList([...editingProductIdList, id]);
         };
 
-        const handleEdit = (id) => {
+        const handleEdit = (e, id) => {
+          e.stopPropagation();
           setEditingProductIdList([...editingProductIdList, id]);
         };
 
-        const handleDelete = (id) => {
+        const handleDelete = (e, id) => {
+          e.stopPropagation();
           setProductList(productList.filter((product) => product.id !== id));
         };
 
@@ -221,12 +227,16 @@
             existingProduct &&
             existingProduct.name === "" &&
             existingProduct.code === "" &&
-            existingProduct.quantity === "0"
+            existingProduct.quantity === 0
           ) {
             setProductList(productList.filter((product) => product.id !== id));
           }
 
           setEditingProductIdList(editingProductIdList.filter((productId) => productId !== id));
+        };
+
+        const onIncrementQuantity = (productId) => {
+          setProductList(productList.map((p) => p.id === productId ? { ...p, quantity: p.quantity + 1 } : p));
         };
 
         productList.sort((a, b) => a.name.localeCompare(b.name));
@@ -245,10 +255,11 @@
                 key={product.id}
                 product={product}
                 isEditing={editingProductIdList?.includes(product.id)}
-                handleEdit={() => handleEdit(product.id)}
-                handleDelete={() => handleDelete(product.id)}
+                handleEdit={(e) => handleEdit(e, product.id)}
+                handleDelete={(e) => handleDelete(e, product.id)}
                 handleSave={handleSave}
                 handleCancel={() => handleCancel(product.id)}
+                onIncrementQuantity={() => onIncrementQuantity(product.id)}
               />
             ))}
           </section>
@@ -302,7 +313,7 @@
                 placeholder="Stock"
                 min={0}
                 value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
+                onChange={(e) => setQuantity(Number(e.target.value))}
                 required
               />
             </div>
@@ -322,7 +333,7 @@
         );
       };
 
-      const Card = ({ product, isEditing, handleEdit, handleDelete, handleSave, handleCancel }) => {
+      const Card = ({ product, isEditing, handleEdit, handleDelete, handleSave, handleCancel, onIncrementQuantity }) => {
         const { quantity, name, code } = product;
         return isEditing ? (
           <Form
@@ -331,7 +342,7 @@
             handleCancel={handleCancel}
           />
         ) : (
-          <article className="card">
+          <article className="card cursor-pointer" onClick={onIncrementQuantity}>
             <div className="quantity text-ellipsis">{quantity}</div>
             <div className="details">
               <div className="name text-ellipsis">{name}</div>
@@ -339,10 +350,10 @@
             </div>
             <div className="flex flex-col flex-center">
               <button className="edit-button" onClick={handleEdit}>
-                <i class="fa-regular fa-pen-to-square"></i>
+                <i className="fa-regular fa-pen-to-square"></i>
               </button>
               <button className="delete-button" onClick={handleDelete}>
-                <i class="fa-regular fa-trash-can"></i>
+                <i className="fa-regular fa-trash-can"></i>
               </button>
             </div>
           </article>
