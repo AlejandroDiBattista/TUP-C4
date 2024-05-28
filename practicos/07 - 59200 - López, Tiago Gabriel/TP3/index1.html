@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Enlaces a React, ReactDOM y Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.ico">
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Almacen</title>
+
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState, useEffect} = React;
+
+        const productosOG = [
+            { nombre: "Cigarrillos Chesterfield", ean: "5689247013578", cantidad: 5 },
+            { nombre: "Cigarrillos Camel", ean: "4398701256347", cantidad: 10 },
+            { nombre: "Cigarrillos Philip Morris", ean: "9210473568023", cantidad: 20 },
+            { nombre: "Cigarrillos Malboro", ean: "8726135908156", cantidad: 35 },
+        ];
+
+        function cargarProductosOG() {
+            const productosSaved = localStorage.getItem("productos");
+            return productosSaved ? JSON.parse(productosSaved) : productosOG;
+        }
+
+        function MostrarProd ({ mostrarFormAdd, setMostrarFormAdd}) {
+            const [productos, setProductos] = useState(cargarProductosOG);
+            const [productoNuevo, setProductoNuevo] = useState({ nombre: "", ean: "", cantidad: "" });
+            const [edicionPr, setEdicionPr] = useState (null);
+            const [edicionDeProducto, setEdicionDeProducto] = useState ({nombre: "", ean: "", cantidad: "" });
+
+            useEffect(() => {
+                localStorage.setItem("productos", JSON.stringify(productos));
+            }, [productos]);
+
+            function aumentarProducto(principal) {
+                const productosActualizados = productos.map((producto, i) =>  
+                i === principal ? {...producto, cantidad: parseInt(producto.cantidad) + 1} : producto
+            );
+            setProductos(productosActualizados);
+            }
+
+            function ocultarFormulario(setMostrarFormAdd) {
+            setMostrarFormAdd(false);
+            }
+
+            function handleInputChange (e, setter) {
+            const { name, value} = e.target;
+            setter(prev => ({...prev, [name]: value}));
+            }
+
+            function AggProducto (productoNuevo, setProductos, setProductoNuevo) {
+            if (productoNuevo.nombre && productoNuevo.ean) {
+                setProductos(productosPrev => [...productosPrev, {...productoNuevo, cantidad:  parseInt(productoNuevo.cantidad)}]);
+            }
+            else {
+                alert("Complete los campos para guardar los productos")
+            }
+            }
+
+            function eliminarProd(principal, setProductos, productos) {
+            const productosActualizados = productos.filter((_, i) => i !== principal);
+            setProductos(productosActualizados);
+            }
+
+
+            function editarProd(principal, setEdicionPr, setEdicionDeProducto, productos) {
+            setEdicionPr(principal);
+            setEdicionDeProducto(productos[principal]); 
+            }
+
+
+            function guardarProd(setProductos, productos, edicionPr, edicionDeProducto, setEdicionPr, setEdicionDeProducto) {
+            const productosActualizados = productos.map((producto, i) =>  
+                i === edicionPr ? {...edicionDeProducto} : producto
+            );
+            setProductos(productosActualizados);
+            setEdicionPr(null);
+            }
+
+            return (
+                <div className="listaDeProductos">
+                    
+                    {mostrarFormAdd && (
+                        <div className="AgregarProductos">
+                            <input 
+                            type="text" 
+                            name="nombre" 
+                            placeholder="Nombre Del Producto"
+                            value={productoNuevo.nombre}
+                            onChange={(e) => handleInputChange(e, setProductoNuevo)}
+                            />
+
+                            <input
+                                type="text"
+                                name="ean"
+                                minLength="10"
+                                maxLength="10"
+                                placeholder="EAN (10 Digitos)"
+                                value={productoNuevo.ean}
+                                onChange={(e) => handleInputChange(e, setProductoNuevo)}
+                            />
+
+                            <input  
+                            type="number"
+                            name="cantidad"
+                            placeholder="Cantidad"
+                            value={productoNuevo.cantidad}
+                            onChange={(e) => handleInputChange(e, setProductoNuevo)} 
+                            />
+
+                            <div className="botonesAddP">
+                                <button onClick={() => {
+                                    AggProducto(productoNuevo, setProductos, setProductoNuevo)
+                                    ocultarFormulario(setMostrarFormAdd)
+                                }}>Aceptar</button>
+                                <button onClick={() => ocultarFormulario(setMostrarFormAdd)}>Cancelar</button>
+                            </div>
+                        </div>
+                    )}
+
+
+                    {productos.sort((a,b) => a.nombre.localeCompare(b.nombre)).map((producto, principal) => (
+                        <div key={principal}> 
+                            {edicionPr !== principal ?
+                            (  
+                                <div className="cardP" onClick={() => aumentarProducto(principal)}>
+                                    <div className= "itemsC">
+                                        <span className= "cProductos">{producto.cantidad}</span>
+                                        <div className="pNombre">
+                                            <p className="producto-nombre">{producto.nombre}</p>
+                                            <p className="ean-producto">{producto.ean}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="acciones">
+                                            <i className="fas fa-pen" onClick={(e) => {e.stopPropagation(); editarProd(principal, setEdicionPr, setEdicionDeProducto, productos); }}></i>
+                                            <i className="fas fa-trash" onClick={(e) => {e.stopPropagation(); eliminarProd(principal, setProductos, productos); }}></i>
+                                        </div>
+                                    </div>
+                            
+                            ) : (
+                                <div className="formEdit">
+                                    <div className="containerInputs">
+                                        <input type="text"
+                                        name="nombre"
+                                        placeholder="Nombre"
+                                        value={edicionDeProducto.nombre}
+                                        onChange={(e) => handleInputChange(e, setEdicionDeProducto)}
+                                        />
+                                        <input 
+                                        type="text"
+                                        name="ean"
+                                        placeholder="Ean"
+                                        value={edicionDeProducto.ean}
+                                        onChange={(e) => handleInputChange(e, setEdicionDeProducto)}
+                                        />
+                                        <input 
+                                        type="number"
+                                        name="cantidad"
+                                        placeholder="Cantidad"
+                                        value={edicionDeProducto.cantidad}
+                                        onChange={(e) => handleInputChange(e, setEdicionDeProducto)}
+                                        />
+                                        </div>
+                                        <div className="Btns-EditarP">
+                                            <button onClick={() => guardarProd(setProductos, productos, edicionPr, edicionDeProducto, setEdicionPr, setEdicionDeProducto)}>Aceptar</button>
+                                            <button onClick={() => setEdicionPr(null)}>Cancelar</button>
+                                            </div>  
+                                            
+                              </div>                               
+                            )}  
+                        </div>
+                    ))}
+                </div>   
+            )
+         }
+
+
+         function App() {
+            const [mostrarFormAdd, setMostrarFormAdd ] = useState(false);
+            return (
+                <div className="container">
+                    <div className="head">
+                        <img src="logo.png" className="logotipo" alt="logo"/><h1>Control Stock </h1>
+                        <button className="btn-agregar-p"
+                            onClick={() => setMostrarFormAdd(true)}>
+                            <i className="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <MostrarProd
+                        mostrarFormAdd={mostrarFormAdd}
+                        setMostrarFormAdd={setMostrarFormAdd}
+                    />
+                </div>
+            );
+        }
+
+       
+
+         
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7); 
+}
+
+.header {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 30px;
+    margin: 0;
+}
+
+.btn-agregar-p {
+    cursor: pointer;
+}
+
+.listaDeProductos {
+    width: 300px;
+    margin-top: 10px;
+}
+
+.cardP {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 1.5);
+    cursor: pointer;
+}
+
+.itemsC {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.itemsC input {
+    width: 100px;
+}
+
+.cProductos {
+    font-size: 40px;
+    color: blue;
+    margin-left: 10px;
+}
+
+.pNombre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.producto-nombre {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0px;
+}
+
+.ean-producto {
+    margin: 5px;
+}
+
+
+.AgregarProductos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.AgregarProductos input {
+    border-radius: 5px;
+    width: 80%;
+    padding: 5px;
+    margin: 5px;
+}
+
+.acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.fa-trash {
+    color: red;
+    cursor: pointer;
+}
+
+.fa-pen {
+    color: blue;
+    cursor: pointer;
+}
+
+
+.botonesAddP {
+    margin-top: 5px;
+}
+
+.AgregarProductos button {
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin-left: 5px;
+}
+
+
+.formEdit {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 1.5);
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.containerInputs {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.formEdit input {
+    border-radius: 5px;
+    width: 200px;
+}
+
+.Btns-EditarP {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.logotipo {
+    width: 45px; 
+    margin-left: 80px;
+    
+}
+
+.btn-agregar-p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; 
+    height: 30px; 
+    border: none;
+    border-radius: 50%;
+    background-color: #007bff; 
+    color: #fff; /* Color del icono */
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 90px;
+}
