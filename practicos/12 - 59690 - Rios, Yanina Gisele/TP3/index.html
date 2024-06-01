@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlaces a React, ReactDOM y Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <title>Control Deposito</title>
+    <style>
+      /* reset */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+
+      #root {
+        max-width: 1280px;
+        margin: 20px auto;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .flex-col {
+        flex-direction: column;
+      }
+
+      .flex-row {
+        flex-direction: row;
+      }
+
+      .flex-center {
+        justify-content: center;
+        align-items: center;
+      }
+
+      .text-ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .w-full {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 40px;
+        margin-right: 10px;
+      }
+
+     .card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  overflow: hidden;
+  min-height: 120px;
+  position: relative;
+}
+
+.quantity {
+  font-size: 45px;
+  color: blue;
+  margin: 0px 20px 0px 15px;
+  flex-shrink: 0;
+  max-width: 30%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.details {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.code {
+  color: #555;
+}
+
+.edit-button,
+.delete-button,
+.add-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin: 2px 0;
+}
+.edit-button {
+  top: 10px; /* Posición en la esquina superior derecha */
+  right: 10px;
+}
+
+.delete-button {
+  bottom: 10px; /* Posición en la esquina inferior derecha */
+  right: 10px;
+}
+
+.edit-button i,
+.delete-button i,
+.add-button i {
+  font-size: 25px;
+  color: #000;
+  cursor: pointer;
+}
+.confirm-button,
+.cancel-button {
+  margin-bottom: 8px;
+  background-color: transparent;
+  padding: 4px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+      input {
+        margin-bottom: 5px;
+        padding: 6px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        outline: none;
+        width: 90%;
+      }
+
+      input:last-child{
+        margin-bottom: 0px;
+      }
+      
+      input:focus {
+        border-color: #aaa;
+      }
+
+      @media screen and (max-width: 768px) {
+        .card {
+          max-width: 80%;
+        }
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { createRoot } = ReactDOM;
+      const { useState } = React;
+
+      const App = () => {
+        return (
+          <main className="flex flex-center w-full">
+            <Storage />
+          </main>
+        );
+      };
+
+const Storage = () => {
+  const [editingProductIdList, setEditingProductIdList] = useState([]);
+  const [productList, setProductList] = useState([
+    { id: 1, name: "7up", code: "7799876543210", quantity: "7" },
+    { id:2, name:"Coca Cola", code: "7791234567890", quantity: "92" },
+    { id: 3, name: "Fanta", code: "7793219876540", quantity: "5" },
+  ]);
+
+  const handleAdd = () => {
+    const id = productList.length > 0
+      ? Math.max(...productList.map((product) => product.id)) + 1
+      : 1;
+
+    const item = {
+      id,
+      name: "",
+      code: "",
+      quantity: "0",
+    };
+
+    setProductList([...productList, item]);
+    setEditingProductIdList([...editingProductIdList, id]);
+  };
+
+  const handleEdit = (id) => {
+    setEditingProductIdList([...editingProductIdList, id]);
+  };
+
+  const handleDelete = (id) => {
+    setProductList(productList.filter((product) => product.id !== id));
+  };
+
+  const handleSave = (product) => {
+    const existingProduct = productList.find((product) => product.id === product.id);
+
+    if (existingProduct) {
+      setProductList(productList.map((p) => (p.id === product.id ? product : p)));
+    } else {
+      setProductList([...productList, product]);
+    }
+
+    setEditingProductIdList(editingProductIdList.filter((productId) => productId !== product.id));
+  };
+
+  const handleCancel = (id) => {
+    const existingProduct = productList.find((product) => product.id === id);
+
+    if (
+      existingProduct &&
+      existingProduct.name === "" &&
+      existingProduct.code === "" &&
+      existingProduct.quantity === "0"
+    ) {
+      setProductList(productList.filter((product) => product.id !== id));
+    }
+
+    setEditingProductIdList(editingProductIdList.filter((productId) => productId !== id));
+  };
+
+  const incrementQuantity = (id) => {
+    setProductList(productList.map((product) => {
+      if (product.id === id) {
+        return { ...product, quantity: parseInt(product.quantity) + 1 };
+      }
+      return product;
+    }));
+  };
+
+  productList.sort((a, b) => a.name.localeCompare(b.name));
+
+  return (
+    <section className="flex flex-col flex-center w-full">
+      <div className="flex flex-row flex-center">
+        <h1>Control Depósito</h1>
+        <button className="add-button" onClick={handleAdd}>
+          <i className="fa-regular fa-square-plus" />
+        </button>
+      </div>
+
+      {productList.map((product) => (
+        <Card
+          key={product.id}
+          product={product}
+          isEditing={editingProductIdList?.includes(product.id)}
+          handleEdit={() => handleEdit(product.id)}
+          handleDelete={() => handleDelete(product.id)}
+          handleSave={handleSave}
+          handleCancel={() => handleCancel(product.id)}
+          incrementQuantity={() => incrementQuantity(product.id)}
+        />
+      ))}
+    </section>
+  );
+};
+
+
+      const Form = ({ product, handleSave, handleCancel }) => {
+        const [name, setName] = useState(product.name);
+        const [code, setCode] = useState(product.code);
+        const [quantity, setQuantity] = useState(product.quantity);
+        const isSubmitDisabled = name?.trim().length === 0 || code?.trim().length < 13;
+
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          handleSave({ ...product, name, code, quantity });
+        };
+
+        const handleCodeChange = (e) => {
+          const value = e.target.value.replace(/\D/g, "");
+          setCode(value);
+        };
+
+        return (
+          <form onSubmit={handleSubmit} className="card">
+            <div className="flex flex-col w-full">
+              <input
+                type="text"
+                name="name"
+                placeholder="Ingrese el nombre del producto"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <input
+                type="text"
+                minLength={13}
+                maxLength={13}
+                name="code"
+                placeholder="Ingrese el Codigo EAM"
+                value={code}
+                onChange={handleCodeChange}
+                required
+              />
+              <input
+                type="number"
+                name="quantity"
+                placeholder="Stock"
+                min={0}
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <button
+                className="confirm-button"
+                type="submit"
+                disabled={isSubmitDisabled}
+              >
+                Aceptar
+              </button>
+              <button className="cancel-button" onClick={handleCancel}>
+                Cancelar
+              </button>
+            </div>
+          </form>
+        );
+      };
+
+const Card = ({
+  product,
+  isEditing,
+  handleEdit,
+  handleDelete,
+  handleSave,
+  handleCancel,
+  incrementQuantity,
+}) => {
+  const handleClick = (e) => {
+    if (
+      e.target.closest(".edit-button") ||
+      e.target.closest(".delete-button")
+    ) {
+      return;
+    }
+    incrementQuantity(product.id);
+  };
+
+  if (isEditing) {
+    return <Form product={product} handleSave={handleSave} handleCancel={handleCancel} />;
+  }
+
+ return (
+    <div className="card" onClick={handleClick}>
+      <div className="quantity">{product.quantity}</div>
+      <div className="details">
+        <div className="name">{product.name}</div>
+        <div className="code">{product.code}</div>
+      </div>
+      <div className="buttons-container">
+        <button
+          className="edit-button"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleEdit();
+          }}
+        >
+          <i className="fa-regular fa-pen-to-square" />
+        </button>
+        <button
+          className="delete-button"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDelete();
+          }}
+        >
+          <i className="fa-regular fa-trash-can" />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+
+      const root = createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
