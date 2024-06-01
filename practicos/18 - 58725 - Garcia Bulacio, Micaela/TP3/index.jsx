@@ -10,72 +10,38 @@ const productosIniciales = [
 ];
 
 function Agenda({ productos, editar, cancelarEdicion, borrar, agregar, agregarCant }) {
-    const [busqueda, setBusqueda] = useState('');
-    const [productoNoEncontrado, setProductoNoEncontrado] = useState(false);
-
-    const handleBusquedaChange = (e) => {
-        setBusqueda(e.target.value);
-    };
-
-    useEffect(() => {
-        if (productos.some(producto => producto.nombre.toLowerCase().includes(busqueda.toLowerCase()))) {
-            setProductoNoEncontrado(false);
-        } else {
-            setProductoNoEncontrado(true);
-        }
-    }, [productos, busqueda]);
-
-    const productosFiltrados = productos.filter(producto =>
-        producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
-    );
+    if (productos.length === 0) {
+        return (
+            <div className="Productos0">
+                <h1>No hay productos</h1>
+                <button className="agregarProd"><i className="fas fa-plus" onClick={agregar}></i></button>
+            </div>
+        )
+    }
 
     function ordenAlfabetico(a, b) {
         if (a.nombre < b.nombre) return -1;
         if (a.nombre > b.nombre) return 1;
         return 0;
     }
-
-    productosFiltrados.sort(ordenAlfabetico);
-
-    const handleAgregarProducto = () => {
-        agregar();
-        productosFiltrados.sort(ordenAlfabetico);
-    };
-
-    if (productos.length === 0) {
-        return (
-            <div className="Productos0">
-                <h1>No hay productos</h1>
-                <button className="agregarProd" onClick={agregar}><i className="fas fa-plus"></i></button>
-            </div>
-        );
-    }
-
+    productos.sort(ordenAlfabetico);
     return (
         <div className="agenda">
             <div className="titulo">
                 <h1>Control Depósito</h1>
-                <div className="buscador">
-                    <input
-                        type="text"
-                        placeholder="Buscar productos..."
-                        value={busqueda}
-                        onChange={handleBusquedaChange}
-                    />
-                </div>
-                <button className="agregarProd" onClick={handleAgregarProducto}><i className="fas fa-plus"></i></button>
+                <button className="agregarProd"><i className="fas fa-plus" onClick={agregar}></i></button>
             </div>
-            {productoNoEncontrado && <p className="sin-productos">  Producto no encontrado</p>}
-            {productosFiltrados.map(producto => (
+            {productos.map(producto => (
                 <div key={producto.id}>
                     {producto.editando
-                        ? <EditarAgenda
+                        ?
+                        <EditarAgenda
                             producto={producto}
                             productos={productos}
                             guardar={(p) => editar(p)}
                             cancelar={() => cancelarEdicion(producto)}
                         />
-                        : <Mostrar
+                        :<Mostrar
                             producto={producto}
                             editar={() => editar({ ...producto, editando: true })}
                             borrar={() => borrar(producto)}
@@ -87,7 +53,6 @@ function Agenda({ productos, editar, cancelarEdicion, borrar, agregar, agregarCa
         </div>
     );
 }
-
 
 function Mostrar({ producto, editar, borrar, agregarCant }) {
     const handleClick = (e) => {
@@ -113,8 +78,8 @@ function Mostrar({ producto, editar, borrar, agregarCant }) {
                 <p className="codigo">{producto.codigo}</p>
             </div>
             <div className="botones-mostrar">
-                <div><i className="fas fa-pencil-alt" onClick={handleEditClick}></i></div>
-                <div><i className="fas fa-trash" onClick={handleDeleteClick}></i></div>
+                <div><i class="fa-regular fa-pen-to-square" onClick={handleEditClick}></i></div>
+                <div><i class="fa-regular fa-trash-can" onClick={handleDeleteClick}></i></div>
             </div>
         </div>
     );
@@ -234,7 +199,7 @@ function App() {
         setProductos([...productos, nuevoProducto]);
     };
 
-    const agregarCan = (producto) => {
+    const agregarCant = (producto) => {
         setProductos(productos.map(p => p.id === producto.id ? { ...producto, cantidad: parseInt(producto.cantidad) + 1 } : p));
     };
 
@@ -246,7 +211,7 @@ function App() {
                 cancelarEdicion={cancelarEdicion}
                 borrar={borrar}
                 agregar={agregar}
-                agregarCant={agregarCan}
+                agregarCant={agregarCant}
             />
         </div>
     );
