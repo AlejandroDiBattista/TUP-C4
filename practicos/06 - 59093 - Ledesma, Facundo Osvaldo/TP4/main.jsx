@@ -1,4 +1,4 @@
-const { useState } = React;
+const { useState, useEffect } = React;
 
 const ApiKey = "1586248c3937369faa3442ed8f947769";
 
@@ -8,9 +8,14 @@ const UrlApi = "https://api.openweathermap.org/data/2.5/weather";
 
 function App() {
   const [cityName, setCityName] = useState("");
-  const [weatherData, setWheather] = useState(null);
+  const [weatherData, setWeather] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(""); // Estado para el mensaje de error
+
+  useEffect(() => {
+    // Cargar datos de Barcelona cuando el componente se monte
+    getWeather("Barcelona");
+  }, []);
 
   const Navbar = ({ getWeather }) => (
     <nav>
@@ -46,7 +51,7 @@ function App() {
         throw new Error("Error al buscar ciudad");
       }
       const data = await response.json();
-      setWheather(data);
+      setWeather(data);
     } catch (error) {
       setError(error.message); // Capturar el error y actualizar el estado del mensaje de error
     } finally {
