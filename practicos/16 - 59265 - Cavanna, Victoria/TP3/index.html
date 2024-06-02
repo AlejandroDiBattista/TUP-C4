@@ -32,8 +32,13 @@
 
         .titulo-container {
             display: flex;
-            align-items: center;
+            align-items: baseline;
             justify-content: space-between;
+        }
+
+        .fa-solid {
+            margin-top: 2%;
+            font-size: 1.3rem;
         }
 
         .titulo {
@@ -44,7 +49,6 @@
             border-radius: 10px;
             background-color: transparent;
             border: 3px solid black;
-            padding: 0.5rem;
             transition: 0.5s;
         }
 
@@ -56,20 +60,19 @@
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
             justify-content: space-between;
-            align-items: center;
             cursor: pointer;
             margin-bottom: 2rem;
             display: flex;
-            padding: 1rem;
+            padding: 1.3rem;
         }
 
-        .fa-solid {
+        .fa-regular {
             font-size: 1.5rem;
             cursor: pointer;
             transition: 0.5s;
         }
 
-        .fa-solid:hover {
+        .fa-regular:hover {
             transform: scale(1.15);
         }
 
@@ -79,28 +82,33 @@
             margin-left: 10px;
         }
 
+        input.form-control {
+            margin-bottom: 3px;
+            width: 18vw;
+        }
+
         .form-agregar,
         .editar-form {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 1rem;
-        }
-
-        input.form-control {
-            margin-bottom: 5%;
-        }
-
-        .editar-form {
+            justify-content: space-between;
             border-radius: 10px;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
-            align-items: center;
-            justify-content: space-between;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
         }
 
-        .editar-form .form-btns {
+        .form-btns {
             display: flex;
             flex-direction: column;
+        }
+
+        .form-btns button {
+            font-weight: 500;
+            font-size: 1.1rem;
+            border-radius: 15px;
+            padding: 2px 6px;
+            background-color: transparent;
         }
     </style>
 </head>
@@ -145,20 +153,22 @@
             }
         ];
 
+        const obtenerProductos = () => {
+            const productosLocales = localStorage.getItem("productos");
+            return productosLocales ? JSON.parse(productosLocales) : productosIniciales;
+        };
 
-
-        const CardProducto = ({ producto, incrementar, setIdEditando, setProductoEditando, eliminarProducto }) => {
+        const CardProducto = ({ producto, incrementar, setListaProductosIdEditando, eliminarProducto }) => {
 
             const editarProducto = (e) => {
                 e.stopPropagation();
-                setIdEditando(producto.id);
-                setProductoEditando(producto);
-            }
+                setListaProductosIdEditando(prev => [...prev, producto.id]);
+            };
 
             const eliminar = (e) => {
                 e.stopPropagation();
                 eliminarProducto(producto.id);
-            }
+            };
 
             return (
                 <div className="card d-flex flex-row" onClick={() => incrementar(producto.id)}>
@@ -170,66 +180,66 @@
                         </div>
                     </div>
                     <div className="d-flex flex-column justify-content-around">
-                        <i className="fa-solid fa-pen-to-square mb-3" style={{ color: "#3264c8" }} onClick={editarProducto}></i>
-                        <i className="fa-solid fa-trash-can" style={{ color: "#bd2828" }} onClick={eliminar}></i>
+                        <i className="fa-regular fa-pen-to-square mb-3" onClick={editarProducto}></i>
+                        <i className="fa-regular fa-trash-can" onClick={eliminar}></i>
                     </div>
                 </div>
             );
-        }
-        const obtenerProductos = () => {
-            const productosLocales = localStorage.getItem("productos");
-            return productosLocales ? JSON.parse(productosLocales) : productosIniciales;
-        }
-        const EditarProducto = ({ idEditando, setIdEditando, productoEditando, setProductoEditando, setProductos, productos }) => {
+        };
+
+        const EditarProducto = ({ producto, handleGuardar, handleCancelar }) => {
+            const [formData, setFormData] = useState({ ...producto });
+
             const handleCampo = (e) => {
                 const { name, value } = e.target;
-                setProductoEditando(producto => ({ ...producto, [name]: value }));
-            }
+                setFormData({ ...formData, [name]: value });
+            };
 
-            const guardarProducto = (e) => {
+            const handleSubmit = (e) => {
                 e.preventDefault();
-                const productosActualizados = productos.map((producto) =>
-                    producto.id === idEditando ? { ...productoEditando, cantidad: parseInt(productoEditando.cantidad) } : producto
-                );
-                setProductos(productosActualizados);
-                setIdEditando(null);
-            }
+                handleGuardar({ ...formData, cantidad: parseInt(formData.cantidad) });
+            };
 
             return (
-                <form className="editar-form p-3" onSubmit={guardarProducto}>
-                    <input
-                        type="text"
-                        name="nombre"
-                        placeholder="Nombre"
-                        className="form-control"
-                        value={productoEditando.nombre}
-                        onChange={handleCampo}
-                    />
-                    <input
-                        type="text"
-                        name="codigoEAN"
-                        placeholder="Código EAN"
-                        className="form-control"
-                        value={productoEditando.codigoEAN}
-                        onChange={handleCampo}
-                    />
-                    <input
-                        type="number"
-                        name="cantidad"
-                        placeholder="Cantidad"
-                        className="form-control"
-                        value={productoEditando.cantidad}
-                        onChange={handleCampo}
-                    />
+                <form className="editar-form p-3" onSubmit={handleSubmit}>
+                    <div className="inputs">
+                        <input
+                            type="text"
+                            name="nombre"
+                            placeholder="Nombre"
+                            className="form-control"
+                            value={formData.nombre}
+                            onChange={handleCampo}
+                        />
+                        <input
+                            type="text"
+                            name="codigoEAN"
+                            placeholder="Código EAN"
+                            className="form-control"
+                            value={formData.codigoEAN}
+                            onChange={handleCampo}
+                            maxLength={13}
+                        />
+                        <input
+                            type="number"
+                            name="cantidad"
+                            placeholder="Cantidad"
+                            min={0}
+                            max={100}
+                            className="form-control"
+                            value={formData.cantidad}
+                            onChange={handleCampo}
+                        />
+                    </div>
                     <div className="form-btns">
-                        <button type="submit" className="btn btn-primary mb-1">Modificar</button>
-                        <button type="button" className="btn btn-secondary" onClick={() => setIdEditando(null)}>Cancelar</button>
+                        <button type="submit" className="mb-1">Aceptar</button>
+                        <button type="button" onClick={() => handleCancelar(producto.id)}>Cancelar</button>
                     </div>
                 </form>
             );
-        }
+        };
 
-        const AgregarProducto = ({ cancelarAgregar,setMostrarFormAgregar, setProductos, productos }) => {
+        const AgregarProducto = ({ cancelarAgregar, setMostrarFormAgregar, setProductos, productos }) => {
             const [nuevo, setNuevo] = useState({ id: "", nombre: "", codigoEAN: "", cantidad: "" });
 
             const handleCampo = (e) => {
@@ -238,104 +248,125 @@
             };
 
             const ultimoId = () => {
-                return productos[productos.length - 1].id
-            }
+                return Math.max(...productos.map((product) => product.id));
+            };
 
             const agregarProductoNuevo = (e) => {
                 e.preventDefault();
                 if (nuevo.nombre && nuevo.codigoEAN && nuevo.cantidad) {
-                    setProductos(productosAnterior => {
-                        return [...productosAnterior, { ...nuevo, cantidad: parseInt(nuevo.cantidad), id: ultimoId() + 1 }];
-                    });
-                    setNuevo({ id: "", nombre: "", codigoEAN: "", cantidad: "" });
-                    setMostrarFormAgregar(false);
+                    if (validarCodigo(nuevo.codigoEAN)) {
+                        setProductos(productosAnterior => [
+                            ...productosAnterior,
+                            { ...nuevo, cantidad: parseInt(nuevo.cantidad), id: ultimoId() + 1 }
+                        ]);
+                        setNuevo({ id: "", nombre: "", codigoEAN: "", cantidad: "" });
+                        setMostrarFormAgregar(false);
+                    } else {
+                        alert("El código EAN debe tener 13 dígitos válidos. Ingresar solo caracteres numéricos.");
+                    }
                 } else {
                     alert("Completar todos los campos");
                 }
+            };
+
+            function validarCodigo(codigo) {
+                const codigoValido = codigo.replace(/\s/g, '');
+                return /^\d{13}$/.test(codigoValido);
             }
 
             return (
                 <form className="form-agregar" onSubmit={agregarProductoNuevo}>
-                    <label className="form-label fs-5 fw-medium">Nombre del producto </label>
-                    <input
-                        type="text"
-                        name="nombre"
-                        className="form-control"
-                        value={nuevo.nombre}
-                        onChange={handleCampo}
-                    />
-                    <label className="form-label fs-5 fw-medium">Código EAN</label>
-                    <input
-                        type="text"
-                        name="codigoEAN"
-                        className="form-control"
-                        value={nuevo.codigoEAN}
-                        onChange={handleCampo}
-                    />
-                    <label className="form-label fs-5 fw-medium">Cantidad</label>
-                    <input
-                        type="number"
-                        name="cantidad"
-                        className="form-control"
-                        value={nuevo.cantidad}
-                        onChange={handleCampo}
-                    />
-                    <div className="form-btns text-center mb-5">
-                        <button type="submit" className="btn btn-success me-4">Agregar</button>
-                        <button type="button" className="btn btn-secondary" onClick={cancelarAgregar}>Cancelar</button>
+                    <div className="inputs">
+                        <input
+                            type="text"
+                            name="nombre"
+                            className="form-control"
+                            placeholder="Nombre del producto"
+                            value={nuevo.nombre}
+                            onChange={handleCampo}
+                        />
+                        <input
+                            type="text"
+                            name="codigoEAN"
+                            className="form-control"
+                            placeholder="Código EAN"
+                            value={nuevo.codigoEAN}
+                            maxLength={13}
+                            onChange={handleCampo}
+                        />
+                        <input
+                            type="number"
+                            name="cantidad"
+                            className="form-control"
+                            placeholder="Cantidad"
+                            value={nuevo.cantidad}
+                            min={0}
+                            max={100}
+                            onChange={handleCampo}
+                        />
+                    </div>
+                    <div className="form-btns">
+                        <button type="submit" className="mb-1">Aceptar</button>
+                        <button type="button" onClick={cancelarAgregar}>Cancelar</button>
                     </div>
                 </form>
             );
-        }
+        };
 
-        const Producto = ({ productos, setProductos, productoEditando, setProductoEditando, idEditando, setIdEditando }) => {
+        const Producto = ({ productos, setProductos, setListaProductosIdEditando, listaProductosIdEditando }) => {
 
             const incrementar = (id) => {
                 const productosActualizados = productos.map((producto) =>
                     producto.id === id ? { ...producto, cantidad: parseInt(producto.cantidad) + 1 } : producto
                 );
                 setProductos(productosActualizados);
-            }
+            };
 
             const eliminarProducto = (id) => {
                 const productosActualizados = productos.filter((producto) => producto.id !== id);
                 setProductos(productosActualizados);
-            }
+            };
+
+            const handleGuardar = (productoEditado) => {
+                const productosActualizados = productos.map((producto) =>
+                    producto.id === productoEditado.id ? productoEditado : producto
+                );
+                setProductos(productosActualizados);
+                setListaProductosIdEditando(listaProductosIdEditando.filter(id => id !== productoEditado.id));
+            };
+
+            const handleCancelar = (id) => {
+                setListaProductosIdEditando(listaProductosIdEditando.filter(productId => productId !== id));
+            };
 
             return (
                 <div className="productos">
-                    {productos.sort((a, b) => a.nombre.localeCompare(b.nombre)).map((producto) => (
-                        idEditando !== producto.id ? (
+                    {productos.sort((a, b) => a.nombre.localeCompare(b.nombre)).map((producto) =>
+                        listaProductosIdEditando.includes(producto.id) ? (
+                            <EditarProducto
+                                key={producto.id}
+                                producto={producto}
+                                handleGuardar={handleGuardar}
+                                handleCancelar={handleCancelar}
+                            />
+                        ) : (
                             <CardProducto
                                 key={producto.id}
                                 producto={producto}
-                                setProductoEditando={setProductoEditando}
-                                setIdEditando={setIdEditando}
+                                setListaProductosIdEditando={setListaProductosIdEditando}
                                 eliminarProducto={eliminarProducto}
                                 incrementar={incrementar}
                             />
-                        ) : (
-                            <EditarProducto
-                                key={producto.id}
-                                idEditando={idEditando}
-                                setIdEditando={setIdEditando}
-                                productoEditando={productoEditando}
-                                setProductoEditando={setProductoEditando}
-                                setProductos={setProductos}
-                                productos={productos}
-                            />
                         )
-                    ))}
+                    )}
                 </div>
             );
-        }
+        };
 
         const App = () => {
             const [mostrarFormAgregar, setMostrarFormAgregar] = useState(false);
             const [productos, setProductos] = useState(obtenerProductos);
-            
-            const [idEditando, setIdEditando] = useState(null);
-            const [productoEditando, setProductoEditando] = useState({ id: "", nombre: "", codigoEAN: "", cantidad: "" });
+            const [listaProductosIdEditando, setListaProductosIdEditando] = useState([]);
 
             useEffect(() => {
                 localStorage.setItem("productos", JSON.stringify(productos));
@@ -343,10 +374,12 @@
 
             const handleAgregar = () => {
                 setMostrarFormAgregar(true);
-            }
+            };
+
             const cancelarAgregar = () => {
                 setMostrarFormAgregar(false);
-            }
+            };
+
             return (
                 <div className="container p-5">
                     <div className="titulo-container">
@@ -358,7 +391,7 @@
                     {mostrarFormAgregar && (
                         <AgregarProducto
                             cancelarAgregar={cancelarAgregar}
-                            setMostrarFormAgregar={handleAgregar}
+                            setMostrarFormAgregar={setMostrarFormAgregar}
                             setProductos={setProductos}
                             productos={productos}
                         />
@@ -366,17 +399,14 @@
                     <Producto
                         productos={productos}
                         setProductos={setProductos}
-                        idEditando={idEditando}
-                        setIdEditando={setIdEditando}
-                        productoEditando={productoEditando}
-                        setProductoEditando={setProductoEditando}
+                        setListaProductosIdEditando={setListaProductosIdEditando}
+                        listaProductosIdEditando={listaProductosIdEditando}
                     />
                 </div>
             );
-        }
+        };
 
-        const root = ReactDOM.createRoot(document.getElementById("root"));
-        root.render(<App />);
+        ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
 
