@@ -24,7 +24,7 @@ nav h1 {
 }
 
 nav .left-align {
-    margin-right: auto; /* Mover hacia la izquierda */
+    margin-right: auto;
 }
 
 nav ul {
@@ -122,7 +122,6 @@ nav ul li a:hover {
     margin-top: 10px;
 }
 
-/* Media queries */
 @media (max-width: 600px) {
     nav {
         flex-direction: column;
