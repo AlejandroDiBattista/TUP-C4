@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Enlaces a React, ReactDOM y Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <title>Stock Gaseosas</title>
+  <style>
+    /* reset */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    .contenedor-app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 30px;
+      margin: 0;
+    }
+
+    .lista-productos {
+      width: 300px;
+      margin-top: 10px;
+    }
+
+    .card-producto {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+
+    .item-detalle {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cantidad-producto {
+      font-size: 40px;
+      color: blue;
+      margin-left: 15px;
+    }
+
+    .contenedor-nombre {
+      
+      flex-wrap: wrap;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .p-producto-nombre {
+      font-size: 25px;
+      font-weight: bold;
+      margin: 0px;
+    }
+
+    .p-producto-ean {
+      margin: 10px 0 0 0;
+    }
+
+    /*botones agregar, editar y eliminar productos */
+
+    .btn-agregar {
+      background: url(agregar.png) no-repeat center center / contain;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+    }
+
+    .acciones {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .btn-editar {
+      background: url(editar.png) no-repeat center center / contain;
+      cursor: pointer;
+      width: 20px;
+      height: 25px;
+    }
+
+    .btn-borrar {
+      background: url(borrar.png) no-repeat center center / contain;
+      cursor: pointer;
+      width: 20px;
+      height: 30px;
+    }
+
+    /*Form Agregar producto y Form edicion producto */
+
+    .card-agregar-producto,
+    .formulario-edicion {
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 15px;
+    }
+
+    .contenedor-agregar-inputs,
+    .inputs-contenedor {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .card-agregar-producto input,
+    .formulario-edicion input {
+      border-radius: 5px;
+      width: 200px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    /* Botones aceptar y cancerlar */
+
+    .botones-agregar-producto,
+    .botones-editar-producto {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .btn-aceptar,
+    .btn-cancelar {
+      border: 1px solid rgba(0, 0, 0, 1);
+      background-color: #fff;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    const { useState, useEffect } = React;
+
+    const productosIniciales = [
+      { nombre: "7up", ean: "7799876543210", cantidad: 7 },
+      { nombre: "Coca-Cola", ean: "7791234567890", cantidad: 92 },
+      { nombre: "Fanta", ean: "7793219876540", cantidad: 5 },
+      { nombre: "Mirinda", ean: "7797894561230", cantidad: 6 },
+      { nombre: "Sprite", ean: "7796543219870", cantidad: 4 }
+    ];
+
+    function cargarProductosIniciales() {
+      const productosGuardados = localStorage.getItem("productos");
+      return productosGuardados ? JSON.parse(productosGuardados) : productosIniciales;
+    }
+
+    function MostrarProductos({ productos, setProductos, productosEdicion, setProductosEdicion }) {
+
+      function incrementarCantidad(indice) {
+        const productosActualizados = productos.map((producto, i) =>
+          i === indice ? { ...producto, cantidad: parseInt(producto.cantidad) + 1 } : producto
+        );
+        setProductos(productosActualizados);
+      }
+
+      function eliminarProducto(indice) {
+        const productosActualizados = productos.filter((_, i) => i !== indice);
+        setProductos(productosActualizados);
+      }
+
+      // se crea una matriz de índices de productos para mantener el orden original 
+      //y que no se afecten los id al momento de agregar y editar un producto a la vez
+      const indicesOrdenados = productos.map((_, index) => index);
+      indicesOrdenados.sort((a, b) => productos[a].nombre.localeCompare(productos[b].nombre));
+
+      return (
+        <div className="lista-productos">
+          {indicesOrdenados.map((indice, index) => (
+            productosEdicion[indice] ? (
+              <EditarProducto
+                key={indice}
+                indiceEdicion={indice}
+                productosEdicion={productosEdicion}
+                setProductosEdicion={setProductosEdicion}
+                setProductos={setProductos}
+                productos={productos}
+              />
+            ) : (
+              <TarjetaProducto
+                key={indice}
+                producto={productos[indice]}
+                indice={indice}
+                incrementarCantidad={incrementarCantidad}
+                setProductosEdicion={setProductosEdicion}
+                eliminarProducto={eliminarProducto}
+              />
+            )
+          ))}
+        </div>
+      );
+    }
+
+
+    function TarjetaProducto({ producto, indice, incrementarCantidad, setProductosEdicion, eliminarProducto }) {
+
+      function editarProducto() {
+        setProductosEdicion(prev => ({ ...prev, [indice]: producto }));
+      }
+
+      return (
+        <div className="card-producto" onClick={() => incrementarCantidad(indice)}>
+          <div className="item-detalle">
+            <span className="cantidad-producto">{producto.cantidad}</span>
+            <div className="contenedor-nombre">
+              <p className="p-producto-nombre">{producto.nombre}</p>
+              <p className="p-producto-ean">{producto.ean}</p>
+            </div>
+          </div>
+          <div className="acciones">
+            <i className="btn-editar" onClick={(e) => { e.stopPropagation(); editarProducto(); }}></i>
+            <i className="btn-borrar" onClick={(e) => { e.stopPropagation(); eliminarProducto(indice); }}></i>
+          </div>
+        </div>
+      );
+    }
+
+
+    function AgregarProducto({ setMostrarFormularioAgregar, setProductos }) {
+      const [nuevoProducto, setNuevoProducto] = useState({ nombre: "", ean: "", cantidad: "" });
+
+      function manejarCambioInput(e) {
+        const { name, value } = e.target;
+        setNuevoProducto(prev => ({ ...prev, [name]: value }));
+      }
+
+      function agregarProducto() {
+        if (nuevoProducto.nombre && nuevoProducto.ean && nuevoProducto.cantidad) {
+          setProductos(productosPrevios => [...productosPrevios, { ...nuevoProducto, cantidad: parseInt(nuevoProducto.cantidad) }]);
+          setMostrarFormularioAgregar(false);
+          setNuevoProducto({ nombre: "", ean: "", cantidad: "" })
+        } else {
+          alert("Debés completar todos los campos para guardar un nuevo producto");
+        }
+      }
+
+      return (
+        <div className="card-agregar-producto">
+          <div className="contenedor-agregar-inputs">
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Nombre"
+              value={nuevoProducto.nombre}
+              onChange={manejarCambioInput}
+            />
+            <input
+              type="text"
+              name="ean"
+              placeholder="EAN"
+              value={nuevoProducto.ean}
+              onChange={manejarCambioInput}
+            />
+            <input
+              type="number"
+              name="cantidad"
+              placeholder="Cantidad"
+              value={nuevoProducto.cantidad}
+              onChange={manejarCambioInput}
+            />
+          </div>
+          <div className="botones-agregar-producto">
+            <button className="btn-aceptar" onClick={agregarProducto}>Aceptar</button>
+            <button className="btn-cancelar" onClick={() => setMostrarFormularioAgregar(false)}>Cancelar</button>
+          </div>
+        </div>
+      );
+    }
+
+
+    function EditarProducto({ indiceEdicion, productosEdicion, setProductosEdicion, setProductos, productos }) {
+
+      const productoAEditar = productosEdicion[indiceEdicion];
+
+      function manejarCambioInput(e) {
+        const { name, value } = e.target;
+        setProductosEdicion(prev => ({
+          ...prev,
+          [indiceEdicion]: { ...productoAEditar, [name]: value }
+        }));
+      }
+
+      function guardarProducto() {
+        const productosActualizados = productos.map((producto, indice) =>
+          indice === indiceEdicion ? { ...productoAEditar, cantidad: parseInt(productoAEditar.cantidad) } : producto
+        );
+        setProductos(productosActualizados);
+        setProductosEdicion(prev => {
+          const copia = { ...prev }
+          delete copia[indiceEdicion]
+          return copia
+        });
+      }
+
+      return (
+        <div className="formulario-edicion">
+          <div className="inputs-contenedor">
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Nombre"
+              value={productoAEditar.nombre}
+              onChange={manejarCambioInput}
+            />
+            <input
+              type="text"
+              name="ean"
+              placeholder="EAN"
+              value={productoAEditar.ean}
+              onChange={manejarCambioInput}
+            />
+            <input
+              type="number"
+              name="cantidad"
+              placeholder="Cantidad"
+              value={productoAEditar.cantidad}
+              onChange={manejarCambioInput}
+            />
+          </div>
+          <div className="botones-editar-producto">
+            <button className="btn-aceptar" onClick={guardarProducto}>Aceptar</button>
+            <button className="btn-cancelar" onClick={() => setProductosEdicion(prev => {
+              const copia = { ...prev }
+              delete copia[indiceEdicion]
+              return copia
+            })}>Cancelar</button>
+          </div>
+        </div>
+      );
+    }
+
+
+    function App() {
+      const [mostrarFormularioAgregar, setMostrarFormularioAgregar] = useState(false);
+      const [productos, setProductos] = useState(cargarProductosIniciales);
+      const [productosEdicion, setProductosEdicion] = useState({});
+
+      useEffect(() => {
+        localStorage.setItem("productos", JSON.stringify(productos));
+      }, [productos]);
+
+      return (
+        <div className="contenedor-app">
+          <div className="header">
+            <h1>Control Depósito</h1>
+            <i className="btn-agregar" onClick={() => setMostrarFormularioAgregar(true)}></i>
+          </div>
+          {mostrarFormularioAgregar &&
+            <AgregarProducto
+              setMostrarFormularioAgregar={setMostrarFormularioAgregar}
+              setProductos={setProductos}
+            />
+          }
+          <MostrarProductos
+            productos={productos}
+            setProductos={setProductos}
+            productosEdicion={productosEdicion}
+            setProductosEdicion={setProductosEdicion}
+          />
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+  </script>
+</body>
+
+</html>

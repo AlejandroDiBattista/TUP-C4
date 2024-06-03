@@ -3,110 +3,96 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- Enlaces a React, ReactDOM y Babel -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Iconos FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-
-    <title>Demo 1</title>
+    <title>Agenda</title>
     <style>
-        /* reset */
-        body {
-            font-family: Arial, sans-serif;
+        body, html {
+            height: 100%;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
         }
 
         #root {
-            max-width: 1280px;
+            min-height: 100%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 0 20px;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .card {
             padding: 16px;
             margin: 4px;
             border-radius: 8px;
-            background-color: #ffffff;
-            box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+            background-color: #2d2d2d;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
         }
 
         .agenda {
-            margin-top: 16px;
             display: flex;
             flex-wrap: wrap;
             justify-content: start;
-
-            >div {
-                text-align: center;
-                width: 240px;
-                height: 96px;
-                position: relative;
-
-                span {
-                    position: absolute;
-                    top: 8px;
-                    right: 8px;
-                }
-
-                div {
-                    margin-top: 25px;
-                    font-size: 20px;
-                }
-
-                div:last-child {
-                    text-align: right;
-                    font-size: 14px;
-                }
-            }
         }
 
-        form {
-            width: 240px;
-            padding: 16px;
-            margin: 8px;
-            border-radius: 8px;
+        .agenda > .card {
+            width: calc(33.33% - 8px);
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
 
-            label {
-                display: block;
-                font-size: 12px;
-                color: #aaa;
-            }
+        .agenda > .card:nth-child(3n) {
+            margin-right: 0;
+        }
 
-            input {
-                width: calc(100% - 8px);
-                border-radius: 4px;
-                margin: 4px 0;
-                border: 1px solid #ccc;
-                padding: 4px;
-                font-size: 16px;
-            }
+        .card > div {
+            margin-bottom: 8px;
+        }
 
-            div {
-                display: flex;
-                justify-content: space-between;
-                margin-top: 16px;
+        .card > div:last-child {
+            margin-bottom: 0;
+        }
 
-                button {
-                    padding: 8px 16px;
-                    border: none;
-                    border-radius: 4px;
-                    font-size: 14px;
-                    cursor: pointer;
-                }
-            }
+        .fa-trash {
+            color: #ff5252;
+            cursor: pointer;
+        }
+
+        .fa-trash:hover {
+            color: #ff1744;
+        }
+
+        .star {
+            color: #ffd700;
+        }
+
+        .star:hover {
+            color: #ffe57f;
         }
     </style>
 </head>
 
 <body>
     <div id="root"></div>
-    <script>
+    <script type="text/babel">
+        // Datos de ejemplo
         const datos = [
             { id: 1, nombre: 'Juan', apellido: 'Perez', telefono: '(381) 123-4567', favorito: true },
             { id: 2, nombre: 'Maria', apellido: 'Gomez', telefono: '(381) 123-4567', favorito: false },
@@ -128,30 +114,120 @@
             { id: 18, nombre: 'Matias', apellido: 'Luna', telefono: '(381) 123-4567', favorito: false },
             { id: 19, nombre: 'Cecilia', apellido: 'Carrizo', telefono: '(381) 123-4567', favorito: true },
             { id: 20, nombre: 'Facundo', apellido: 'Paez', telefono: '(381) 123-4567', favorito: false }
-        ]
-    </script>
+        ];
 
-    <script type="text/babel">
-        const { createRoot } = ReactDOM
-
-        const Contacto = ({ nombre, apellido, telefono }) =>
-            <div className="card">
-                <div>{nombre} <b>{apellido}</b></div>
+        // Componente funcional Contacto
+        const Contacto = ({ id, nombre, apellido, telefono, favorito, onFavoritoToggle, onDelete, onEdit }) => (
+            <div className="card" onClick={() => onEdit(id)}>
+                <div>{nombre} <b>{apellido}</b> {favorito ? <span className="star" onClick={(e) => onFavoritoToggle(e, id)}>⭐</span> : <span onClick={(e) => onFavoritoToggle(e, id)}>☆</span>}</div>
                 <div>{telefono}</div>
+                <div onClick={(e) => onDelete(e, id)}><i className="fas fa-trash"></i></div>
             </div>
+        );
 
-        const Agenda = ({ datos }) =>
-            <div className="agenda">
-                {datos.map(contacto => <Contacto key={contacto.id} {...contacto} />)}
-            </div>
+        // Componente funcional FormularioContacto
+        const FormularioContacto = ({ onSubmit }) => {
+            const [nombre, setNombre] = React.useState('');
+            const [apellido, setApellido] = React.useState('');
+            const [telefono, setTelefono] = React.useState('');
 
-        const App = () =>
-            <div>
-                <h1>Agenda</h1>
-                <Agenda datos={datos} />
-            </div>
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                if (!nombre || !apellido || !telefono) return;
+                onSubmit({ nombre, apellido, telefono });
+                setNombre('');
+                setApellido('');
+                setTelefono('');
+            };
 
-        const root = createRoot(document.getElementById('root'))
+            return (
+                <form onSubmit={handleSubmit}>
+                    <label>Nombre:</label>
+                    <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+                    <label>Apellido:</label>
+                    <input type="text" value={apellido} onChange={(e) => setApellido(e.target.value)} required />
+                    <label>Teléfono:</label>
+                    <input type="tel" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
+                    <div>
+                        <button type="submit">Agregar</button>
+                    </div>
+                </form>
+            );
+        };
+
+        // Componente funcional Agenda
+        const Agenda = ({ datos, onFavoritoToggle, onDelete, onEdit }) => {
+            return (
+                <div className="agenda">
+                    {datos.map(contacto => (
+                        <Contacto
+                            key={contacto.id}
+                            {...contacto}
+                            onFavoritoToggle={onFavoritoToggle}
+                            onDelete={onDelete}
+                            onEdit={onEdit}
+                        />
+                    ))}
+                </div>
+            );
+        };
+
+        // Componente funcional App
+        const App = () => {
+            const [contactos, setContactos] = React.useState(datos);
+            const [ordenAscendente, setOrdenAscendente] = React.useState(true);
+
+            const handleFavoritoToggle = (e, id) => {
+                e.stopPropagation(); // Detiene la propagación del evento para evitar que se active el onClick del Contacto
+                setContactos(prevContactos =>
+                    prevContactos.map(contacto =>
+                        contacto.id === id ? { ...contacto, favorito: !contacto.favorito } : contacto
+                    )
+                );
+            };
+
+            const handleDelete = (e, id) => {
+                e.stopPropagation(); // Detiene la propagación del evento para evitar que se active el onClick del Contacto
+                setContactos(prevContactos => prevContactos.filter(contacto => contacto.id !== id));
+            };
+
+            const handleEdit = (id) => {
+                console.log("Editar contacto con ID:", id);
+                // Aquí puedes implementar la lógica para editar el contacto
+            };
+
+            const handleAgregarContacto = (nuevoContacto) => {
+                const nuevoId = contactos.length + 1;
+                setContactos(prevContactos => [...prevContactos, { id: nuevoId, ...nuevoContacto }]);
+            };
+
+            const handleOrdenarAlfabeticamente = () => {
+                const contactosOrdenados = [...contactos].sort((a, b) => {
+                    const nombreA = `${a.nombre} ${a.apellido}`;
+                    const nombreB = `${b.nombre} ${b.apellido}`;
+                    return ordenAscendente ? nombreA.localeCompare(nombreB) : nombreB.localeCompare(nombreA);
+                });
+                setContactos(contactosOrdenados);
+                setOrdenAscendente(prevOrden => !prevOrden);
+            };
+
+            return (
+                <div>
+                    <h1>Agenda</h1>
+                    <FormularioContacto onSubmit={handleAgregarContacto} />
+                    <button onClick={handleOrdenarAlfabeticamente}>Ordenar Alfabéticamente</button>
+                    <Agenda
+                        datos={contactos}
+                        onFavoritoToggle={handleFavoritoToggle}
+                        onDelete={handleDelete}
+                        onEdit={handleEdit}
+                    />
+                </div>
+            );
+        };
+
+        // Renderizar la aplicación en el elemento con id "root"
+        const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
 </body>

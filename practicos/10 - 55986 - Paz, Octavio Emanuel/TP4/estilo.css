@@ -1,0 +1,84 @@
+body {
+    background-color: #ccc;
+    height: 100vh;
+}
+
+#root {
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+/*NAV*/
+
+.tituloClima{
+    font-size: 35px;
+    color: #000;
+    padding-top: 0;
+}
+
+.liCiudades{
+    padding-top: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #1f47d8;
+}
+ 
+.contenedorSearchyCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Search */
+.buscarContenedor{
+    width: 400px;
+}
+
+.buscarCiudad{
+    background-color: #fff;
+    color: #000;
+}
+
+/*Card*/
+.cardClima{
+    background-color: #fff;
+    padding: 0 15px;
+    width: 400px;
+}
+
+.cardHeader,.cardFooter{
+    background-color: #fff;
+    border: none;
+    margin: 0;
+    padding-left: 0;
+    padding-top: 25px;
+}
+
+.h2Card, .h3Card {
+    font-size: 30px;
+    color: #000;
+    padding-bottom: 15px;
+    margin: 0;
+}
+
+.contenedorImgCard{
+    display: flex;
+    justify-content: center;
+    background-color: #87CEEB;
+    border-radius: 10px;
+}
+
+.iconoImg{
+    height: auto;
+    width: 250px;
+}
+
+.pCard{
+    color: #000;
+    font-size: 20px;
+}
+
+.error {
+    color: #ff0000;
+    font-weight: bold;
+}

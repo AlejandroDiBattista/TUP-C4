@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <title>Control de depósito</title>
+  <style>
+    body {
+      font-family: 'Verdana', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    #main-container {
+      max-width: 900px;
+      margin: 20px auto;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .flex-row {
+      flex-direction: row;
+    }
+
+    .flex-center {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .text-ellipsis {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .full-width {
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-right: 10px;
+      color: #333;
+    }
+
+    .product-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      margin-bottom: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .quantity {
+      font-size: 28px;
+      color: blue;
+      margin: 0px 20px 0px 15px;
+      flex-shrink: 0;
+      max-width: 30%;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .details {
+      flex-grow: 1;
+      min-width: 0;
+    }
+
+    .name {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .code {
+      color: #555;
+    }
+
+    .edit-btn,
+    .delete-btn,
+    .add-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      margin: 2px 0;
+    }
+
+    .edit-btn i,
+    .delete-btn i,
+    .add-btn i {
+      font-size: 20px;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .save-btn,
+    .cancel-btn {
+      margin-bottom: 8px;
+      background-color: transparent;
+      padding: 4px;
+      border: 1px solid #000;
+      border-radius: 8px;
+      box-sizing: border-box;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input {
+      margin-bottom: 5px;
+      padding: 4px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      outline: none;
+      width: 90%;
+    }
+
+    input:last-child {
+      margin-bottom: 0px;
+    }
+
+    input:focus {
+      border-color: #999;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="main-container"></div>
+
+  <script type="text/babel">
+    const { createRoot } = ReactDOM;
+    const { useState } = React;
+
+    const App = () => {
+      return (
+        <div className="flex flex-center full-width">
+          <InventoryManager />
+        </div>
+      );
+    };
+
+    const InventoryManager = () => {
+      const [editItems, setEditItems] = useState([]);
+      const [products, setProducts] = useState([
+        { id: 1, name: "7up", code: "0123456789123", quantity: "7" },
+      ]);
+
+      const addProduct = () => {
+        const newId = products.length > 0 ? Math.max(...products.map((product) => product.id)) + 1 : 1;
+        const newProduct = { id: newId, name: "", code: "", quantity: "0" };
+
+        setProducts([...products, newProduct]);
+        setEditItems([...editItems, newId]);
+      };
+
+      const editProduct = (id) => {
+        setEditItems([...editItems, id]);
+      };
+
+      const deleteProduct = (id) => {
+        setProducts(products.filter((product) => product.id !== id));
+      };
+
+      const saveProduct = (product) => {
+        const updatedProducts = products.map((p) => (p.id === product.id ? product : p));
+        setProducts(updatedProducts);
+        setEditItems(editItems.filter((itemId) => itemId !== product.id));
+      };
+
+      const cancelEdit = (id) => {
+        const existingProduct = products.find((product) => product.id === id);
+
+        if (existingProduct && existingProduct.name === "" && existingProduct.code === "" && existingProduct.quantity === "0") {
+          setProducts(products.filter((product) => product.id !== id));
+        }
+
+        setEditItems(editItems.filter((itemId) => itemId !== id));
+      };
+
+      products.sort((a, b) => a.name.localeCompare(b.name));
+
+      return (
+        <section className="flex flex-col flex-center full-width">
+          <div className="flex flex-row flex-center">
+            <h1>Control de depósito</h1>
+            <button className="add-btn" onClick={addProduct}>
+              <i className="fa-regular fa-square-plus" />
+            </button>
+          </div>
+
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              isEditing={editItems.includes(product.id)}
+              editProduct={() => editProduct(product.id)}
+              deleteProduct={() => deleteProduct(product.id)}
+              saveProduct={saveProduct}
+              cancelEdit={() => cancelEdit(product.id)}
+            />
+          ))}
+        </section>
+      );
+    };
+
+    const ProductForm = ({ product, saveProduct, cancelEdit }) => {
+      const [name, setName] = useState(product.name);
+      const [code, setCode] = useState(product.code);
+      const [quantity, setQuantity] = useState(product.quantity);
+      const isSubmitDisabled = name.trim().length === 0 || code.trim().length < 13;
+
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        saveProduct({ ...product, name, code, quantity });
+      };
+
+      const handleCodeChange = (e) => {
+        const value = e.target.value.replace(/\D/g, "");
+        setCode(value);
+      };
+
+      return (
+        <form onSubmit={handleSubmit} className="product-card">
+          <div className="flex flex-col full-width">
+            <input
+              type="text"
+              name="name"
+              placeholder="Nombre"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              minLength={13}
+              maxLength={13}
+              name="code"
+              placeholder="Código EAN (13 dígitos)"
+              value={code}
+              onChange={handleCodeChange}
+              required
+            />
+            <input
+              type="number"
+              name="quantity"
+              placeholder="Cantidad"
+              min={0}
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              required
+            />
+          </div>
+          <div className="flex flex-col">
+            <button className="save-btn" type="submit" disabled={isSubmitDisabled}>
+              Guardar
+            </button>
+            <button className="cancel-btn" onClick={() => cancelEdit(product.id)}>
+              Cancelar
+            </button>
+          </div>
+        </form>
+      );
+    };
+
+    const ProductCard = ({ product, isEditing, editProduct, deleteProduct, saveProduct, cancelEdit }) => {
+      const { id, quantity, name, code } = product;
+      const [currentQuantity, setCurrentQuantity] = useState(parseInt(quantity));
+
+      const handleIncrement = () => {
+        setCurrentQuantity(prevQuantity => prevQuantity + 1);
+      };
+
+      return isEditing ? (
+        <ProductForm product={product} saveProduct={saveProduct} cancelEdit={cancelEdit} />
+      ) : (
+        <div className="product-card" onClick={handleIncrement}>
+          <div className="quantity text-ellipsis">{currentQuantity}</div>
+          <div className="details">
+            <div className="name text-ellipsis">{name}</div>
+            <div className="code text-ellipsis">{code}</div>
+          </div>
+          <div className="flex flex-col flex-center">
+            <button className="edit-btn" onClick={editProduct}>
+              <i className="fa-regular fa-pen-to-square"></i>
+            </button>
+            <button className="delete-btn" onClick={deleteProduct}>
+              <i className="fa-regular fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+      );
+    };
+
+    const root = createRoot(document.getElementById("main-container"));
+    root.render(<App />);
+  </script>
+</body>
+</html>

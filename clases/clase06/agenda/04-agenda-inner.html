@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Agenda con innerHTML</title>
+  <script>
+    let contactos = [
+      { id: 1, nombre: 'Juan',  apellido: 'Pérez' },
+      { id: 2, nombre: 'Ana',   apellido: 'Gómez' },
+      { id: 3, nombre: 'Pedro', apellido: 'García' },
+      { id: 4, nombre: 'Laura', apellido: 'Fernández'},
+      { id: 5, nombre: 'María', apellido: 'López' },
+    ]
+
+    const Contacto = ({nombre, apellido}) => 
+        `<li>${nombre} <b>${apellido}</b></li>`
+
+    const Agenda = (contactos) => 
+        `<ul>
+          ${contactos.map(c => Contacto(c)).join('\n')}
+         </ul>`
+
+    const instalar = () => document.getElementById('root').innerHTML = Agenda(contactos);
+
+    window.onload = instalar;
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>

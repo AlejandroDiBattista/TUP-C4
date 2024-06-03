@@ -1,0 +1,23 @@
+body {
+    background-color: #ccc;
+    height: 100vh;
+}
+
+#root {
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    margin: 0px;
+}
+
+.error {
+    margin-left: 10px;
+}

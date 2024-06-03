@@ -1,24 +1,42 @@
-# Trabajo Práctico Nº 2
+# Trabajo Práctico 5
 
-## React: Creación de una página interactiva
-### Funcionalidades requeridas
+## Desarrollo de una API en el backend
 
-Modifica la aplicación de **Agenda** para que permita marcar contactos como favoritos y realizar operaciones de **Altas, Bajas y Modificaciones (ABM)** en la lista de contactos:
+El objetivo de este trabajo es realizar una API mínima que implemente dos funciones.
 
-1. **Marcar / Desmarcar como favoritos**: Los usuarios deben poder marcar o desmarcar contactos como favoritos.
-2. **Orden de visualización**: Los contactos marcados como favoritos deben mostrarse primero, seguidos por el resto de los contactos en un grupo separado.
-3. **Indicador de favoritos**: Los contactos marcados como favoritos deben mostrar una ⭐ en la esquina superior derecha.
-4. **Orden alfabético**: Todos los contactos deben estar ordenados alfabéticamente por apellido y nombre.
+1. **GetAll**: Trae todas las personas desde el servidor.
+2. **Set**: Modifica una persona en el servidor.
 
-### Instrucciones para la presentación del trabajo:
+---
+La idea es que el servidor tenga una base de datos (simulada como un array de objetos) de personas que se pueda consultar y actualizar.
+Todas las personas deben tener un ID asignado en el servidor. 
+Si se intenta actualizar una persona que no tiene ID, el servidor debe asignarle uno y realizar una alta.
+Si se pasa una persona con un ID, el servidor debe actualizar los campos que se le pasen. 
+Si la persona a actualizar tiene el campo "borrado = true", debe realizarse un borrado lógico de la misma; es decir, debe ser marcada como borrada y no debe aparecer en los próximos listados, pero no debe ser eliminada de la base de datos.
 
-**USANDO GitHub Desktop**
+Para verificar que la funcionalidad ha sido realizada con éxito, se han provisto **pruebas automatizadas**. 
+Todas las pruebas deben ser superadas correctamente para que se considere que el trabajo está bien realizado.
 
-1. Bajar la última versión del repositorio del curso. (fetch)
-2. Crear una nueva rama para tus cambios (new branch).
-3. Abrir la carpeta correspondiente a tu nombre de usuario (practicos/{alumno}/tp2).
-4. Realizar las modificaciones necesarias en el archivo index.html dentro de la carpeta TP2 (sin alterar ninguna otra carpeta).
-5. Realizar un solicitud de publicación (Pull request)
-6. Volver a la rama principal (main) para actualizar (fetch) el repositorio
+Para realizar las funciones, se deben modificar las dos funciones "GET" y "PUT" en el archivo "app.js".
 
-¡Buena suerte con tu trabajo práctico! 😊
+Para correr las pruebas, deben instalarse las dependencias una única vez mediante el comando `npm install`, y luego se deben correr los tests con el comando `npm run test`.
+
+> [!NOTE]
+>
+> **Instrucciones para la presentación del trabajo**
+> 
+> 1. Cambiar a la rama principal (main).
+> 2. Descargar la última versión del repositorio del curso (fetch).
+> 3. Crear una nueva rama para tus cambios (new branch) (TP5-{alumno}).
+> 4. Abrir la carpeta correspondiente a tu nombre de usuario (practicos/{alumno}/TP5).
+> 5. **Implementar las funciones GET y PUT en src/app.js** (sin alterar ninguna otra carpeta).
+> 6. **Correr todos los tests con `npm run test`**.
+> 7. Confirmar los cambios (commit).
+> 8. Realizar una solicitud de publicación (pull request).
+> 9. Revisar que el pull request esté subido (solapa pull request en GitHub).
+
+*Los cambios no aparecerán en el repositorio principal hasta que se acepte el pull request el día del vencimiento del plazo para entregar el trabajo.*
+
+Fecha de entrega: 
+- Comisión 3 y comisión 9: **Sábado  8 hasta 13hs**
+- Comisión 4 y comisión 5: **Domingo 9 hasta 23hs**

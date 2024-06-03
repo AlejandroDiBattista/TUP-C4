@@ -1,0 +1,285 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    font-size: 20px;
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    margin: 10px auto;
+    border-radius: 15px;
+    border: 1px solid #cccccc;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.259);
+    position: relative;
+}
+
+.card2 {
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.242);
+}
+
+.titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.errores, .errores2, .errores4 {
+    color: #ff1900;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.Productos0 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #1704d9;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ffffff;
+    color: #1704d9;
+    border: 1px solid #1704d9;
+}
+
+.bt1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.edit-buttons button {
+    background-color: #ffffff;
+    color: black;
+    border: 1px solid #ccc;
+}
+
+.edit-buttons button:hover {
+    background-color: #dddddd;
+}
+
+input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 96%;
+    margin-bottom: 10px;
+}
+
+.input-1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-2 {
+    display: block;
+    margin-bottom: 10px;
+}
+
+i {
+    display: block;
+}
+
+p {
+    color: black;
+    margin: 0;
+}
+
+strong {
+    color: #000;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.btn {
+    padding-right: 16px;
+}
+
+.cantidad {
+    font-size: 3rem;
+    color: #0000ff;
+    margin-right: 10px;
+}
+
+.codigo {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #585858;
+}
+
+
+.agregarProd {
+    background-color: #ffffff;
+    color: #1b1b1b;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 1px solid #ccc;
+}
+
+.agregarProd:hover {
+    background-color: #dddede;
+}
+
+.contenido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+h2 {
+    font-weight: bold;
+    margin: 0 1rem;
+    color: #0000FF;
+    font-size: 4rem;
+}
+
+h3 {
+    text-align: start;
+    color: rgb(12, 28, 207);
+    font-size: xx-large;
+}
+
+h4 {
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: xx-large;
+}
+
+.formulario-producto {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 1rem;
+    align-items: center;
+    width: 30rem;
+    height: 10rem;
+    padding: 1rem;
+    margin: .5rem;
+    border-radius: 1rem;
+    box-shadow: 0 .25rem .5rem rgba(0, 0, 0, 0.4);
+    padding: 20px;
+}
+
+.botonForm {
+    border: .1rem solid black;
+    border-radius: .7rem;
+    font-size: large;
+    width: 6rem;
+    padding: .3rem .5rem;
+    margin-bottom: .5rem;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.producto {
+    position: relative;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 30rem;
+    height: 10rem;
+    padding: 1rem;
+    margin: .5rem;
+    border-radius: 1rem;
+    box-shadow: 0 .25rem .5rem rgba(0, 0, 0, 0.4);
+    padding: 20px;
+}
+
+.producto-item {
+    display: flex;
+    flex-direction: column;
+    margin: .75rem;
+}
+
+.botones {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.botones2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: .5rem;
+}
+
+img {
+    height: 1.5rem;
+}
+
+.boton {
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+}
+
+.iconoAgregar {
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+}
+
+.titulo1 {
+    margin-right: 2rem;
+}

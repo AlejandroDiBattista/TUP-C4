@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control Stock</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    .container {
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      padding: 20px 40px;
+      margin: 20px;
+      width: 600px;
+      height: 150px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .quantity {
+      font-size: 50px;
+      font-weight: bold;
+      color: blue;
+    }
+
+    .details {
+      flex-grow: 1;
+      margin-left: 10px;
+    }
+
+    .product-name {
+      font-size: 50px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .barcode {
+      font-size: 25px;
+      color: #000;
+      margin: 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .add-button {
+      height: 60px;
+      border-radius: 5px;
+      border: none;
+      color: black;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 15px 25px;
+      margin-left: 20px;
+    }
+
+    .delete-button,
+    .edit-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 35px;
+      color: black;
+    }
+
+    .button:hover {
+      color: #000;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      margin-right: 20px;
+    }
+
+    .form-edit {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .input-fields {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      gap: 10px;
+    }
+
+    .edit-buttons {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 10px;
+      width: 20%;
+    }
+
+    .form-edit input {
+      padding: 12px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      width: calc(100% - 24px);
+      font-size: 18px;
+    }
+
+    .save-button,
+    .cancel-button {
+      padding: 10px 15px;
+      margin-left: 15px;
+      border: 1px solid #ced4da;
+      border-radius: 5px;
+      background-color: white;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .save-button:hover,
+    .cancel-button:hover {
+      background-color: #e9ecef;
+    }
+
+    .save-button:focus,
+    .cancel-button:focus {
+      outline: none;
+    }
+
+    .error-message {
+      color: red;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const InitialInventory = [
+      { id: 1, nombreProducto: "Coca Cola", codigoEan: "12345678", cantidad: '5' },
+      { id: 2, nombreProducto: "Pepsi Cola", codigoEan: "8756878345", cantidad: '20' },
+      { id: 3, nombreProducto: "Jugo de Tomate Frio", codigoEan: "868865047", cantidad: '15'},
+    ];
+
+    function EditarProducto({ item, onSave, onCancel }) {
+      let [nombreProducto, setNombreProducto] = useState(item.nombreProducto || '');
+      let [codigoEan, setCodigoEan] = useState(item.codigoEan || '');
+      let [cantidad, setCantidad] = useState(item.cantidad || '');
+      let [error, setError] = useState(false);
+
+      const handleNombreProducto = (e) => {
+        setNombreProducto(e.target.value);
+        setError(false);
+      };
+      const handleCodigoEan = (e) => {
+        setCodigoEan(e.target.value);
+        setError(false);
+      };
+      const handleCantidad = (e) => {
+        setCantidad(e.target.value);
+        setError(false);
+      };
+
+      const guardarProducto = (e) => {
+        e.preventDefault();
+        if (
+          nombreProducto.trim() === '' ||
+          codigoEan.trim() === '' ||
+          cantidad.trim() === ''
+        ) {
+          setError(true);
+          return;
+        }
+        onSave({ ...item, nombreProducto, codigoEan, cantidad });
+      };
+      const cancelarEdicion = (e) => {
+        e.preventDefault();
+        onCancel();
+      };
+
+      return (
+        <form className="container">
+          <div className="form-edit">
+            <div className="input-fields">
+              <input type="text" placeholder="Producto" value={nombreProducto} onChange={handleNombreProducto} className="producto-input" />
+              <input type="text" placeholder="CodigoEAN" value={codigoEan} onChange={handleCodigoEan} className="ean-input" />
+              <input type="text" placeholder="Cantidad" value={cantidad} onChange={handleCantidad} className="cantidad-input" />
+              {error && <p className="error-message">Todos los campos son obligatorios</p>}
+            </div>
+            <div className="edit-buttons">
+              <button onClick={guardarProducto} className="save-button">Aceptar</button>
+              <button onClick={cancelarEdicion} className="cancel-button">Cancelar</button>
+            </div>
+          </div>
+          
+        </form>
+      );
+    }
+
+    function MostrarProducto({ item, onSave, onDelete }) {
+      const [isEditing, setIsEditing] = useState(false);
+
+      const incrementarCantidad = () => {
+        const nuevaCantidad = parseInt(item.cantidad, 10) + 1;
+        onSave({ ...item, cantidad: nuevaCantidad.toString() });
+      };
+
+      return isEditing ? (
+        <EditarProducto
+          item={item}
+          onSave={(datosActualizados) => {
+            onSave(datosActualizados);
+            setIsEditing(false);
+          }}
+          onCancel={() => setIsEditing(false)}
+        />
+      ) : (
+        <div className="container" onClick={incrementarCantidad}>
+          <div className="quantity">{item.cantidad}</div>
+          <div className="details">
+            <p className="product-name">{item.nombreProducto}</p>
+            <p className="barcode">{item.codigoEan}</p>
+          </div>
+          <div className="actions">
+            <button className="edit-button" onClick={(e) => { e.stopPropagation(); setIsEditing(true); }}>
+              <i className="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button className="delete-button" onClick={(e) => { e.stopPropagation(); onDelete(); }}>
+              <i className="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    function Inventario({ items, onAdd, onEdit, onDelete }) {
+      const itemsOrdenados = items.sort((a, b) => a.nombreProducto.localeCompare(b.nombreProducto));
+      const [isAdding, setIsAdding] = useState(false);
+
+      return (
+        <>
+          <div className="header">
+            <h1>Control Inventario</h1>
+            <button className="add-button" onClick={() => setIsAdding(true)}>
+              <i className="fa-solid fa-plus"></i>
+            </button>
+          </div>
+          {isAdding && (
+            <EditarProducto
+              item={{ id: null, nombreProducto: '', codigoEan: '', cantidad: '' }}
+              onSave={(producto) => {
+                onAdd(producto);
+                setIsAdding(false);
+              }}
+              onCancel={() => setIsAdding(false)}
+            />
+          )}
+          {itemsOrdenados.map((item) => (
+            <MostrarProducto
+              key={item.id}
+              item={item}
+              onSave={(datosActualizados) => onEdit(item.id, datosActualizados)}
+              onDelete={() => onDelete(item.id)}
+            />
+          ))}
+        </>
+      );
+    }
+   
+    function App() {
+      const [items, setItems] = useState(() => {
+        const savedItems = localStorage.getItem('items');
+        return savedItems ? JSON.parse(savedItems) : InitialInventory;
+      });
+
+      useEffect(() => {
+        localStorage.setItem('items', JSON.stringify(items));
+      }, [items]);
+
+      const agregarProducto = (producto) => {
+        setItems([...items, { ...producto, id: Date.now() }]);
+      };
+
+      const editarProducto = (id, productoActualizado) => {
+        setItems(
+          items.map((item) =>
+            item.id === id ? productoActualizado : item
+          )
+        );
+      };
+
+      const borrarProducto = (id) => {
+        setItems(items.filter((item) => item.id !== id));
+      };
+
+      return (
+        <>
+          <Inventario
+            items={items}
+            onAdd={agregarProducto}
+            onEdit={editarProducto}
+            onDelete={borrarProducto}
+          />
+        </>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+
+</html>
