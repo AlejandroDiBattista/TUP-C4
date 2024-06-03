@@ -66,7 +66,7 @@ function App() {
                 placeholder="Buscar Ciudad"
                 aria-label="Search"
                 aria-describedby="search-helper"
-                aria-invalid={hasError}
+                
                 required
                />
              {hasError && <MensajeError error={error}/>}
