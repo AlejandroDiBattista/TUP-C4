@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="https://unpkg.com/picocss@1.5.8/pico.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    body {
+      background-color: #faf8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      max-width: 600px;
+      background-color: #cccccc;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .header h1 {
+      margin: 0;
+    }
+    .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #3c819e;
+      font-weight: bold;
+    }
+    .nav-links a:hover {
+      color: #0056b3;
+    }
+    .search-container {
+      position: relative;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .search-container input[type="search"] {
+      width: 100%;
+      padding: 15px 40px 15px 30px;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+    }
+    .search-container .fa-search {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+      margin-right: 10px;
+    }
+    .weather-card {
+     background-color: #f9f9f9;
+     padding: 0;
+     border-radius: 5px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     margin-top: 15px;
+     text-align: start;
+    }
+
+    .weather-card .card-body {
+     background-color: #93d1ee;
+     padding: 20px;
+     text-align: center;
+     margin-left: 20px; /* Espacio en blanco a la izquierda */
+     margin-right: 20px; /* Espacio en blanco a la derecha */
+    }
+
+    .weather-card .card-header,
+    .weather-card .card-footer {
+      padding: 1px 15px;
+      text-align: start;
+    }
+    .weather-card .card-body {
+      background-color: #add9e6;
+      padding: 55px;
+      text-align: center;
+      border-radius: 5px;
+    }
+    .weather-icon {
+      width: 100px;
+      height: 100px;
+      margin: 20px auto;
+    }
+    .divider {
+      border: 0;
+      height: 1px;
+      background: #ddd;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const App = () => {
+      const [city, setCity] = useState('Barcelona');
+      const [weather, setWeather] = useState(null);
+
+      useEffect(() => {
+        const fetchWeather = async () => {
+          const apiKey = '067357fc41303af7851327ddd6df18fa'; // Reemplaza con tu API key de OpenWeatherMap
+          const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+          setWeather(response.data);
+        };
+        fetchWeather();
+      }, [city]);
+
+      const handleSearch = (e) => {
+        if (e.key === 'Enter') {
+          setCity(e.target.value);
+        }
+      };
+
+      return (
+        <div className="container">
+          <div className="header">
+            <h1 style={{ marginRight: '40px' }}>Clima</h1>
+            <div className="nav-links">
+              <a href="#" onClick={() => setCity('Tucuman')}>Tucuman</a>
+              <a href="#" onClick={() => setCity('Salta')}>Salta</a>
+              <a href="#" onClick={() => setCity('Buenos Aires')}>Buenos Aires</a>
+            </div>
+          </div>
+          <div className="search-container">
+            <i className="fas fa-search"></i>
+            <input
+              type="search"
+              id="cityInput"
+              placeholder="Buscar"
+              aria-label="Search"
+              onKeyDown={handleSearch}
+            />
+          </div>
+          <WeatherCard weather={weather} />
+        </div>
+      );
+    };
+
+    const WeatherCard = ({ weather }) => {
+      if (!weather) return null;
+
+      const { main, weather: weatherData, name } = weather;
+
+      // Función para obtener la ruta del icono de Meteocons según el código de ícono del clima
+      const getWeatherIcon = (icon) => {
+        return `openweathermap/${icon}.svg`;
+      };
+
+      return (
+        <div className="weather-card">
+          <div className="card-header">
+            <h2 style={{ marginTop: '7px', fontSize: '1.7em' }}>{name}</h2>
+          </div>
+          <hr className="divider" />
+          <div className="card-body">
+            <img src={getWeatherIcon(weatherData[0].icon)} alt={weatherData[0].description} className="weather-icon" style={{ width: '200px', height: '165px',  margin: '20px auto' }} />
+          </div>
+          <hr className="divider" />
+          <div className="card-footer">
+            <p style={{ fontWeight: 'bold', marginTop: '7px', fontSize: '1.4em' }}>Temperatura: <span style={{ fontWeight: 'bold' }}>{main.temp}°C</span></p>
+            <p>Minima: {main.temp_min}°C / Maxima: {main.temp_max}°C</p>
+            <p>Humedad: {main.humidity}%</p>
+          </div>
+        </div>
+      );
+    };
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+
+  </script>
+</body>
+</html>
