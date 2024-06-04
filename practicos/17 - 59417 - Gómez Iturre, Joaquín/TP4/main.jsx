@@ -6,7 +6,7 @@ function AppClima() {
   
   const obtenerClima = (ciudad) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&units=metric&appid=${apiKey}&lang=es`
+      `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&units=metric&appid=${KEY}&lang=es`
     )
       .then((response) => response.json())
       .then((data) => {
