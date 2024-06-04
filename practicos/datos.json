@@ -11,7 +11,8 @@
     "ubicacion": "./01 - 59263 - Acosta, Facundo",
     "TP2": false,
     "TP3": false,
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-02",
@@ -27,7 +28,8 @@
     "TP3": true,
     "nota_tp3": 0,
     "comentario_tp3": "",
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-03",
@@ -43,7 +45,8 @@
     "TP3": true,
     "nota_tp3": 0,
     "comentario_tp3": "",
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-04",
@@ -57,7 +60,8 @@
     "ubicacion": "./04 - 50704 - Juarez, Pablo Agustín",
     "TP2": false,
     "TP3": false,
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-05",
@@ -71,7 +75,8 @@
     "ubicacion": "./05 - 55896 - Lacroix, Cristian Josué",
     "TP2": false,
     "TP3": false,
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-06",
@@ -87,7 +92,8 @@
     "TP3": true,
     "nota_tp3": 0,
     "comentario_tp3": "",
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-07",
@@ -103,7 +109,8 @@
     "TP3": true,
     "nota_tp3": 0,
     "comentario_tp3": "",
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-08",
@@ -117,7 +124,8 @@
     "ubicacion": "./08 - 59097 - Martin Ibarra, Patricio",
     "TP2": true,
     "TP3": false,
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-09",
@@ -133,7 +141,8 @@
     "TP3": true,
     "nota_tp3": 0,
     "comentario_tp3": "",
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-10",
@@ -149,7 +158,8 @@
     "TP3": true,
     "nota_tp3": 0,
     "comentario_tp3": "",
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-11",
@@ -163,7 +173,8 @@
     "ubicacion": "./11 - 50657 - Ramirez, Giselle Evelyn",
     "TP2": false,
     "TP3": false,
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-12",
@@ -177,7 +188,8 @@
     "ubicacion": "./12 - 59690 - Rios, Yanina Gisele",
     "TP2": true,
     "TP3": true,
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-13",
@@ -193,7 +205,8 @@
     "TP3": true,
     "nota_tp3": 0,
     "comentario_tp3": "",
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-14",
@@ -209,7 +222,8 @@
     "TP3": true,
     "nota_tp3": 0,
     "comentario_tp3": "",
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-15",
@@ -223,7 +237,8 @@
     "ubicacion": "./15 - 50753 - Villafañe Assef, Oscar",
     "TP2": false,
     "TP3": false,
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-16",
@@ -239,7 +254,8 @@
     "TP3": true,
     "nota_tp3": 0,
     "comentario_tp3": "",
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-17",
@@ -253,7 +269,8 @@
     "ubicacion": "./17 - 59417 - Gómez Iturre, Joaquín",
     "TP2": false,
     "TP3": true,
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   },
   {
     "id": "C4-18",
@@ -269,6 +286,7 @@
     "TP3": true,
     "nota_tp3": 0,
     "comentario_tp3": "",
-    "TP4": true
+    "TP4": true,
+    "TP5": true
   }
 ]
