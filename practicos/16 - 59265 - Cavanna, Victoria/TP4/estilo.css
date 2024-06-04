@@ -1,9 +1,52 @@
 body {
     background-color: #ccc;
-    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
-
 #root {
     margin: 0 auto;
-    max-width: 500px;
+    width: 40rem;
+}
+nav {
+    padding-top: 5vh;
+    width: 60%;
+}
+.titulo {
+    color: #2d3238dd;
+}
+
+.barra-busqueda {
+    background-color: white;
+    color: black;
+    border: none;
+}
+.barra-busqueda-form{
+    width: 60%;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    background-color: white;
+    color: #2d3238;
+    width: 60%;
+}
+.card-footer{
+    background-color: white;
+    border-top: var(--pico-border-width) solid #2d323835;
+}
+.card-header{
+    background-color: white;
+    border-bottom: var(--pico-border-width) solid #2d323835;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.text-black {
+    color: #2d3238dd;
 }
