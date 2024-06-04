@@ -96,10 +96,11 @@ const Navbar = ({getClima}) => (
 
 //Error para acomodar Invalid-Search
 const MensajeError = ({error}) => (
-
+    <div>
     <small className="error" id="invalid-search">  
      <b>{error}</b>
     </small>
+    </div>
 );
 
 

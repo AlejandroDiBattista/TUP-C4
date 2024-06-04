@@ -35,5 +35,12 @@ a#buenosaires {
 
 .buscador {
     position: relative;
-    top: -40px;
+    top: -48px;
+}
+
+#tarjeta {
+    padding: 90px;
+    padding-bottom: 435px;
+    position: relative;
+    top: -48px;
 }

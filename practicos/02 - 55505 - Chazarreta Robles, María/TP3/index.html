@@ -1,187 +1,362 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <script src="https://unpkg.com/react/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
-    <title>Control de Stock</title>
+    <!-- Enlaces a React, ReactDOM y Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <title>Legajo: 50694</title>
     <style>
-        .App {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            max-width: 600px;
-            margin: auto;
+      /* reset */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+      }
+
+      #root {
+        max-width: 1280px;
+        margin: 20px auto;
+      }
+
+      .flex {
+        display: flex;
+      }
+
+      .flex-col {
+        flex-direction: column;
+      }
+
+      .flex-row {
+        flex-direction: row;
+      }
+
+      .flex-center {
+        justify-content: center;
+        align-items: center;
+      }
+
+      .text-ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .w-full {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 22px;
+        margin-right: 10px;
+      }
+
+      .card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        margin-bottom: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        overflow: hidden;
+        cursor: pointer; 
+
+      .quantity {
+        font-size: 32px;
+        color: blue;
+        margin: 0px 20px 0px 15px;
+        flex-shrink: 0;
+        max-width: 30%;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .details {
+        flex-grow: 1;
+        min-width: 0;
+      }
+
+      .name {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      .code {
+        color: #555;
+      }
+
+      .edit-button,
+      .delete-button,
+      .add-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 5px;
+        margin: 2px 0;
+      }
+
+      .edit-button i,
+      .delete-button i,
+      .add-button i {
+        font-size: 20px;
+        color: #000;
+        cursor: pointer;
+      }
+
+      .confirm-button,
+      .cancel-button {
+        margin-bottom: 8px;
+        background-color: transparent;
+        padding: 4px;
+        border: 1px solid #000;
+        border-radius: 8px;
+        box-sizing: border-box;
+        outline: none;
+        cursor: pointer;
+      }
+
+      input {
+        margin-bottom: 5px;
+        padding: 4px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        outline: none;
+        width: 90%;
+      }
+
+      input:last-child{
+        margin-bottom: 0px;
+      }
+      
+      input:focus {
+        border-color: #aaa;
+      }
+
+      @media screen and (max-width: 768px) {
+        .card {
+          max-width: 80%;
         }
-        .add-product-form, .edit-product-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .product-list {
-            list-style: none;
-            padding: 0;
-        }
-        .product-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-            border-radius: 10px; 
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
-        }
-        .product-stock {
-            font-size: 24px;
-            margin-right: 20px;
-            cursor: pointer;
-            color: blue; 
-        }
-        .product-details {
-            flex-grow: 1;
-        }
-        .product-details strong {
-            font-size: 18px;
-        }
-        .product-details span {
-            display: block;
-        }
-        button {
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            color: blue;
-        }
-        .edit-icon::before {
-            content: '\270E'; /* Icono lapiz */
-        }
-        .delete-icon::before {
-            content: '\1F5D1'; /* Icono tachito */
-        }
-        .toggle-form-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
+      }
+
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <div id="root"></div>
-    
+
     <script type="text/babel">
-        const { useState, useEffect } = React;
+      const { createRoot } = ReactDOM;
+      const { useState } = React;
 
-        const App = () => {
-            const loadProducts = () => {
-                const storedProducts = localStorage.getItem('products');
-                return storedProducts ? JSON.parse(storedProducts) : [];
-            };
+      const App = () => {
+        return (
+          <main className="flex flex-center w-full">
+            <Deposito />
+          </main>
+        );
+      };
 
-            const saveProducts = (products) => {
-                localStorage.setItem('products', JSON.stringify(products));
-            };
+      const Deposito = () => {
+        const [listaIdProductosEditando, establecerListaIdProductosEditando] = useState([]);
+        const [listaProductos, establecerListaProductos] = useState([
+          { id: 1, nombre: "7up", codigo: "7799876543210", cantidad: "31" },
+        ]);
 
-            const [products, setProducts] = useState(loadProducts());
-            const [newProduct, setNewProduct] = useState({ name: '', ean: '', stock: 0 });
-            const [editingProduct, setEditingProduct] = useState(null);
-            const [showAddForm, setShowAddForm] = useState(true);
+        const manejarAgregar = () => {
+          const id = listaProductos.length > 0
+              ? Math.max(...listaProductos.map((producto) => producto.id)) + 1
+              : 1;
 
-            useEffect(() => {
-                saveProducts(products);
-            }, [products]);
+          const item = {
+            id,
+            nombre: "",
+            codigo: "",
+            cantidad: "0",
+          };
 
-            const handleInputChange = (e) => {
-                const { name, value } = e.target;
-                setNewProduct({ ...newProduct, [name]: name === 'stock' ? parseInt(value) : value });
-            };
-
-            const addProduct = () => {
-                if (newProduct.name && newProduct.ean && newProduct.stock > 0 && newProduct.stock <= 100) {
-                    setProducts(prevProducts => [...prevProducts, { ...newProduct, id: Date.now() }].sort((a, b) => a.name.localeCompare(b.name)));
-                    setNewProduct({ name: '', ean: '', stock: 0 });
-                }
-            };
-
-            const deleteProduct = (id) => {
-                setProducts(products.filter(product => product.id !== id));
-            };
-
-            const startEditProduct = (product) => {
-                setEditingProduct(product);
-            };
-
-            const handleEditInputChange = (e) => {
-                const { name, value } = e.target;
-                setEditingProduct({ ...editingProduct, [name]: name === 'stock' ? parseInt(value) : value });
-            };
-
-            const saveEditProduct = () => {
-                if (editingProduct.name && editingProduct.ean && editingProduct.stock > 0 && editingProduct.stock <= 100) {
-                    setProducts(products.map(product => (product.id === editingProduct.id ? editingProduct : product)));
-                    setEditingProduct(null);
-                }
-            };
-
-            const incrementStock = (id) => {
-                setProducts(products.map(product => {
-                    if (product.id === id) {
-                        return { ...product, stock: product.stock + 1 };
-                    }
-                    return product;
-                }));
-            };
-
-            const toggleAddForm = () => {
-                setShowAddForm(!showAddForm);
-            };
-
-            return (
-                <div className="App">
-                    <h1>Control de Stock <button className="toggle-form-button" onClick={toggleAddForm}>+</button></h1>
-                    {showAddForm && (
-                        <div className="add-product-form">
-                            <input type="text" name="name" value={newProduct.name} placeholder="Nombre" onChange={handleInputChange} />
-                            <input type="text" name="ean" value={newProduct.ean} placeholder="Código EAN" onChange={handleInputChange} />
-                            <input type="number" name="stock" value={newProduct.stock} placeholder="Stock" onChange={handleInputChange} />
-                            <button onClick={addProduct}>Agregar Producto</button>
-                        </div>
-                    )}
-                    <ul className="product-list">
-                        {products.map(product => (
-                            <li key={product.id} className="product-item">
-                                <span className="product-stock" onClick={() => incrementStock(product.id)}>{product.stock}</span>
-                                <span className="product-details">
-                                    <strong>{product.name}</strong>
-                                    <span>{product.ean}</span>
-                                </span>
-                                <button className="edit-icon" onClick={() => startEditProduct(product)}></button>
-                                <button className="delete-icon" onClick={() => deleteProduct(product.id)}></button>
-                            </li>
-                        ))}
-                    </ul>
-                    {editingProduct && (
-                        <div className="edit-product-form">
-                            <h2>Editar Producto</h2>
-                            <input type="text" name="name" value={editingProduct.name} onChange={handleEditInputChange} />
-                            <input type="text" name="ean" value={editingProduct.ean} onChange={handleEditInputChange} />
-                            <input type="number" name="stock" value={editingProduct.stock} onChange={handleEditInputChange} />
-                            <button onClick={saveEditProduct}>Guardar</button>
-                            <button onClick={() => setEditingProduct(null)}>Cancelar</button>
-                        </div>
-                    )}
-                </div>
-            );
+          establecerListaProductos([...listaProductos, item]);
+          establecerListaIdProductosEditando([...listaIdProductosEditando, id]);
         };
 
-        ReactDOM.render(<App />, document.getElementById('root'));
+        const manejarEditar = (id) => {
+          establecerListaIdProductosEditando([...listaIdProductosEditando, id]);
+        };
+
+        const manejarEliminar = (id) => {
+          establecerListaProductos(listaProductos.filter((producto) => producto.id !== id));
+        };
+
+        const manejarGuardar = (producto) => {
+          const productoExistente = listaProductos.find((producto) => producto.id === producto.id);
+
+          if (productoExistente) {
+            establecerListaProductos(listaProductos.map((p) => (p.id === producto.id ? producto : p)));
+          } else {
+            establecerListaProductos([...listaProductos, producto]);
+          }
+
+          establecerListaIdProductosEditando(listaIdProductosEditando.filter((idProducto) => idProducto !== producto.id));
+        };
+
+        const manejarCancelar = (id) => {
+          const productoExistente = listaProductos.find((producto) => producto.id === id);
+
+          
+          if (
+            productoExistente &&
+            productoExistente.nombre === "" &&
+            productoExistente.codigo === "" &&
+            productoExistente.cantidad === "0"
+          ) {
+            establecerListaProductos(listaProductos.filter((producto) => producto.id !== id));
+          }
+
+          establecerListaIdProductosEditando(listaIdProductosEditando.filter((idProducto) => idProducto !== id));
+        };
+
+        const manejarIncrementarCantidad = (id) => {
+          const productoActualizado = listaProductos.map((producto) => {
+            if (producto.id === id) {
+              return { ...producto, cantidad: String(Number(producto.cantidad) + 1) };
+            }
+            return producto;
+          });
+
+          establecerListaProductos(productoActualizado);
+        };
+
+        listaProductos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+        return (
+          <section className="flex flex-col flex-center w-full">
+            <div className="flex flex-row flex-center">
+              <h1>Control Depósito</h1>
+              <button className="add-button" onClick={manejarAgregar}>
+                <i className="fa-regular fa-square-plus" />
+              </button>
+            </div>
+
+            {listaProductos.map((producto) => (
+              <Tarjeta
+                key={producto.id}
+                producto={producto}
+                estaEditando={listaIdProductosEditando?.includes(producto.id)}
+                manejarEditar={() => manejarEditar(producto.id)}
+                manejarEliminar={() => manejarEliminar(producto.id)}
+                manejarGuardar={manejarGuardar}
+                manejarCancelar={() => manejarCancelar(producto.id)}
+                manejarIncrementarCantidad={() => manejarIncrementarCantidad(producto.id)}
+              />
+            ))}
+          </section>
+        );
+      };
+
+      const Formulario = ({ producto, manejarGuardar, manejarCancelar }) => {
+        const [nombre, establecerNombre] = useState(producto.nombre);
+        const [codigo, establecerCodigo] = useState(producto.codigo);
+        const [cantidad, establecerCantidad] = useState(producto.cantidad);
+        const enviarDeshabilitado = nombre?.trim().length === 0 || codigo?.trim().length < 13;
+
+        const manejarEnvio = (e) => {
+          e.preventDefault();
+          manejarGuardar({ ...producto, nombre, codigo, cantidad });
+        };
+
+        const manejarCambioCodigo = (e) => {
+          
+          const valor = e.target.value.replace(/\D/g, "");
+          establecerCodigo(valor);
+        };
+
+        return (
+          <form onSubmit={manejarEnvio} className="card">
+            <div className="flex flex-col w-full">
+              <input
+                type="text"
+                nombre="nombre"
+                placeholder="Nombre"
+                valor={nombre}
+                onChange={(e) => establecerNombre(e.target.value)}
+                requerido
+              />
+              <input
+                type="text"
+                minLength={13}
+                maxLength={13}
+                nombre="codigo"
+                placeholder="Codigo EAM (13 digitos)"
+                valor={codigo}
+                onChange={manejarCambioCodigo}
+                requerido
+              />
+              <input
+                type="number"
+                nombre="cantidad"
+                placeholder="Stock"
+                min={0}
+                valor={cantidad}
+                onChange={(e) => establecerCantidad(e.target.value)}
+                requerido
+              />
+            </div>
+            <div className="flex flex-col">
+              <button
+                className="confirm-button"
+                type="submit"
+                disabled={enviarDeshabilitado}
+              >
+                Aceptar
+              </button>
+              <button className="cancel-button" onClick={manejarCancelar}>
+                Cancelar
+              </button>
+            </div>
+          </form>
+        );
+      };
+
+      const Tarjeta = ({ producto, estaEditando, manejarEditar, manejarEliminar, manejarGuardar, manejarCancelar, manejarIncrementarCantidad }) => {
+        const { cantidad, nombre, codigo } = producto;
+        return estaEditando ? (
+          <Formulario
+            producto={producto}
+            manejarGuardar={manejarGuardar}
+            manejarCancelar={manejarCancelar}
+          />
+        ) : (
+          <article className="card" onClick={() => manejarIncrementarCantidad(producto.id)}>
+            <div className="quantity text-ellipsis">{cantidad}</div>
+            <div className="details">
+              <div className="name text-ellipsis">{nombre}</div>
+              <div className="code text-ellipsis">{codigo}</div>
+            </div>
+            <div className="flex flex-col flex-center">
+              <button className="edit-button" onClick={(e) => { e.stopPropagation(); manejarEditar(); }}>
+                <i class="fa-regular fa-pen-to-square"></i>
+              </button>
+              <button className="delete-button" onClick={(e) => { e.stopPropagation(); manejarEliminar(); }}>
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </div>
+          </article>
+        );
+      };
+
+      const root = createRoot(document.getElementById("root"));
+      root.render(<App />);
     </script>
-</body>
+  </body>
 </html>
