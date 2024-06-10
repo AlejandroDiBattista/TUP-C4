@@ -7,15 +7,35 @@ app.use(express.json());
 app.use(cors())
 
 let datos = [
-    // Datos de ejemplo   
+    {id:1,nombre:"Micaela",apellido:"Garcia",edad:24 ,borrado:false,actualizado:1},
+    {id:2,nombre:"Benjamin",apellido:"Ruiz",edad:24 ,borrado:false,actualizado:1},
+    {id:3,nombre:"Joaquin",apellido:"Iturre",edad:24 ,borrado:false,actualizado:1},
+    {id:4,nombre:"Victoria",apellido:"Cavanna",edad:24 ,borrado:false,actualizado:1},
+    {id:5,nombre:"Facundo",apellido:"Acosta",edad:24 ,borrado:false,actualizado:1}
 ]
 
 app.get('/personas', (req, res) => {
-    // Implementar GET_ALL
+   res.send(datos.filter(d=>!d.borrado))
 });
 
 app.put('/personas', (req, res) => {
-    // Implementar PUT
+   const persona= req.body
+   if(persona.id){
+    let buscarPers= datos.findIndex(d=>d.id===persona.id)
+    if(buscarPers<0){
+        return res.status(404).send()
+    }
+    else{
+       datos[buscarPers]={...datos[buscarPers],...persona}
+       return res.status(201).send(datos[buscarPers])}          
+   }
+   else{
+    const id=Math.max(...datos.map(d=> d.id))+1
+    persona.id=id
+    persona.borrado=false
+    persona.actualizado=1
+    datos.push(persona)
+    return res.status(201).send(persona)}
 })
 
 export default app
