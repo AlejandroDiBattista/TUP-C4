@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Enlaces a React, ReactDOM y Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="estilo.css">
+    <title>Demo 1</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+    </script>
+
+    <script type="text/babel">
+        const { createRoot } = ReactDOM
+        const { useState, useEffect } = React
+
+        const App = () => {
+            let [mensaje, setMensaje] = useState('vacio')
+
+            function mostrar() {
+                console.log('1. Antes del Fetch')
+                fetch("/valor")
+                    .then(response => {
+                        let tipo = response.headers.get('content-length')
+                        console.log("3. En el fecth", tipo)
+                        return response.json()
+                    })
+                    .then(data => {
+                        console.log("4. En el then", data)
+                        setMensaje(data.contador)
+                    })
+                console.log("2. Después del Fetch")
+            }
+
+            function incrementarViejo(){
+                fetch("/incrementar", {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({mensaje: "Hola"})
+                })
+                .then(res => res.json())
+                .then(data => setMensaje(data.contador)) 
+            }
+
+            // async / await 
+
+            async function incrementar(){
+                let res = await fetch("/incrementar", {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({mensaje: "Hola"})
+                })
+                let data = await res.json()
+                setMensaje(data.contador)
+            }
+
+            useEffect(
+                () => {
+                    console.log('useEffect', mensaje)
+                },[mensaje])
+         
+            return <div>
+                <h1>Contador</h1>
+                <button onClick={incrementar}>Incrementar</button>
+                <div>
+                    Mensaje: {mensaje}
+                </div>
+            </div>
+        }
+
+        const root = createRoot(document.getElementById('root'))
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
