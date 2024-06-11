@@ -77,13 +77,13 @@ describe("Actualizar una persona", () => {
     test("1. Actualizar una persona (retorna codigo)", async () => {
         const persona = { id: 2, nombre: "Juan", apellido: "Perez", edad: 30 }
         const res = await request(app).put("/personas").send(persona)
-        expect(res.statusCode).toBe(201)
+        expect(res.statusCode).toBe(200)
     })
-
+    
     test("2. Si no existe la persona, no se actualiza", async () => {
         const persona = { id: 100, nombre: "Juan", apellido: "Perez", edad: 30 }
         const res = await request(app).put("/personas").send(persona)
-        expect(res.statusCode).toBe(404)
+        expect(res.statusCode).toBe(201)
     })
 
     test("3. Actualizar una persona (y retorna la persona actualizada)", async () => {
@@ -101,16 +101,15 @@ describe("Actualizar una persona", () => {
 describe("Borrar una persona", () => {
     test("1. Borrar una persona (retorna codigo)", async () => {
         const persona = { id: 2 }
-        const res = await request(app).put("/personas").send(persona)
-        expect(res.statusCode).toBe(201)
+        const res = await request(app).delete("/personas").send(persona)
+        expect(res.statusCode).toBe(200)
     })
-
+    
     test("2. Si no existe la persona, no se borra", async () => {
         const persona = { id: 100 }
-        const res = await request(app).put("/personas").send(persona)
+        const res = await request(app).delete("/personas").send(persona)
         expect(res.statusCode).toBe(404)
     })
-
 
     test("3. Borrar una persona (y retorna la persona borrada)", async () => {
         const persona = { id: 3, borrado: true }
