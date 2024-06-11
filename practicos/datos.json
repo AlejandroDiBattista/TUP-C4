@@ -13,7 +13,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": true,
-    "TP6": false
+    "TP6": false,
+    "TP5": true
   },
   {
     "id": "C4-16",
@@ -31,7 +32,8 @@
     "comentario_tp3": "",
     "tp4": true,
     "tp5": true,
-    "TP6": false
+    "TP6": false,
+    "TP5": true
   },
   {
     "id": "C4-02",
@@ -49,7 +51,8 @@
     "comentario_tp3": "",
     "tp4": true,
     "tp5": false,
-    "TP6": false
+    "TP6": false,
+    "TP5": false
   },
   {
     "id": "C4-03",
@@ -67,7 +70,8 @@
     "comentario_tp3": "",
     "tp4": true,
     "tp5": true,
-    "TP6": false
+    "TP6": false,
+    "TP5": true
   },
   {
     "id": "C4-18",
@@ -85,7 +89,8 @@
     "comentario_tp3": "",
     "tp4": false,
     "tp5": true,
-    "TP6": false
+    "TP6": false,
+    "TP5": true
   },
   {
     "id": "C4-17",
@@ -101,7 +106,8 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "TP6": false
+    "TP6": false,
+    "TP5": true
   },
   {
     "id": "C4-04",
@@ -117,7 +123,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "TP6": false
+    "TP6": false,
+    "TP5": false
   },
   {
     "id": "C4-05",
@@ -133,7 +140,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "TP6": false
+    "TP6": false,
+    "TP5": false
   },
   {
     "id": "C4-06",
@@ -151,7 +159,8 @@
     "comentario_tp3": "",
     "tp4": true,
     "tp5": true,
-    "TP6": false
+    "TP6": false,
+    "TP5": true
   },
   {
     "id": "C4-07",
@@ -169,7 +178,8 @@
     "comentario_tp3": "",
     "tp4": true,
     "tp5": false,
-    "TP6": false
+    "TP6": false,
+    "TP5": false
   },
   {
     "id": "C4-08",
@@ -185,7 +195,8 @@
     "tp3": false,
     "tp4": true,
     "tp5": false,
-    "TP6": false
+    "TP6": false,
+    "TP5": false
   },
   {
     "id": "C4-09",
@@ -203,7 +214,8 @@
     "comentario_tp3": "",
     "tp4": true,
     "tp5": true,
-    "TP6": false
+    "TP6": false,
+    "TP5": true
   },
   {
     "id": "C4-10",
@@ -221,7 +233,8 @@
     "comentario_tp3": "",
     "tp4": true,
     "tp5": true,
-    "TP6": false
+    "TP6": false,
+    "TP5": true
   },
   {
     "id": "C4-11",
@@ -237,7 +250,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "TP6": false
+    "TP6": false,
+    "TP5": false
   },
   {
     "id": "C4-12",
@@ -253,7 +267,8 @@
     "tp3": true,
     "tp4": true,
     "tp5": false,
-    "TP6": false
+    "TP6": false,
+    "TP5": true
   },
   {
     "id": "C4-13",
@@ -271,7 +286,8 @@
     "comentario_tp3": "",
     "tp4": true,
     "tp5": true,
-    "TP6": false
+    "TP6": false,
+    "TP5": true
   },
   {
     "id": "C4-14",
@@ -289,7 +305,8 @@
     "comentario_tp3": "",
     "tp4": false,
     "tp5": false,
-    "TP6": false
+    "TP6": false,
+    "TP5": false
   },
   {
     "id": "C4-15",
@@ -305,6 +322,7 @@
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "TP6": false
+    "TP6": false,
+    "TP5": false
   }
 ]
