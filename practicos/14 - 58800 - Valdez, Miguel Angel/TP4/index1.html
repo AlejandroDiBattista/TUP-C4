@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Enlaces a React, ReactDOM y Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"/>
+    <link rel="stylesheet" href="./estilo.css" />
+
+    <script type="text/babel" src="main.jsx"></script>
+    <!-- Agregar aca otros modulos -->
+    <script type="text/babel" src="XXX.jsx"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<App />); // Renderizar el componente principal
+    </script>
+</body>
+
+</html>
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+        #root {
+            margin: 0 auto;
+            max-width: 500px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .error {
+            margin-left: 10px;
+        }
+
+        #cities {
+            display: flex;
+            justify-content: right;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #cities li {
+            margin-right: 10px;
+        }
+
+        #cities li:last-child {
+            margin-right: 0;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="root">     
+        <nav>
+            <ul id="cities">
+                <li><a href="#" id="Tucuman">Tucumán</a></li>
+                <li><a href="#" id="Salta">Salta</a></li>
+                <li><a href="#" id="BuenosAires">Buenos Aires</a></li>
+            </ul>
+        </nav>
+        <main>
+            <form role="search" id="search-form">
+                <input type="search" id="city-input" placeholder="Buscar ciudad" aria-label="Search" required>
+                <small class="error" id="search-helper"></small>
+            </form>
+            <article id="loader" aria-busy="false"></article>
+            <article id="card"></article>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const API_KEY = '30d38b26954359266708f92e1317dac0';
+            const DEFAULT_CITY = "Tucumán";
+            const URL = "https://api.openweathermap.org/data/2.5/weather";
+
+            const cityInput = document.getElementById('city-input');
+            const searchForm = document.getElementById('search-form');
+            const citiesList = document.getElementById('cities');
+            const loader = document.getElementById('loader');
+            const card = document.getElementById('card');
+            const errorHelper = document.getElementById('search-helper');
+
+            let isLoading = false;
+
+            const getWeatherData = async (city) => {
+                isLoading = true;
+                loader.setAttribute('aria-busy', 'true');
+                try {
+                    const response = await axios.get(URL, {
+                        params: {
+                            q: city.trim(),
+                            units: "metric",
+                            appid: API_KEY,
+                            lang: "es",
+                        },
+                    });
+                    return response.data;
+                } catch (err) {
+                    throw new Error(err.response.status === 404 ? "Ciudad no encontrada" : "Error al obtener los datos del clima");
+                } finally {
+                    isLoading = false;
+                    loader.setAttribute('aria-busy', 'false');
+                }
+            };
+
+            const handleSubmit = async (event) => {
+                event.preventDefault();
+                const cityName = cityInput.value;
+                if (!isLoading) {
+                    try {
+                        const weatherData = await getWeatherData(cityName);
+                        displayWeatherData(weatherData);
+                    } catch (error) {
+                        displayError(error.message);
+                    }
+                }
+            };
+
+            const displayWeatherData = (data) => {
+                const { name, weather, main } = data;
+                const iconURL = `iconos/${weather[0].icon}.svg`;
+                const cardContent = `
+                    <header><h2>${name}</h2></header>
+                    <img src="${iconURL}" alt="${weather[0].description}">
+                    <footer>
+                        <h3>Temperatura: ${main.temp}°C</h3>
+                        <p>Mínima: ${main.temp_min}°C / Máxima: ${main.temp_max}°C</p>
+                        <p>Humedad: ${main.humidity}%</p>
+                    </footer>
+                `;
+                card.innerHTML = `<article>${cardContent}</article>`;
+            };
+
+            const displayError = (errorMessage) => {
+                errorHelper.textContent = errorMessage;
+            };
+
+            searchForm.addEventListener('submit', handleSubmit);
+
+            citiesList.addEventListener('click', (event) => {
+                if (event.target.tagName === 'A') {
+                    const city = event.target.textContent;
+                    cityInput.value = city;
+                    handleSubmit(event);
+                }
+            });
+
+            // Al cargar la página, mostrar el clima de Tucumán
+            window.onload = async () => {
+                try {
+                    const weatherData = await getWeatherData(DEFAULT_CITY);
+                    displayWeatherData(weatherData);
+                } catch (error) {
+                    displayError(error.message);
+                }
+            };
+        });
+    </script>
+</body>
+</html>
