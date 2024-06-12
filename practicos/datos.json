@@ -13,7 +13,7 @@
     "tp3": false,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": false
   },
   {
     "id": "C4-16",
@@ -31,7 +31,7 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": false
   },
   {
     "id": "C4-02",
@@ -48,8 +48,8 @@
     "tp2": true,
     "tp3": true,
     "tp4": true,
-    "tp5": true,
-    "tp6": true
+    "tp5": false,
+    "tp6": false
   },
   {
     "id": "C4-03",
@@ -67,7 +67,7 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": false
   },
   {
     "id": "C4-18",
@@ -85,7 +85,7 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": false
   },
   {
     "id": "C4-17",
@@ -101,7 +101,7 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": false
   },
   {
     "id": "C4-04",
@@ -116,8 +116,8 @@
     "tp2": false,
     "tp3": false,
     "tp4": true,
-    "tp5": true,
-    "tp6": true
+    "tp5": false,
+    "tp6": false
   },
   {
     "id": "C4-05",
@@ -132,8 +132,8 @@
     "tp2": false,
     "tp3": false,
     "tp4": true,
-    "tp5": true,
-    "tp6": true
+    "tp5": false,
+    "tp6": false
   },
   {
     "id": "C4-06",
@@ -151,7 +151,7 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": false
   },
   {
     "id": "C4-07",
@@ -168,8 +168,8 @@
     "tp2": true,
     "tp3": true,
     "tp4": true,
-    "tp5": true,
-    "tp6": true
+    "tp5": false,
+    "tp6": false
   },
   {
     "id": "C4-08",
@@ -184,8 +184,8 @@
     "tp2": true,
     "tp3": false,
     "tp4": true,
-    "tp5": true,
-    "tp6": true
+    "tp5": false,
+    "tp6": false
   },
   {
     "id": "C4-09",
@@ -203,7 +203,7 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": false
   },
   {
     "id": "C4-10",
@@ -221,7 +221,7 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": false
   },
   {
     "id": "C4-11",
@@ -236,8 +236,8 @@
     "tp2": false,
     "tp3": false,
     "tp4": true,
-    "tp5": true,
-    "tp6": true
+    "tp5": false,
+    "tp6": false
   },
   {
     "id": "C4-12",
@@ -253,7 +253,7 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": false
   },
   {
     "id": "C4-13",
@@ -271,7 +271,7 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": false
   },
   {
     "id": "C4-14",
@@ -288,8 +288,8 @@
     "tp2": true,
     "tp3": true,
     "tp4": true,
-    "tp5": true,
-    "tp6": true
+    "tp5": false,
+    "tp6": false
   },
   {
     "id": "C4-15",
@@ -304,7 +304,7 @@
     "tp2": false,
     "tp3": false,
     "tp4": true,
-    "tp5": true,
-    "tp6": true
+    "tp5": false,
+    "tp6": false
   }
 ]
