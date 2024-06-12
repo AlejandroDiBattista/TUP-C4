@@ -11,9 +11,9 @@
     "tp1": true,
     "tp2": false,
     "tp3": false,
-    "tp4": false,
+    "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true
   },
   {
     "id": "C4-16",
@@ -28,10 +28,10 @@
     "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true
   },
   {
     "id": "C4-02",
@@ -46,10 +46,10 @@
     "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
-    "tp5": false,
-    "tp6": false
+    "tp5": true,
+    "tp6": true
   },
   {
     "id": "C4-03",
@@ -64,10 +64,10 @@
     "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true
   },
   {
     "id": "C4-18",
@@ -82,10 +82,10 @@
     "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true
   },
   {
     "id": "C4-17",
@@ -98,10 +98,10 @@
     "ubicacion": "./17 - 59417 - Gómez Iturre, Joaquín",
     "tp1": false,
     "tp2": false,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true
   },
   {
     "id": "C4-04",
@@ -115,9 +115,9 @@
     "tp1": false,
     "tp2": false,
     "tp3": false,
-    "tp4": false,
-    "tp5": false,
-    "tp6": false
+    "tp4": true,
+    "tp5": true,
+    "tp6": true
   },
   {
     "id": "C4-05",
@@ -131,9 +131,9 @@
     "tp1": false,
     "tp2": false,
     "tp3": false,
-    "tp4": false,
-    "tp5": false,
-    "tp6": false
+    "tp4": true,
+    "tp5": true,
+    "tp6": true
   },
   {
     "id": "C4-06",
@@ -148,10 +148,10 @@
     "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true
   },
   {
     "id": "C4-07",
@@ -166,10 +166,10 @@
     "comentario_tp3": "",
     "tp1": false,
     "tp2": true,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
-    "tp5": false,
-    "tp6": false
+    "tp5": true,
+    "tp6": true
   },
   {
     "id": "C4-08",
@@ -184,8 +184,8 @@
     "tp2": true,
     "tp3": false,
     "tp4": true,
-    "tp5": false,
-    "tp6": false
+    "tp5": true,
+    "tp6": true
   },
   {
     "id": "C4-09",
@@ -200,10 +200,10 @@
     "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true
   },
   {
     "id": "C4-10",
@@ -218,10 +218,10 @@
     "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true
   },
   {
     "id": "C4-11",
@@ -235,9 +235,9 @@
     "tp1": false,
     "tp2": false,
     "tp3": false,
-    "tp4": false,
-    "tp5": false,
-    "tp6": false
+    "tp4": true,
+    "tp5": true,
+    "tp6": true
   },
   {
     "id": "C4-12",
@@ -250,10 +250,10 @@
     "ubicacion": "./12 - 59690 - Rios, Yanina Gisele",
     "tp1": false,
     "tp2": true,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true
   },
   {
     "id": "C4-13",
@@ -268,10 +268,10 @@
     "comentario_tp3": "",
     "tp1": false,
     "tp2": false,
-    "tp3": false,
+    "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true
   },
   {
     "id": "C4-14",
@@ -286,10 +286,10 @@
     "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
-    "tp3": false,
-    "tp4": false,
-    "tp5": false,
-    "tp6": false
+    "tp3": true,
+    "tp4": true,
+    "tp5": true,
+    "tp6": true
   },
   {
     "id": "C4-15",
@@ -303,8 +303,8 @@
     "tp1": false,
     "tp2": false,
     "tp3": false,
-    "tp4": false,
-    "tp5": false,
-    "tp6": false
+    "tp4": true,
+    "tp5": true,
+    "tp6": true
   }
 ]
