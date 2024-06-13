@@ -5,13 +5,14 @@
   "main": "servidor.js",
   "type": "module",
   "scripts": {
-    "dev" : "nodemon servidor.js",
+    "dev": "nodemon servidor.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "argon2": "^0.40.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.19.2",

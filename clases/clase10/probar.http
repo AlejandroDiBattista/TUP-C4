@@ -21,10 +21,6 @@ Content-Type: application/json
 
 ### Logout
 PUT http://localhost:3000/logout
-Token: 28528314287707524
 
 ### Leer info confidencial
 GET http://localhost:3000/info
-Token: 28528314287707524
-
-    

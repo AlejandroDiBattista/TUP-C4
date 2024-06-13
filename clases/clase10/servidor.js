@@ -1,20 +1,23 @@
 import express from 'express';
-import Usuario from '../models/usuario.js';
+import usuario from './routers/usuario.js'
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 app.disable('x-powered-by');
 app.use(express.json());
+app.use(cookieParser());
 
-app.get("/usuarios", Usuario.obtenerUsuarios);
-app.post('/registrar', Usuario.registrar);
-app.post('/login', Usuario.login);
-app.put('/logout', Usuario.validarUsuario, Usuario.logout);
-app.get('/info', Usuario.validarUsuario, Usuario.obtenerInfo);
+app.use(morgan('dev')); // Middleware de log
+app.use(express.static('public')); // Servidor de archivos estaticos
 
+app.use(usuario)
+
+app.get("/traer", (req, res) => {
+    res.cookie('Token','EN TRAER ', 
+        { maxAge: 1000 * 10 })
+    res.send('Traer usuarios');
+});
 app.listen(3000, () => {
     console.log('Servidor en http://localhost:3000');
 });
-
-function crearToken() {
-    return Math.random().toString().substring(2);
-}
