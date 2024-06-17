@@ -1,19 +1,129 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="index.css">
-
     <!-- Enlaces a React, ReactDOM y Babel -->
-    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-    <script src="index.jsx" type="text/babel"></script>
-    <title>TP1</title>
+    <title>Demo 1</title>
+    <style>
+        /* reset */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #cdb5c2;
+        }
+
+        #root {
+            max-width: 1280px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 20px;
+        }
+
+
+        .card {
+            padding: 16px;
+            margin: 4px;
+            border-radius: 8px;
+            background-color: #f07abf;
+            box-shadow: 0 0 4px rgba(59, 59, 59, 0.1);
+        }
+
+        .agenda {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: start;
+            text-decoration: double;
+
+            >div {
+                text-align: center;
+                width: 240px;
+                height: 96px;
+                position: relative;
+
+                span {
+                    position: absolute;
+                    top: 8px;
+                    right: 8px;
+                }
+
+                div {
+                    margin-top: 25px;
+                    font-size: 20px;
+                }
+
+                div:last-child {
+                    text-align: right;
+                    font-size: 14px;
+                }
+            }
+        }
+
+        form {
+            width: 240px;
+            padding: 16px;
+            margin: 8px;
+            border-radius: 8px;
+            
+            div {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 16px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <!-- Reemplazar title por el número de legajo y borrar esta línea -->
     <div id="root"></div>
+    <script>
+        const datos = [
+            { id: 1, nombre: 'Juan', apellido: 'Ramirez', telefono: '11-2982902989'},
+            { id: 2, nombre: 'Giovanni', apellido: 'Latronico', telefono: '11-42553426'},
+            { id: 3, nombre: 'Irene', apellido: 'Arrieta', telefono: '11-2743825'},
+            { id: 4, nombre: 'Sara', apellido: 'Sanchez', telefono: '11-2129867'},
+            { id: 5, nombre: 'Isabel', apellido: 'Sanchez', telefono: '11-6756765'},
+            { id: 6, nombre: 'Alejandra', apellido: 'Ramirez', telefono: '11-42739876'},
+            { id: 7, nombre: 'Andrea', apellido: 'Albarracin', telefono: '381-2090344756'},
+            { id: 8, nombre: 'Adrian', apellido: 'Latronico', telefono: '11-2985432989'},
+            { id: 9, nombre: 'Juan', apellido: 'Ramirez', telefono: '11-2982902989'},
+            { id: 10, nombre: 'Andrea', apellido: 'Galarza', telefono: '381-209384756'},
+    ];
+       
+    </script>
+
+    <script type="text/babel">
+        const { createRoot } = ReactDOM
+
+        const Contacto = ({ nombre, apellido, telefono }) =>
+            <div className="card">
+                <div>{nombre} <b>{apellido}</b></div>
+                <div>{telefono}</div>
+            </div>
+
+        const Agenda = ({ datos }) =>
+            <div className="agenda">
+                {datos.map(contacto => <Contacto key={contacto.id} {...contacto} />)}
+            </div>
+
+        const App = () =>
+            <div>
+                <h1>Agenda</h1>
+                <Agenda datos={datos} />
+            </div>
+
+        const root = createRoot(document.getElementById('root'))
+        root.render(<App />);
+    </script>
 </body>
+
 </html>
