@@ -17,7 +17,7 @@
             font-family: Arial, Arial, Helvetica, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-color: #cdb5c2;
         }
 
         #root {
@@ -28,22 +28,21 @@
             margin: 0 20px;
         }
 
-        .card {
-             width:50%;
-             height: 50vh; 
-             padding: 4em; 
-             margin: 10px;
-             border-radius: 12px;
-             background-color: #30ec50;
-             box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-            }
 
+        .card {
+            padding: 16px;
+            margin: 4px;
+            border-radius: 8px;
+            background-color: #f07abf;
+            box-shadow: 0 0 4px rgba(59, 59, 59, 0.1);
+        }
 
         .agenda {
             margin-top: 16px;
             display: flex;
             flex-wrap: wrap;
             justify-content: start;
+            text-decoration: double;
 
             >div {
                 text-align: center;
@@ -74,36 +73,11 @@
             padding: 16px;
             margin: 10px;
             border-radius: 8px;
-
-            label {
-                display: block;
-                font-size: 14px;
-                color: 
-                #918989;
-            }
-
-            input {
-                width: calc(100% - 8px);
-                border-radius: 4px;
-                margin: 4px 0;
-                border: 1px solid #ccc;
-                padding: 4px;
-                font-size: 16px;
-            }
-
+            
             div {
                 display: flex;
                 justify-content: space-between;
                 margin-top: 16px;
-
-                button {
-                    padding: 8px 16px;
-                    border: none;
-                    border-radius: 4px;
-                    font-size: 14px;
-                    cursor: pointer;
-                    background-color: rgb(61, 53, 53);
-                }
             }
         }
     </style>
@@ -112,7 +86,7 @@
 <body>
     <div id="root"></div>
     <script>
-        const nombres = [
+        const datos = [
             { id: 1, nombre: 'Juan', apellido: 'Ramirez', telefono: '11-2982902989'},
             { id: 2, nombre: 'Giovanni', apellido: 'Latronico', telefono: '11-42553426'},
             { id: 3, nombre: 'Irene', apellido: 'Arrieta', telefono: '11-2743825'},
@@ -125,7 +99,6 @@
             { id: 10, nombre: 'Andrea', apellido: 'Galarza', telefono: '381-209384756'},
     ];
        
-        
     </script>
 
     <script type="text/babel">
