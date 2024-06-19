@@ -1,0 +1,30 @@
+### Traer usuarios
+GET http://localhost:3000/usuarios
+
+### Registrar
+POST http://localhost:3000/registrar
+Content-Type: application/json
+
+{
+    "username": "adibattista",
+    "password": "4321"
+}
+
+### Login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username": "adibattista",
+    "password": "4321"
+}
+
+### Logout
+PUT http://localhost:3000/logout
+Token: 28528314287707524
+
+### Leer info confidencial
+GET http://localhost:3000/info
+Token: 28528314287707524
+
+    
