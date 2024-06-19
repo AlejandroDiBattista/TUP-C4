@@ -14,7 +14,7 @@
     <style>
         /* reset */
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, Arial, Helvetica, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #cdb5c2;
@@ -30,13 +30,14 @@
 
 
         .card {
-            padding: 16px;
-            margin: 4px;
-            border-radius: 8px;
-            background-color: #f07abf;
-            box-shadow: 0 0 4px rgba(59, 59, 59, 0.1);
-        }
-
+             width:50%;
+             height: 50vh; 
+             padding: 4em; 
+             margin: 10px;
+             border-radius: 12px;
+             background-color: #30ec50;
+             box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+            }
         .agenda {
             margin-top: 16px;
             display: flex;
@@ -71,13 +72,36 @@
         form {
             width: 240px;
             padding: 16px;
-            margin: 8px;
+            margin: 10px;
             border-radius: 8px;
-            
+
+            label {
+                display: block;
+                font-size: 14px;
+                color: 
+                #918989;
+            }
+
+            input {
+                width: calc(100% - 8px);
+                border-radius: 4px;
+                margin: 4px 0;
+                border: 1px solid #ccc;
+                padding: 4px;
+                font-size: 16px;
+            }
             div {
                 display: flex;
                 justify-content: space-between;
                 margin-top: 16px;
+                button {
+                    padding: 8px 16px;
+                    border: none;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    cursor: pointer;
+                    background-color: rgb(61, 53, 53);
+                }
             }
         }
     </style>
@@ -86,7 +110,7 @@
 <body>
     <div id="root"></div>
     <script>
-        const datos = [
+        const nombres = [
             { id: 1, nombre: 'Juan', apellido: 'Ramirez', telefono: '11-2982902989'},
             { id: 2, nombre: 'Giovanni', apellido: 'Latronico', telefono: '11-42553426'},
             { id: 3, nombre: 'Irene', apellido: 'Arrieta', telefono: '11-2743825'},
@@ -104,22 +128,56 @@
     <script type="text/babel">
         const { createRoot } = ReactDOM
 
-        const Contacto = ({ nombre, apellido, telefono }) =>
+        const Contacto = ({ id, nombre, apellido, telefono, favorito, onAlternarFavorito }) => (
             <div className="card">
+                {favorito && <span className="fav">&#9733;</span>}  
                 <div>{nombre} <b>{apellido}</b></div>
-                <div>{telefono}</div>
+                <div>{telefono}</div><br />
+                <button className="botonFav" onClick={() => onAlternarFavorito(id)}>
+                    {favorito ? 'Desmarcar' : 'Marcar'} como favorito
+                </button>
             </div>
+        );
 
-        const Agenda = ({ datos }) =>
-            <div className="agenda">
-                {datos.map(contacto => <Contacto key={contacto.id} {...contacto} />)}
-            </div>
 
-        const App = () =>
-            <div>
-                <h1>Agenda</h1>
-                <Agenda datos={datos} />
-            </div>
+        const Agenda = ({ datos, onAlternarFavorito }) => {
+            const favoritos = datos.filter(contacto => contacto.favorito)
+            const noFavoritos = datos.filter(contacto => !contacto.favorito)
+            const contactosOrdenados = [...favoritos.sort((a, b) => a.apellido.localeCompare(b.apellido)), ...noFavoritos.sort((a, b) => a.apellido.localeCompare(b.apellido))]
+
+            return (
+                <div className="agenda">
+                    {contactosOrdenados.map(contacto => (
+                        <Contacto
+                            key={contacto.id}
+                            {...contacto}
+                            onAlternarFavorito={onAlternarFavorito}
+                        />
+                    ))}
+                </div>
+            )
+        };
+
+        const App = () => {
+            const [contactos, setContactos] = React.useState(nombres)
+
+            const AlternarFavorito = (id) => {
+                const contactosActualizados = contactos.map(contacto => {
+                    if (contacto.id === id) {
+                        return { ...contacto, favorito: !contacto.favorito } 
+                    }
+                    return contacto
+                })
+                setContactos(contactosActualizados);
+            }
+
+            return (
+                <div>
+                    <h1 className="h1Agenda">Agenda</h1>
+                    <Agenda datos={contactos} onAlternarFavorito={AlternarFavorito} />
+                </div>
+            )
+        }
 
         const root = createRoot(document.getElementById('root'))
         root.render(<App />);
