@@ -1,6 +1,5 @@
-html {
+html{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 24px;
     background-color: #eee;
     box-sizing:content-box;
 }
@@ -10,7 +9,7 @@ html {
 }
 
 #root {
-    width: 400px;
+    width: 500px;
     margin: 0 auto;
     padding: 10px;
 }
@@ -18,19 +17,6 @@ html {
 h1,h2,h3,h4,h5,h6 {
     color: #333;
     margin: 8px 0;
-}
-
-button {
-    padding: 4px 6px;
-    min-width: 100px;
-    cursor: pointer;
-    border: 0.5px solid #bbb;
-    border-radius: 5px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
-}
-
-button:hover {
-    background-color: #ddd;
 }
 
 form {
@@ -89,6 +75,7 @@ section {
     border-radius: 15px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
 }
+
 
 ul {
     list-style-type: none;
