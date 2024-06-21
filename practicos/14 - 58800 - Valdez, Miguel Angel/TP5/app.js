@@ -25,7 +25,7 @@ app.get('/personas', (req, res) => {
     res.status(200).json(personasNoBorradas);
 });
 
-//  función PUT
+// Implementación de la función PUT
 app.put('/personas', (req, res) => {
     const persona = req.body;
     
