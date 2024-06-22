@@ -1,4 +1,21 @@
 {
+  "name": "practicos",
+  "version": "1.0.0",
+  "description": "Este trabajo se considera como el *segundo parcial*.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlejandroDiBattista/TUP-C4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlejandroDiBattista/TUP-C4/issues"
+  },
+  "homepage": "https://github.com/AlejandroDiBattista/TUP-C4#readme"
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
