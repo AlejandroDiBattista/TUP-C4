@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Inventario</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Control de Inventario del Depósito</h1>
+        <div id="product-list">
+            <!-- Aquí se mostrará la lista de productos -->
+        </div>
+        <form id="product-form">
+            <input type="text" id="product-name" placeholder="Nombre del Producto" required>
+            <input type="text" id="product-code" placeholder="Código EAN" required>
+            <input type="number" id="product-quantity" placeholder="Cantidad" required>
+            <button type="submit">Agregar Producto</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

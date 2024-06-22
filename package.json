@@ -16,4 +16,9 @@
     "url": "https://github.com/AlejandroDiBattista/TUP-C4/issues"
   },
   "homepage": "https://github.com/AlejandroDiBattista/TUP-C4#readme"
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.2"
+  }
 }

@@ -6,6 +6,7 @@
     <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+    <script src="https://unpkg.com/@mui/material@latest/umd/material-ui.development.js"></script> 
     <link rel="stylesheet" href="estilo.css">
     <script type="text/babel" src="main.jsx"></script>
     <title></title>
@@ -15,6 +16,7 @@
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect } = React
+        const { Button, TextField, Typography, Container, Box, Card, CardContent } = MaterialUI;
         const root = ReactDOM.createRoot(document.getElementById('root'))
         root.render(<App />);
     </script>
