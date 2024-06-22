@@ -1,98 +1,129 @@
 html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 24px;
-    background-color: #eee;
-    box-sizing:content-box;
+    font-size: 16px;
+    background-color: #f0f2f5;
+    box-sizing: border-box;
+    
 }
 
-*, *:before, *:after {
+*, *::before, *::after {
     box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
 }
 
 #root {
     width: 400px;
-    margin: 0 auto;
-    padding: 10px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-h1,h2,h3,h4,h5,h6 {
-    color: #333;
-    margin: 8px 0;
+h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    color: #212020;
+
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: #212020;
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+    text-align: left;
+    color: #2a2929;
+}
+
+input[type='text'],
+input[type='password'] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #05336f;
+    
 }
 
 button {
-    padding: 4px 6px;
-    min-width: 100px;
+    padding: 10px 20px;
+    min-width: 150px;
     cursor: pointer;
-    border: 0.5px solid #bbb;
+    border: none;
     border-radius: 5px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #357edd;
+    color: white;
+    font-size: 1em;
+    margin: 10px 5px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #ddd;
+    background-color: #2861a7;
 }
 
 form {
     width: 100%;
-    button[type='submit'] {
-        font-weight: bold;
-    }
-    label {
-        display: block;
-        margin: 8px 0;
-        font-size: 14px;
-        color: #666;
-        width: 100%;
-        input {
-            display: block;
-            width: calc(100% - 20px);
-            padding: 5px 10px;
-            margin-top: 5px;
-            border: 0.5px solid #bbb;
-            border-radius: 5px;
-            box-shadow: inset 0 0 4px 0 rgba(0, 0, 0, 0.2);
-            font-size: 20px;
-            font-weight: bold;
-        }
-    }
-    h3 {
-        margin: -5px 0 0 0;
-        padding: 0;
-    }
-    span:has(> button) {
-        padding-top: 10px;
-    }
+    text-align: center;
 }
 
-span:has(> button) {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 16px;
-    gap: 10px;
-}
-
-div:has(> button) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 16px;
-    gap: 10px;
-}
-
-section {
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #fff;
-    border: 0.5px solid #bbb;
-    border-radius: 15px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+form button[type='submit'] {
+    font-weight: bold;
 }
 
 ul {
     list-style-type: none;
-    li {
-        padding: 5px 0;
+    padding: 0;
+}
+
+ul li {
+    padding: 5px 0;
+}
+
+.message {
+    font-weight: bold;
+    text-align: center;
+    color: #e74c3c;
+}
+
+p {
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+@media (max-width: 420px) {
+    #root {
+        width: 90%;
+        padding: 15px;
+    }
+
+    input[type='text'],
+    input[type='password'] {
+        width: calc(100% - 16px);
+    }
+
+    button {
+        width: 100%;
+        margin: 10px 5px;
     }
 }
