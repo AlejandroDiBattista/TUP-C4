@@ -31,7 +31,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-02",
@@ -49,7 +51,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": false,
-    "tp6": false
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-03",
@@ -67,7 +71,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-18",
@@ -85,7 +91,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-17",
@@ -101,7 +109,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-04",
@@ -151,7 +161,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-07",
@@ -169,7 +181,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": false,
-    "tp6": false
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-08",
@@ -185,7 +199,9 @@
     "tp3": false,
     "tp4": true,
     "tp5": false,
-    "tp6": true
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-09",
@@ -203,7 +219,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-10",
@@ -221,7 +239,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-11",
@@ -237,7 +257,9 @@
     "tp3": false,
     "tp4": true,
     "tp5": false,
-    "tp6": false
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-12",
@@ -253,7 +275,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": true
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-13",
@@ -271,7 +295,9 @@
     "tp3": true,
     "tp4": true,
     "tp5": true,
-    "tp6": false
+    "tp6": true,
+    "nota_tp6": 0,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-14",
