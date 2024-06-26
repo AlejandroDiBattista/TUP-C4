@@ -155,7 +155,7 @@ function EditarAgenda({ producto, productos, guardar, cancelar }) {
                     <div><button className="btn1" onClick={cancelarEdicion}>Cancelar</button></div>
                 </div>
             </form>
-            {error && <p className="errores">Completa todos los campos</p>}
+            {error  && <p className="errores">Completa todos los campos</p>}
             {error2 && <p className="errores2">No pueden haber valores negativos</p>}
             {error3 && <p className="errores2">El codigo EAR debe tener 13 digitos</p>}
             {error4 && <p className="errores2">El codigo EAR ya existe</p>}
