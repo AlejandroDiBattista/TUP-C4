@@ -106,110 +106,110 @@ const App = () => {
 
     return (
         <Container>
-        <div className="d-flex justify-content-center align-items-center vh-100">
-            {!logueado ? (
-                <div>
-                    {mostrarForm === 'login' && (
-                        <Card>
-                            <Card.Body>
-                                <div className="text-center">
-                                    <h5 className="mb-3">Iniciar Sesión</h5>
-                                    <Form onSubmit={manejarLogin}>
-                                        <Form.Group controlId="formBasicEmail">
-                                            <Form.Label>Usuario</Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                placeholder="Ingrese su usuario"
-                                                value={usuarioLogin}
-                                                onChange={(e) => setUsuarioLogin(e.target.value)}
-                                                required
-                                            />
-                                        </Form.Group>
-                                        <Form.Group controlId="formBasicPassword">
-                                            <Form.Label>Contraseña</Form.Label>
-                                            <Form.Control
-                                                type="password"
-                                                placeholder="Contraseña"
-                                                value={contraseñaLogin}
-                                                onChange={(e) => setContraseñaLogin(e.target.value)}
-                                                required
-                                            />
-                                        </Form.Group>
-                                        <Button variant="primary" type="submit">
-                                            Iniciar Sesión
-                                        </Button>
-                                    </Form>
-                                    <div className="mt-3">
-                                        ¿No tienes una cuenta?{' '}
-                                        <Button variant="link" onClick={() => mostrarFormulario('register')}>
-                                            Regístrate aquí
-                                        </Button>
+            <div className="d-flex justify-content-center align-items-center vh-100">
+                {!logueado ? (
+                    <div>
+                        {mostrarForm === 'login' && (
+                            <Card className="custom-card">
+                                <Card.Body className="custom-card-body">
+                                    <div className="text-center">
+                                        <h5 className="mb-3">Iniciar Sesión</h5>
+                                        <Form onSubmit={manejarLogin}>
+                                            <Form.Group controlId="formBasicEmail">
+                                                <Form.Label>Usuario</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Ingrese su usuario"
+                                                    value={usuarioLogin}
+                                                    onChange={(e) => setUsuarioLogin(e.target.value)}
+                                                    required
+                                                />
+                                            </Form.Group>
+                                            <Form.Group controlId="formBasicPassword">
+                                                <Form.Label>Contraseña</Form.Label>
+                                                <Form.Control
+                                                    type="password"
+                                                    placeholder="Contraseña"
+                                                    value={contraseñaLogin}
+                                                    onChange={(e) => setContraseñaLogin(e.target.value)}
+                                                    required
+                                                />
+                                            </Form.Group>
+                                            <Button variant="primary" type="submit" className="custom-btn-primary">
+                                                Iniciar Sesión
+                                            </Button>
+                                        </Form>
+                                        <div className="mt-3">
+                                            ¿No tienes una cuenta?{' '}
+                                            <Button variant="link" onClick={() => mostrarFormulario('register')} className="custom-btn-link">
+                                                Regístrate aquí
+                                            </Button>
+                                        </div>
                                     </div>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    )}
+                                </Card.Body>
+                            </Card>
+                        )}
 
-                    {mostrarForm === 'register' && (
-                        <Card>
-                            <Card.Body>
-                                <div className="text-center">
-                                    <h5 className="mb-3">Registrar</h5>
-                                    <Form onSubmit={manejarRegistro}>
-                                        <Form.Group controlId="formBasicRegistro">
-                                            <Form.Label>Usuario</Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                placeholder="Ingrese su usuario"
-                                                value={usuarioRegistro}
-                                                onChange={(e) => setUsuarioRegistro(e.target.value)}
-                                                required
-                                            />
-                                        </Form.Group>
-                                        <Form.Group controlId="formBasicPasswordRegistro">
-                                            <Form.Label>Contraseña</Form.Label>
-                                            <Form.Control
-                                                type="password"
-                                                placeholder="Contraseña"
-                                                value={contraseñaRegistro}
-                                                onChange={(e) => setContraseñaRegistro(e.target.value)}
-                                                required
-                                            />
-                                        </Form.Group>
-                                        <Button variant="primary" type="submit">
-                                            Registrar
-                                        </Button>
-                                    </Form>
-                                    <div className="mt-3">
-                                        ¿Ya tienes una cuenta?{' '}
-                                        <Button variant="link" onClick={() => mostrarFormulario('login')}>
-                                            Inicia sesión aquí
-                                        </Button>
+                        {mostrarForm === 'register' && (
+                            <Card className="custom-card">
+                                <Card.Body className="custom-card-body">
+                                    <div className="text-center">
+                                        <h5 className="mb-3">Registrar</h5>
+                                        <Form onSubmit={manejarRegistro}>
+                                            <Form.Group controlId="formBasicRegistro">
+                                                <Form.Label>Usuario</Form.Label>
+                                                <Form.Control
+                                                    type="text"
+                                                    placeholder="Ingrese su usuario"
+                                                    value={usuarioRegistro}
+                                                    onChange={(e) => setUsuarioRegistro(e.target.value)}
+                                                    required
+                                                />
+                                            </Form.Group>
+                                            <Form.Group controlId="formBasicPasswordRegistro">
+                                                <Form.Label>Contraseña</Form.Label>
+                                                <Form.Control
+                                                    type="password"
+                                                    placeholder="Contraseña"
+                                                    value={contraseñaRegistro}
+                                                    onChange={(e) => setContraseñaRegistro(e.target.value)}
+                                                    required
+                                                />
+                                            </Form.Group>
+                                            <Button variant="primary" type="submit" className="custom-btn-primary">
+                                                Registrar
+                                            </Button>
+                                        </Form>
+                                        <div className="mt-3">
+                                            ¿Ya tienes una cuenta?{' '}
+                                            <Button variant="link" onClick={() => mostrarFormulario('login')} className="custom-btn-link">
+                                                Inicia sesión aquí
+                                            </Button>
+                                        </div>
                                     </div>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    )}
-                </div>
-            ) : (
-                <div className="text-center">
-                    <h5>Bienvenido</h5>
-                    <Button variant="secondary" className="mr-2" onClick={manejarLogout}>
-                        Cerrar Sesión
-                    </Button>
-                    <Button variant="primary" onClick={manejarObtenerInfo}>
-                        Obtener Información
-                    </Button>
-                    {info && (
-                        <p className="mt-3">
-                            {info}
-                            {mostrarContraseña && <span>Su contraseña es: "{contraseñaLogin}"</span>}
-                        </p>
-                    )}
-                </div>
-            )}
-        </div>
-    </Container>
+                                </Card.Body>
+                            </Card>
+                        )}
+                    </div>
+                ) : (
+                    <div className="text-center">
+                        <h5>Bienvenido</h5>
+                        <Button variant="secondary" className="mr-2 custom-btn-secondary" onClick={manejarLogout}>
+                            Cerrar Sesión
+                        </Button>
+                        <Button variant="primary" className="custom-btn-primary" onClick={manejarObtenerInfo}>
+                            Obtener Información
+                        </Button>
+                        {info && (
+                            <p className="mt-3">
+                                {info}
+                                {mostrarContraseña && <span>Su contraseña es: "{contraseñaLogin}"</span>}
+                            </p>
+                        )}
+                    </div>
+                )}
+            </div>
+        </Container>
     );
 };
 
