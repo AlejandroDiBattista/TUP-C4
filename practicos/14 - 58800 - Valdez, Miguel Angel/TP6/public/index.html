@@ -3,21 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Bootstrap Example</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tu estilo personalizado -->
     <link rel="stylesheet" href="estilo.css">
-    <script type="text/babel" src="main.jsx"></script>
-    <title></title>
 </head>
 
 <body>
     <div id="root"></div>
-    <script type="text/babel">
-        const { useState, useEffect } = React
-        const root = ReactDOM.createRoot(document.getElementById('root'))
-        root.render(<App />);
-    </script>
+    <!-- React y react-dom -->
+    <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+
+    <!-- Babel para transpilar JSX -->
+    <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+    <!-- react-bootstrap y react-bootstrap-icons -->
+    <script src="https://unpkg.com/react-bootstrap@2.0.0-beta.1/dist/react-bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Script principal de React -->
+    <script type="text/babel" src="main.jsx"></script>
 </body>
 
 </html>
