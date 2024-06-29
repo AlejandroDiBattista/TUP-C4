@@ -270,7 +270,7 @@
     "inicial": "YGR",
     "cambio": false,
     "ubicacion": "./12 - 59690 - Rios, Yanina Gisele",
-    "tp1": false,
+    "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": true,
@@ -291,7 +291,7 @@
     "nota_tp3": 0,
     "comentario_tp3": "",
     "tp1": true,
-    "tp2": false,
+    "tp2": true,
     "tp3": true,
     "tp4": true,
     "tp5": true,
@@ -314,8 +314,8 @@
     "tp2": true,
     "tp3": true,
     "tp4": true,
-    "tp5": false,
-    "tp6": false
+    "tp5": true,
+    "tp6": true
   },
   {
     "id": "C4-15",
