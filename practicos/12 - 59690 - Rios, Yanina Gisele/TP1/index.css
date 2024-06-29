@@ -5,3 +5,31 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
+
+/* Estilos CSS personalizados para la agenda */
+.agenda-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.contact-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.contact-card h5 {
+    margin-bottom: 10px;
+}
+
+.contact-card .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.contact-card .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
