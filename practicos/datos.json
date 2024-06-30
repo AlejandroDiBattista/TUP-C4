@@ -14,7 +14,8 @@
     "tp4": false,
     "tp5": true,
     "tp6": false,
-    "TP3": false
+    "TP3": false,
+    "TP6": false
   },
   {
     "id": "C4-02",
@@ -35,7 +36,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-03",
@@ -56,7 +58,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-04",
@@ -73,7 +76,8 @@
     "tp4": false,
     "tp5": false,
     "tp6": false,
-    "TP3": false
+    "TP3": false,
+    "TP6": false
   },
   {
     "id": "C4-05",
@@ -90,7 +94,8 @@
     "tp4": false,
     "tp5": false,
     "tp6": false,
-    "TP3": false
+    "TP3": false,
+    "TP6": false
   },
   {
     "id": "C4-06",
@@ -111,7 +116,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-07",
@@ -132,7 +138,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-08",
@@ -153,7 +160,8 @@
     "comentario_tp6": "",
     "nota_tp3": 3,
     "comentario_tp3": "No esta implementada ninguna funcionalidad",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-09",
@@ -174,7 +182,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-10",
@@ -195,7 +204,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-11",
@@ -214,7 +224,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-12",
@@ -235,7 +246,8 @@
     "comentario_tp6": "",
     "TP3": true,
     "nota_tp3": 10,
-    "comentario_tp3": ""
+    "comentario_tp3": "",
+    "TP6": true
   },
   {
     "id": "C4-13",
@@ -256,7 +268,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-14",
@@ -275,7 +288,8 @@
     "tp4": false,
     "tp5": true,
     "tp6": true,
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-15",
@@ -292,7 +306,8 @@
     "tp4": false,
     "tp5": false,
     "tp6": false,
-    "TP3": false
+    "TP3": false,
+    "TP6": false
   },
   {
     "id": "C4-16",
@@ -313,7 +328,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   },
   {
     "id": "C4-17",
@@ -334,7 +350,8 @@
     "comentario_tp6": "",
     "TP3": true,
     "nota_tp3": 9,
-    "comentario_tp3": "Diferencias en el diseño"
+    "comentario_tp3": "Diferencias en el diseño",
+    "TP6": true
   },
   {
     "id": "C4-18",
@@ -355,6 +372,7 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true
+    "TP3": true,
+    "TP6": true
   }
 ]

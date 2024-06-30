@@ -1,53 +1,43 @@
-# Evaluación tp6 - C4
+# Evaluación TP6 en C4
 
 ## 02 - 55505 - Chazarreta Robles, María
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 03 - 50694 - Ferrari, Stefano
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 06 - 59093 - Ledesma, Facundo Osvaldo
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 07 - 59200 - López, Tiago Gabriel
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 08 - 59097 - Martin Ibarra, Patricio
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 09 - 55466 - Medina, Álvaro Ignacio
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 10 - 55986 - Paz, Octavio Emanuel
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 11 - 50657 - Ramirez, Giselle Evelyn
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 12 - 59690 - Rios, Yanina Gisele
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 13 - 58798 - Salazar, Santiago
-- Aprobado: 
-- 
+- Nota: 0
+
+## 14 - 58800 - Valdez, Miguel Angel
+- Nota: 0
 
 ## 16 - 59265 - Cavanna, Victoria
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 17 - 59417 - Gómez Iturre, Joaquín
-- Aprobado: 
-- 
+- Nota: 0
 
 ## 18 - 58725 - Garcia Bulacio, Micaela
-- Aprobado: 
-- 
+- Nota: 0

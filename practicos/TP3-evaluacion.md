@@ -28,11 +28,17 @@
 ## 10 - 55986 - Paz, Octavio Emanuel
 - Nota: 10
 
+## 11 - 50657 - Ramirez, Giselle Evelyn
+- Nota: 0
+
 ## 12 - 59690 - Rios, Yanina Gisele
 - Nota: 10
 
 ## 13 - 58798 - Salazar, Santiago
 - Nota: 10
+
+## 14 - 58800 - Valdez, Miguel Angel
+- Nota: 0
 
 ## 16 - 59265 - Cavanna, Victoria
 - Nota: 10
