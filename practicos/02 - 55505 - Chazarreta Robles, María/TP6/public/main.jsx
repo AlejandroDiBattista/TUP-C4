@@ -1,130 +1,129 @@
 function App() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [message, setMessage] = useState('');
-    const [userInfo, setUserInfo] = useState(null);
-    const [view, setView] = useState('register');
+    const [nombreUsuario, setNombreUsuario] = useState('');
+    const [contrasena, setContrasena] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [mensaje, setMensaje] = useState('');
+    const [infoUsuario, setInfoUsuario] = useState(null);
+    const [vista, setVista] = useState('registrar');
 
-    const handleRegister = async () => {
-        const response = await fetch('/register', {
+    
+    const manejarLogin = async () => {
+        const respuesta = await fetch('/iniciar-sesion', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password, name })
+            body: JSON.stringify({ nombreUsuario, contrasena })
         });
-        const data = await response.json();
-        setMessage(data.message);
-        if (response.status === 201) {
-            setView('login');
+        const datos = await respuesta.json();
+        setMensaje(datos.mensaje);
+        if (respuesta.status === 200) {
+            setInfoUsuario(datos.usuario);
+            setVista('info');
         }
     };
-
-    const handleLogin = async () => {
-        const response = await fetch('/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        });
-        const data = await response.json();
-        setMessage(data.message);
-        if (response.status === 200) {
-            setUserInfo(data.user);
-            setView('info');
-        }
-    };
-
-    const handleLogout = async () => {
-        const response = await fetch('/logout', {
+    
+    const manejarLogout = async () => {
+        const respuesta = await fetch('/cerrar-sesion', {
             method: 'POST'
         });
-        const data = await response.json();
-        setMessage(data.message);
-        setUserInfo(null);
-        setView('register');
+        const datos = await respuesta.json();
+        setMensaje(datos.mensaje);
+        setInfoUsuario(null);
+        setVista('registrar');
     };
-
-    const fetchInfo = async () => {
-        const response = await fetch('/info');
-        if (response.ok) {
-            const data = await response.json();
-            setUserInfo(data.user);
-            setView('info');
-        } else {
-            setMessage('No autorizado');
-            setView('register');
+    
+    const manejarRegistro = async () => {
+        const respuesta = await fetch('/registrar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombreUsuario, contrasena, nombre })
+        });
+        const datos = await respuesta.json();
+        setMensaje(datos.mensaje);
+        if (respuesta.status === 201) {
+            setVista('iniciar-sesion');
         }
     };
-
-
+    const obtenerInfo = async () => {
+        const respuesta = await fetch('/info');
+        if (respuesta.ok) {
+            const datos = await respuesta.json();
+            setInfoUsuario(datos.usuario);
+            setVista('info');
+        } else {
+            setMensaje('No autorizado');
+            setVista('registrar');
+        }
+    };
+    
     return (
         <div>
             <h1>TP6 - Sesiones</h1>
-            {view === 'register' && (
+            {vista === 'registrar' && (
                 <div>
                     <h2>Registrarse</h2>
                     <label>
                         Usuario:
                         <input
                             type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={nombreUsuario}
+                            onChange={(e) => setNombreUsuario(e.target.value)}
                         />
                     </label>
                     <label>
                         Contraseña:
                         <input
                             type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={contrasena}
+                            onChange={(e) => setContrasena(e.target.value)}
                         />
                     </label>
                     <label>
                         Nombre:
                         <input
                             type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            value={nombre}
+                            onChange={(e) => setNombre(e.target.value)}
                         />
                     </label>
                     
-                    <button onClick={handleRegister}>Registrarse</button>
-                    <button onClick={() => setView('login')}>Login</button>
+                    <button onClick={manejarRegistro}>Registrarse</button>
+                    <button onClick={() => setVista('iniciar-sesion')}>Iniciar sesión</button>
                 </div>
             )}
-            {view === 'login' && (
+            {vista === 'iniciar-sesion' && (
                 <div>
-                    <h2>Login</h2>
+                    <h2>Iniciar sesión</h2>
                     <label>
-                        Usuario
+                        Usuario:
                         <input
                             type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={nombreUsuario}
+                            onChange={(e) => setNombreUsuario(e.target.value)}
                         />
                     </label>
                     <label>
-                        Contraseña
+                        Contraseña:
                         <input
                             type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={contrasena}
+                            onChange={(e) => setContrasena(e.target.value)}
                         />
                     </label>
 
-                    <button onClick={handleLogin}>Login</button>
-                    <button onClick={() => setView('register')}>Registrarse</button>
+                    <button onClick={manejarLogin}>Iniciar sesión</button>
+                    <button onClick={() => setVista('registrar')}>Registrarse</button>
                 </div>
             )}
-            {view === 'info' && userInfo && (
+            {vista === 'info' && infoUsuario && (
                 <div>
                     <h2>Información del Usuario</h2>
-                    <p>Usuario: {userInfo.username}</p>
-                    <p>Nombre: {userInfo.name}</p>                    
-                    <button onClick={handleLogout}>Logout</button>
+                    <p>Usuario: {infoUsuario.nombreUsuario}</p>
+                    <p>Nombre: {infoUsuario.nombre}</p>                    
+                    <button onClick={manejarLogout}>Cerrar sesión</button>
                 </div>
             )}
             <div>
-                <p>{message}</p>
+                <p>{mensaje}</p>
             </div>
         </div>
     );
