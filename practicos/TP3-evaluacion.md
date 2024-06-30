@@ -25,6 +25,24 @@
 - No permite edición simultanea de productos
 - Al agregar no cierra el formulario
 
+## 10 - 55986 - Paz, Octavio Emanuel
+- Nota: 10
+
+## 12 - 59690 - Rios, Yanina Gisele
+- Nota: 10
+
+## 13 - 58798 - Salazar, Santiago
+- Nota: 10
+
 ## 16 - 59265 - Cavanna, Victoria
 - Nota: 10
 - Diferencias minima en el diseño
+
+## 17 - 59417 - Gómez Iturre, Joaquín
+- Nota: 9
+- Diferencias en el diseño
+
+## 18 - 58725 - Garcia Bulacio, Micaela
+- Nota: 8
+- La alta funciona solo algunas veces
+- Agrega el ID antes de agregar el producto

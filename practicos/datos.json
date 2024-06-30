@@ -13,7 +13,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": true,
-    "tp6": false
+    "tp6": false,
+    "TP3": false
   },
   {
     "id": "C4-02",
@@ -24,8 +25,8 @@
     "inicial": "MCR",
     "cambio": false,
     "ubicacion": "./02 - 55505 - Chazarreta Robles, María",
-    "nota_tp3": 0,
-    "comentario_tp3": "",
+    "nota_tp3": 10,
+    "comentario_tp3": "Pequeñas diferencias con el diseño original, pero cumple con los requerimientos.",
     "tp1": true,
     "tp2": true,
     "tp3": true,
@@ -33,7 +34,8 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true
   },
   {
     "id": "C4-03",
@@ -44,8 +46,8 @@
     "inicial": "SFE",
     "cambio": false,
     "ubicacion": "./03 - 50694 - Ferrari, Stefano",
-    "nota_tp3": 0,
-    "comentario_tp3": "",
+    "nota_tp3": 10,
+    "comentario_tp3": "Perfecto! Solo nombres en ingles, pero no es un problema.",
     "tp1": true,
     "tp2": true,
     "tp3": true,
@@ -53,7 +55,8 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true
   },
   {
     "id": "C4-04",
@@ -69,7 +72,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "tp6": false
+    "tp6": false,
+    "TP3": false
   },
   {
     "id": "C4-05",
@@ -85,7 +89,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "tp6": false
+    "tp6": false,
+    "TP3": false
   },
   {
     "id": "C4-06",
@@ -96,8 +101,8 @@
     "inicial": "FOL",
     "cambio": false,
     "ubicacion": "./06 - 59093 - Ledesma, Facundo Osvaldo",
-    "nota_tp3": 0,
-    "comentario_tp3": "",
+    "nota_tp3": 10,
+    "comentario_tp3": "Muy bien el uso de componentes y la estructura del proyecto.",
     "tp1": true,
     "tp2": true,
     "tp3": true,
@@ -105,7 +110,8 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true
   },
   {
     "id": "C4-07",
@@ -116,8 +122,8 @@
     "inicial": "TGL",
     "cambio": false,
     "ubicacion": "./07 - 59200 - López, Tiago Gabriel",
-    "nota_tp3": 0,
-    "comentario_tp3": "",
+    "nota_tp3": 9,
+    "comentario_tp3": "No realiza la edicion en el lugar de mas de un producto",
     "tp1": true,
     "tp2": true,
     "tp3": true,
@@ -125,7 +131,8 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true
   },
   {
     "id": "C4-08",
@@ -143,7 +150,10 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "nota_tp3": 3,
+    "comentario_tp3": "No esta implementada ninguna funcionalidad",
+    "TP3": true
   },
   {
     "id": "C4-09",
@@ -154,8 +164,8 @@
     "inicial": "ÁIM",
     "cambio": false,
     "ubicacion": "./09 - 55466 - Medina, Álvaro Ignacio",
-    "nota_tp3": 0,
-    "comentario_tp3": "",
+    "nota_tp3": 9,
+    "comentario_tp3": "No permite edición simultanea de productos;Al agregar no cierra el formulario",
     "tp1": true,
     "tp2": true,
     "tp3": true,
@@ -163,7 +173,8 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true
   },
   {
     "id": "C4-10",
@@ -174,7 +185,7 @@
     "inicial": "OEP",
     "cambio": false,
     "ubicacion": "./10 - 55986 - Paz, Octavio Emanuel",
-    "nota_tp3": 0,
+    "nota_tp3": 10,
     "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
@@ -183,7 +194,8 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true
   },
   {
     "id": "C4-11",
@@ -201,7 +213,8 @@
     "tp5": false,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true
   },
   {
     "id": "C4-12",
@@ -219,7 +232,10 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true,
+    "nota_tp3": 10,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-13",
@@ -230,7 +246,7 @@
     "inicial": "SSA",
     "cambio": false,
     "ubicacion": "./13 - 58798 - Salazar, Santiago",
-    "nota_tp3": 0,
+    "nota_tp3": 10,
     "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
@@ -239,7 +255,8 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true
   },
   {
     "id": "C4-14",
@@ -257,7 +274,8 @@
     "tp3": true,
     "tp4": false,
     "tp5": true,
-    "tp6": true
+    "tp6": true,
+    "TP3": true
   },
   {
     "id": "C4-15",
@@ -273,7 +291,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "tp6": false
+    "tp6": false,
+    "TP3": false
   },
   {
     "id": "C4-16",
@@ -284,8 +303,8 @@
     "inicial": "VC",
     "cambio": false,
     "ubicacion": "./16 - 59265 - Cavanna, Victoria",
-    "nota_tp3": 0,
-    "comentario_tp3": "",
+    "nota_tp3": 10,
+    "comentario_tp3": "Diferencias minima en el diseño",
     "tp1": true,
     "tp2": true,
     "tp3": true,
@@ -293,7 +312,8 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true
   },
   {
     "id": "C4-17",
@@ -311,7 +331,10 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true,
+    "nota_tp3": 9,
+    "comentario_tp3": "Diferencias en el diseño"
   },
   {
     "id": "C4-18",
@@ -322,8 +345,8 @@
     "inicial": "MGB",
     "cambio": false,
     "ubicacion": "./18 - 58725 - Garcia Bulacio, Micaela",
-    "nota_tp3": 0,
-    "comentario_tp3": "",
+    "nota_tp3": 8,
+    "comentario_tp3": "La alta funciona solo algunas veces;Agrega el ID antes de agregar el producto",
     "tp1": true,
     "tp2": true,
     "tp3": true,
@@ -331,6 +354,7 @@
     "tp5": true,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "TP3": true
   }
 ]
