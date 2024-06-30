@@ -5,9 +5,9 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs'; 
 
 const app = express();
-const users = [];  
-const saltRounds = 10; 
-const SECRET_KEY = 'your_secret_key'; 
+const usuarios = [];  
+const rondasSal = 10; 
+const CLAVE_SECRETA = 'tu_clave_secreta'; 
 
 app.use(morgan('dev'));     // Loggea cada request en consola
 app.use(cookieParser());    // Para leer cookies
@@ -15,57 +15,57 @@ app.use(express.json());    // Para leer JSONs
 app.use(express.static('public'));  // Para servir archivos estáticos
 
 
-app.post('/register', async (req, res) => {
-    const { username, password, name} = req.body;    
+app.post('/registrar', async (req, res) => {
+    const { nombreUsuario, contrasena, nombre} = req.body;    
     
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const contrasenaHasheada = await bcrypt.hash(contrasena, rondasSal);
     
-    if (users.find(user => user.username === username)) {
-        return res.status(400).json({ message: 'Usuario ya existe' });
+    if (usuarios.find(usuario => usuario.nombreUsuario === nombreUsuario)) {
+        return res.status(400).json({ mensaje: 'Usuario ya existe' });
     }
-    users.push({ username, password: hashedPassword, name});
-    res.status(201).json({ message: 'Usuario registrado' });
+    usuarios.push({ nombreUsuario, contrasena: contrasenaHasheada, nombre});
+    res.status(201).json({ mensaje: 'Usuario registrado' });
 });
 
 
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    const user = users.find(user => user.username === username);
-    if (!user) {
-        return res.status(401).json({ message: 'Credenciales inválidas' });
+app.post('/iniciar-sesion', (req, res) => {
+    const { nombreUsuario, contrasena } = req.body;
+    const usuario = usuarios.find(usuario => usuario.nombreUsuario === nombreUsuario);
+    if (!usuario) {
+        return res.status(401).json({ mensaje: 'Credenciales inválidas' });
     }
     
-    bcrypt.compare(password, user.password, (err, result) => {
-        if (err || !result) {
-            return res.status(401).json({ message: 'Credenciales inválidas' });
+    bcrypt.compare(contrasena, usuario.contrasena, (err, resultado) => {
+        if (err || !resultado) {
+            return res.status(401).json({ mensaje: 'Credenciales inválidas' });
         }
         
-        const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ nombreUsuario }, CLAVE_SECRETA, { expiresIn: '1h' });
         res.cookie('token', token, { httpOnly: true });
-        res.json({ message: 'Inicio de sesión exitoso', user: { username: user.username, name: user.name} });
+        res.json({ mensaje: 'Inicio de sesión exitoso', usuario: { nombreUsuario: usuario.nombreUsuario, nombre: usuario.nombre} });
     });
 });
 
 app.get('/info', (req, res) => {
     const token = req.cookies.token;
     if (!token) {
-        return res.status(401).json({ message: 'No autorizado' });
+        return res.status(401).json({ mensaje: 'No autorizado' });
     }
     try {
-        const decoded = jwt.verify(token, SECRET_KEY);
-        const user = users.find(user => user.username === decoded.username);
-        if (!user) {
-            return res.status(401).json({ message: 'Usuario no encontrado' });
+        const decodificado = jwt.verify(token, CLAVE_SECRETA);
+        const usuario = usuarios.find(usuario => usuario.nombreUsuario === decodificado.nombreUsuario);
+        if (!usuario) {
+            return res.status(401).json({ mensaje: 'Usuario no encontrado' });
         }
-        res.json({ user: { username: user.username, name: user.name} });
+        res.json({ usuario: { nombreUsuario: usuario.nombreUsuario, nombre: usuario.nombre} });
     } catch (e) {
-        res.status(401).json({ message: 'Token inválido' });
+        res.status(401).json({ mensaje: 'Token inválido' });
     }
 });
 
-app.post('/logout', (req, res) => {
+app.post('/cerrar-sesion', (req, res) => {
     res.clearCookie('token');
-    res.json({ message: 'Sesión cerrada' });
+    res.json({ mensaje: 'Sesión cerrada' });
 });
 
 app.listen(3000, () => {
