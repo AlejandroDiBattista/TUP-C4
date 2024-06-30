@@ -1,31 +1,31 @@
 # Evaluación TP3 - C4
 
 ## 02 - 55505 - Chazarreta Robles, María
-- Aprobado: 
+- Nota: 
 
 ## 03 - 50694 - Ferrari, Stefano
-- Aprobado: 
+- Nota: 
 
 ## 06 - 59093 - Ledesma, Facundo Osvaldo
-- Aprobado: 
+- Nota: 
 
 ## 07 - 59200 - López, Tiago Gabriel
-- Aprobado: 
+- Nota: 
 
 ## 09 - 55466 - Medina, Álvaro Ignacio
-- Aprobado: 
+- Nota: 
 
 ## 10 - 55986 - Paz, Octavio Emanuel
-- Aprobado: 
+- Nota: 
 
 ## 13 - 58798 - Salazar, Santiago
-- Aprobado: 
+- Nota: 
 
 ## 14 - 58800 - Valdez, Miguel Angel
-- Aprobado: 
+- Nota: 
 
 ## 16 - 59265 - Cavanna, Victoria
-- Aprobado: 
+- Nota: 
 
 ## 18 - 58725 - Garcia Bulacio, Micaela
-- Aprobado: 
+- Nota: 
