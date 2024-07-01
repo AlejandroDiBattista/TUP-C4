@@ -6,16 +6,13 @@
     "legajo": 59263,
     "nombre": "Acosta, Facundo",
     "inicial": "FAC",
-    "cambio": false,
     "ubicacion": "./01 - 59263 - Acosta, Facundo",
     "tp1": true,
     "tp2": false,
     "tp3": false,
     "tp4": false,
     "tp5": true,
-    "tp6": false,
-    "TP3": false,
-    "TP6": false
+    "tp6": false
   },
   {
     "id": "C4-02",
@@ -24,20 +21,17 @@
     "legajo": 55505,
     "nombre": "Chazarreta Robles, María",
     "inicial": "MCR",
-    "cambio": false,
     "ubicacion": "./02 - 55505 - Chazarreta Robles, María",
-    "nota_tp3": 10,
-    "comentario_tp3": "Pequeñas diferencias con el diseño original, pero cumple con los requerimientos.",
     "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": true,
     "tp5": true,
     "tp6": true,
+    "nota_tp3": 10,
+    "comentario_tp3": " Pequeñas diferencias con el diseño original, pero cumple con los requerimientos.",
     "nota_tp6": 0,
-    "comentario_tp6": "",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp6": ""
   },
   {
     "id": "C4-03",
@@ -46,20 +40,17 @@
     "legajo": 50694,
     "nombre": "Ferrari, Stefano",
     "inicial": "SFE",
-    "cambio": false,
     "ubicacion": "./03 - 50694 - Ferrari, Stefano",
-    "nota_tp3": 10,
-    "comentario_tp3": "Perfecto! Solo nombres en ingles, pero no es un problema.",
     "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": true,
     "tp5": true,
     "tp6": true,
+    "nota_tp3": 10,
+    "comentario_tp3": " Perfecto! Solo nombres en ingles, pero no es un problema.",
     "nota_tp6": 0,
-    "comentario_tp6": "",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp6": ""
   },
   {
     "id": "C4-04",
@@ -68,16 +59,13 @@
     "legajo": 50704,
     "nombre": "Juarez, Pablo Agustín",
     "inicial": "PAJ",
-    "cambio": false,
     "ubicacion": "./04 - 50704 - Juarez, Pablo Agustín",
     "tp1": false,
     "tp2": false,
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "tp6": false,
-    "TP3": false,
-    "TP6": false
+    "tp6": false
   },
   {
     "id": "C4-05",
@@ -86,16 +74,13 @@
     "legajo": 55896,
     "nombre": "Lacroix, Cristian Josué",
     "inicial": "CJL",
-    "cambio": false,
     "ubicacion": "./05 - 55896 - Lacroix, Cristian Josué",
     "tp1": false,
     "tp2": false,
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "tp6": false,
-    "TP3": false,
-    "TP6": false
+    "tp6": false
   },
   {
     "id": "C4-06",
@@ -104,20 +89,17 @@
     "legajo": 59093,
     "nombre": "Ledesma, Facundo Osvaldo",
     "inicial": "FOL",
-    "cambio": false,
     "ubicacion": "./06 - 59093 - Ledesma, Facundo Osvaldo",
-    "nota_tp3": 10,
-    "comentario_tp3": "Muy bien el uso de componentes y la estructura del proyecto.",
     "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": true,
     "tp5": true,
     "tp6": true,
+    "nota_tp3": 10,
+    "comentario_tp3": " Muy bien el uso de componentes y la estructura del proyecto.",
     "nota_tp6": 0,
-    "comentario_tp6": "",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp6": ""
   },
   {
     "id": "C4-07",
@@ -126,20 +108,17 @@
     "legajo": 59200,
     "nombre": "López, Tiago Gabriel",
     "inicial": "TGL",
-    "cambio": false,
     "ubicacion": "./07 - 59200 - López, Tiago Gabriel",
-    "nota_tp3": 9,
-    "comentario_tp3": "No realiza la edicion en el lugar de mas de un producto",
     "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": true,
     "tp5": true,
     "tp6": true,
+    "nota_tp3": 9,
+    "comentario_tp3": " No realiza la edicion en el lugar de mas de un producto",
     "nota_tp6": 0,
-    "comentario_tp6": "",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp6": ""
   },
   {
     "id": "C4-08",
@@ -148,7 +127,6 @@
     "legajo": 59097,
     "nombre": "Martin Ibarra, Patricio",
     "inicial": "PEMI",
-    "cambio": false,
     "ubicacion": "./08 - 59097 - Martin Ibarra, Patricio",
     "tp1": true,
     "tp2": true,
@@ -159,9 +137,7 @@
     "nota_tp6": 0,
     "comentario_tp6": "",
     "nota_tp3": 3,
-    "comentario_tp3": "No esta implementada ninguna funcionalidad",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp3": " No esta implementada ninguna funcionalidad"
   },
   {
     "id": "C4-09",
@@ -170,20 +146,17 @@
     "legajo": 55466,
     "nombre": "Medina, Álvaro Ignacio",
     "inicial": "ÁIM",
-    "cambio": false,
     "ubicacion": "./09 - 55466 - Medina, Álvaro Ignacio",
-    "nota_tp3": 9,
-    "comentario_tp3": "No permite edición simultanea de productos;Al agregar no cierra el formulario",
     "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": true,
     "tp5": true,
     "tp6": true,
+    "nota_tp3": 9,
+    "comentario_tp3": " No permite edición simultanea de productos; Al agregar no cierra el formulario",
     "nota_tp6": 0,
-    "comentario_tp6": "",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp6": ""
   },
   {
     "id": "C4-10",
@@ -192,20 +165,17 @@
     "legajo": 55986,
     "nombre": "Paz, Octavio Emanuel",
     "inicial": "OEP",
-    "cambio": false,
     "ubicacion": "./10 - 55986 - Paz, Octavio Emanuel",
-    "nota_tp3": 10,
-    "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": true,
     "tp5": true,
     "tp6": true,
+    "nota_tp3": 10,
+    "comentario_tp3": "",
     "nota_tp6": 0,
-    "comentario_tp6": "",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp6": ""
   },
   {
     "id": "C4-11",
@@ -214,7 +184,6 @@
     "legajo": 50657,
     "nombre": "Ramirez, Giselle Evelyn",
     "inicial": "GER",
-    "cambio": false,
     "ubicacion": "./11 - 50657 - Ramirez, Giselle Evelyn",
     "tp1": true,
     "tp2": true,
@@ -223,9 +192,7 @@
     "tp5": false,
     "tp6": true,
     "nota_tp6": 0,
-    "comentario_tp6": "",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp6": ""
   },
   {
     "id": "C4-12",
@@ -234,7 +201,6 @@
     "legajo": 59690,
     "nombre": "Rios, Yanina Gisele",
     "inicial": "YGR",
-    "cambio": false,
     "ubicacion": "./12 - 59690 - Rios, Yanina Gisele",
     "tp1": true,
     "tp2": true,
@@ -244,10 +210,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true,
     "nota_tp3": 10,
-    "comentario_tp3": "",
-    "TP6": true
+    "comentario_tp3": ""
   },
   {
     "id": "C4-13",
@@ -256,20 +220,17 @@
     "legajo": 58798,
     "nombre": "Salazar, Santiago",
     "inicial": "SSA",
-    "cambio": false,
     "ubicacion": "./13 - 58798 - Salazar, Santiago",
-    "nota_tp3": 10,
-    "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": true,
     "tp5": true,
     "tp6": true,
+    "nota_tp3": 10,
+    "comentario_tp3": "",
     "nota_tp6": 0,
-    "comentario_tp6": "",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp6": ""
   },
   {
     "id": "C4-14",
@@ -278,18 +239,15 @@
     "legajo": 58800,
     "nombre": "Valdez, Miguel Angel",
     "inicial": "MAV",
-    "cambio": false,
     "ubicacion": "./14 - 58800 - Valdez, Miguel Angel",
-    "nota_tp3": 0,
-    "comentario_tp3": "",
     "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": false,
     "tp5": true,
     "tp6": true,
-    "TP3": true,
-    "TP6": true
+    "nota_tp3": 0,
+    "comentario_tp3": ""
   },
   {
     "id": "C4-15",
@@ -298,16 +256,13 @@
     "legajo": 50753,
     "nombre": "Villafañe Assef, Oscar",
     "inicial": "OVA",
-    "cambio": false,
     "ubicacion": "./15 - 50753 - Villafañe Assef, Oscar",
     "tp1": false,
     "tp2": false,
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "tp6": false,
-    "TP3": false,
-    "TP6": false
+    "tp6": false
   },
   {
     "id": "C4-16",
@@ -316,20 +271,17 @@
     "legajo": 59265,
     "nombre": "Cavanna, Victoria",
     "inicial": "VC",
-    "cambio": false,
     "ubicacion": "./16 - 59265 - Cavanna, Victoria",
-    "nota_tp3": 10,
-    "comentario_tp3": "Diferencias minima en el diseño",
     "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": true,
     "tp5": true,
     "tp6": true,
+    "nota_tp3": 10,
+    "comentario_tp3": " Diferencias minima en el diseño",
     "nota_tp6": 0,
-    "comentario_tp6": "",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp6": ""
   },
   {
     "id": "C4-17",
@@ -338,7 +290,6 @@
     "legajo": 59417,
     "nombre": "Gómez Iturre, Joaquín",
     "inicial": "JGI",
-    "cambio": false,
     "ubicacion": "./17 - 59417 - Gómez Iturre, Joaquín",
     "tp1": true,
     "tp2": true,
@@ -348,10 +299,8 @@
     "tp6": true,
     "nota_tp6": 0,
     "comentario_tp6": "",
-    "TP3": true,
     "nota_tp3": 9,
-    "comentario_tp3": "Diferencias en el diseño",
-    "TP6": true
+    "comentario_tp3": " Diferencias en el diseño"
   },
   {
     "id": "C4-18",
@@ -360,19 +309,16 @@
     "legajo": 58725,
     "nombre": "Garcia Bulacio, Micaela",
     "inicial": "MGB",
-    "cambio": false,
     "ubicacion": "./18 - 58725 - Garcia Bulacio, Micaela",
-    "nota_tp3": 8,
-    "comentario_tp3": "La alta funciona solo algunas veces;Agrega el ID antes de agregar el producto",
     "tp1": true,
     "tp2": true,
     "tp3": true,
     "tp4": true,
     "tp5": true,
     "tp6": true,
+    "nota_tp3": 8,
+    "comentario_tp3": " La alta funciona solo algunas veces; Agrega el ID antes de agregar el producto",
     "nota_tp6": 0,
-    "comentario_tp6": "",
-    "TP3": true,
-    "TP6": true
+    "comentario_tp6": ""
   }
 ]
