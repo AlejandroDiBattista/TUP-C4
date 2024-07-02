@@ -13,7 +13,7 @@ const App = () => {
 
   const manejarRegistro = (e) => {
     e.preventDefault();
-    fetch('http://127.0.0.1:3000/api/registrar', {
+    fetch('/api/registrar', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ usuario, contraseña })
@@ -31,7 +31,7 @@ const App = () => {
 
   const manejarLogin = (e) => {
     e.preventDefault();
-    fetch('http://127.0.0.1:3000/api/login', {
+    fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ usuario, contraseña }),
@@ -51,7 +51,7 @@ const App = () => {
   };
 
   const manejarLogout = () => {
-    fetch('http://127.0.0.1:3000/api/logout', {
+    fetch('/api/logout', {
       method: 'POST',
       credentials: 'include'
     }).then(res => res.json())
@@ -68,7 +68,7 @@ const App = () => {
   };
 
   const manejarObtenerInfo = () => {
-    fetch('http://127.0.0.1:3000/api/info', { credentials: 'include' })
+    fetch('/api/info', { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         if (data.info) {

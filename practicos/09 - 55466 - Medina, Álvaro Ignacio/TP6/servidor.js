@@ -15,7 +15,6 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.use(cors({
-  origin: 'http://127.0.0.1:5500',
   credentials: true
 }));
 
@@ -54,14 +53,20 @@ app.post('/api/registrar', (req, res) => {
 // Ruta para login
 app.post('/api/login', (req, res) => {
   const { usuario, contraseña } = req.body;
+
+
+
   const user = usuarios[usuario];
   if (user) {
-    bcrypt.compare(contraseña, user.contraseña, (err, result) => {
+    bcrypt.compare(contraseña, user.contraseña, (err, result) => { // Verificar
       if (err || !result) {
         return res.json({ exito: false });
       }
       const token = jwt.sign({ usuario }, SECRET_KEY, { expiresIn: '1h' });
-      res.cookie('token', token, { httpOnly: true });
+      // 
+      res.cookie('token', token, {
+        httpOnly: true
+      });
       res.json({ exito: true });
     });
   } else {

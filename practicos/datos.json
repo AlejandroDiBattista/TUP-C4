@@ -30,8 +30,8 @@
     "tp6": true,
     "nota_tp3": 10,
     "comentario_tp3": " Pequeñas diferencias con el diseño original, pero cumple con los requerimientos.",
-    "nota_tp6": 0,
-    "comentario_tp6": ""
+    "nota_tp6": 10,
+    "comentario_tp6": "Falta instalar jsonwebtoken"
   },
   {
     "id": "C4-03",
@@ -49,8 +49,8 @@
     "tp6": true,
     "nota_tp3": 10,
     "comentario_tp3": " Perfecto! Solo nombres en ingles, pero no es un problema.",
-    "nota_tp6": 0,
-    "comentario_tp6": ""
+    "nota_tp6": 10,
+    "comentario_tp6": "Tuve cambiar direccion de sitio (127.0.0.1 a localhost)"
   },
   {
     "id": "C4-04",
@@ -98,8 +98,8 @@
     "tp6": true,
     "nota_tp3": 10,
     "comentario_tp3": " Muy bien el uso de componentes y la estructura del proyecto.",
-    "nota_tp6": 0,
-    "comentario_tp6": ""
+    "nota_tp6": 7,
+    "comentario_tp6": "Falta instalar jsonwebtoken;Son iguales #06, #13 (Express)"
   },
   {
     "id": "C4-07",
@@ -117,8 +117,8 @@
     "tp6": true,
     "nota_tp3": 9,
     "comentario_tp3": " No realiza la edicion en el lugar de mas de un producto",
-    "nota_tp6": 0,
-    "comentario_tp6": ""
+    "nota_tp6": 10,
+    "comentario_tp6": "Falta instalar dotenv"
   },
   {
     "id": "C4-08",
@@ -155,8 +155,8 @@
     "tp6": true,
     "nota_tp3": 9,
     "comentario_tp3": " No permite edición simultanea de productos; Al agregar no cierra el formulario",
-    "nota_tp6": 0,
-    "comentario_tp6": ""
+    "nota_tp6": 7,
+    "comentario_tp6": "Son iguales #09, #10, #14"
   },
   {
     "id": "C4-10",
@@ -174,8 +174,8 @@
     "tp6": true,
     "nota_tp3": 10,
     "comentario_tp3": "",
-    "nota_tp6": 0,
-    "comentario_tp6": ""
+    "nota_tp6": 7,
+    "comentario_tp6": "Son iguales #09, #10, #14"
   },
   {
     "id": "C4-11",
@@ -229,8 +229,8 @@
     "tp6": true,
     "nota_tp3": 10,
     "comentario_tp3": "",
-    "nota_tp6": 0,
-    "comentario_tp6": ""
+    "nota_tp6": 7,
+    "comentario_tp6": "Son iguales #06, #13 (Express)"
   },
   {
     "id": "C4-14",
@@ -247,7 +247,9 @@
     "tp5": true,
     "tp6": true,
     "nota_tp3": 0,
-    "comentario_tp3": ""
+    "comentario_tp3": "",
+    "nota_tp6": 7,
+    "comentario_tp6": "Son iguales #09, #10, #14"
   },
   {
     "id": "C4-15",

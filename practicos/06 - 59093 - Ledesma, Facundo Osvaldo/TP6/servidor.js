@@ -2,7 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs'; 
+import bcrypt from 'bcryptjs';
 
 const app = express();
 const users = [];  // Lista para almacenar usuarios
@@ -17,10 +17,10 @@ app.use(express.static('public'));  // Para servir archivos estáticos
 
 app.post('/register', async (req, res) => {
     const { username, password, name, phone } = req.body;
-    
+
     // Hashear la contraseña antes de almacenarla
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    
+    const hashedPassword = await bcrypt.hash(password, saltRounds);// Verificar
+
     if (users.find(user => user.username === username)) {
         return res.status(400).json({ message: 'Usuario ya existe' });
     }
@@ -41,7 +41,7 @@ app.post('/login', (req, res) => {
         if (err || !result) {
             return res.status(401).json({ message: 'Credenciales inválidas' });
         }
-        
+
         const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
         res.cookie('token', token, { httpOnly: true });
         res.json({ message: 'Inicio de sesión exitoso', user: { username: user.username, name: user.name, phone: user.phone } });

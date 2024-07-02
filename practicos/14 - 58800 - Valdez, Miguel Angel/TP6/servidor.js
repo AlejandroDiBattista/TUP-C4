@@ -54,18 +54,19 @@ app.post('/api/registrar', (req, res) => {
 // Ruta para realizar el login
 app.post('/api/login', (req, res) => {
   const { usuario, contraseña } = req.body;
+
+
+
   const user = usuarios[usuario];
   if (user) {
-    bcrypt.compare(contraseña, user.contraseña, (err, result) => {
+    bcrypt.compare(contraseña, user.contraseña, (err, result) => { // Verificar
       if (err || !result) {
         return res.json({ exito: false });
       }
       const token = jwt.sign({ usuario }, SECRET_KEY, { expiresIn: '1h' });
       // Configurar la cookie 'token' con SameSite=None y Secure=true
       res.cookie('token', token, {
-        httpOnly: true,
-        secure: true,  // Asegúrate de que tu servidor esté configurado para HTTPS
-        sameSite: 'None'
+        httpOnly: true, secure: true, sameSite: 'None'
       });
       res.json({ exito: true, token }); // Devolver también el token en la respuesta
     });

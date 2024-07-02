@@ -21,7 +21,7 @@ app.use(express.json()); // Para leer JSONs
 app.use(express.static("public")); // Para servir archivos estáticos
 app.use(
   cors({
-    origin: "http://127.0.0.1:5500", //Si utiliza la extension Live server, fijarse en que puerto lo corre, a mi por ejemplo en el 5500
+    // origin: "http://127.0.0.1:5500", //Si utiliza la extension Live server, fijarse en que puerto lo corre, a mi por ejemplo en el 5500
     credentials: true,
   })
 );

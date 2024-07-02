@@ -39,7 +39,7 @@ const NavBar = ({ setPage, isAuthenticated, setIsAuthenticated }) => {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/logout",
+        "http://localhost:3000/logout",
         {},
         { withCredentials: true }
       );
@@ -128,7 +128,7 @@ const Login = ({ setPage, setIsAuthenticated }) => {
     try {
       setIsLoading(true);
       const response = await axios.post(
-        "http://127.0.0.1:3000/login",
+        "http://localhost:3000/login",
         { email, password },
         { withCredentials: true }
       );
@@ -201,7 +201,7 @@ const Info = ({ setPage }) => {
 
   const handleGetInfo = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:3000/info", {
+      const response = await axios.get("http://localhost:3000/info", {
         withCredentials: true,
       });
 
@@ -270,7 +270,7 @@ const SignUp = ({ setPage }) => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axios.post("http://127.0.0.1:3000/signup", {
+      const response = await axios.post("http://localhost:3000/signup", {
         firstName,
         lastName,
         email,
