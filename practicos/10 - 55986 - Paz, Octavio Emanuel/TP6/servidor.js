@@ -31,7 +31,6 @@ const verificarToken = (req, res, next) => {
   });
 };
 
-
 // Ruta para registrar
 app.post('/api/registrar', (req, res) => {
   const { usuario, contraseña } = req.body;

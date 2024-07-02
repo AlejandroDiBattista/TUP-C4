@@ -9,7 +9,7 @@
 - Tuve cambiar direccion de sitio (127.0.0.1 a localhost)
 
 ## 06 - 59093 - Ledesma, Facundo Osvaldo
-- Nota: 7
+- Nota: 9
 - Falta instalar jsonwebtoken
 - Son iguales #06, #13 (Express)
 
@@ -25,11 +25,10 @@
 
 ## 09 - 55466 - Medina, Álvaro Ignacio
 - Nota: 7
-- Son iguales #09, #10, #14
+- Son iguales #09, #14
 
 ## 10 - 55986 - Paz, Octavio Emanuel
-- Nota: 7
-- Son iguales #09, #10, #14
+- Nota: 10
 
 ## 11 - 50657 - Ramirez, Giselle Evelyn
 - Nota: 1
@@ -45,7 +44,7 @@
 
 ## 14 - 58800 - Valdez, Miguel Angel
 - Nota: 7
-- Son iguales #09, #10, #14
+- Son iguales #09, #14
 
 ## 16 - 59265 - Cavanna, Victoria
 - Nota: 10

@@ -98,7 +98,7 @@
     "tp6": true,
     "nota_tp3": 10,
     "comentario_tp3": " Muy bien el uso de componentes y la estructura del proyecto.",
-    "nota_tp6": 7,
+    "nota_tp6": 9,
     "comentario_tp6": "Falta instalar jsonwebtoken;Son iguales #06, #13 (Express)"
   },
   {
@@ -156,7 +156,7 @@
     "nota_tp3": 9,
     "comentario_tp3": " No permite edición simultanea de productos; Al agregar no cierra el formulario",
     "nota_tp6": 7,
-    "comentario_tp6": "Son iguales #09, #10, #14"
+    "comentario_tp6": "Son iguales #09, #14"
   },
   {
     "id": "C4-10",
@@ -174,8 +174,8 @@
     "tp6": true,
     "nota_tp3": 10,
     "comentario_tp3": "",
-    "nota_tp6": 7,
-    "comentario_tp6": "Son iguales #09, #10, #14"
+    "nota_tp6": 10,
+    "comentario_tp6": ""
   },
   {
     "id": "C4-11",
@@ -251,7 +251,7 @@
     "nota_tp3": 10,
     "comentario_tp3": "",
     "nota_tp6": 7,
-    "comentario_tp6": "Son iguales #09, #10, #14"
+    "comentario_tp6": "Son iguales #09, #14"
   },
   {
     "id": "C4-15",
