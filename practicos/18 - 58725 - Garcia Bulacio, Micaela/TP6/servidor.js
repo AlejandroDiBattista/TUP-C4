@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 
 const app = express();
-const PORT = 5502;
+const PORT = 3000;
 
 app.use(cors());
 app.use(morgan('dev'));

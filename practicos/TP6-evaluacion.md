@@ -18,7 +18,10 @@
 - Falta instalar dotenv
 
 ## 08 - 59097 - Martin Ibarra, Patricio
-- Nota: 0
+- Nota: 8
+- No funciona
+- Importa de carpeta inexistente (model en lugar de controller)
+- Usa variable 'usuario' en lugar de 'Usuario'
 
 ## 09 - 55466 - Medina, Álvaro Ignacio
 - Nota: 7
@@ -29,10 +32,12 @@
 - Son iguales #09, #10, #14
 
 ## 11 - 50657 - Ramirez, Giselle Evelyn
-- Nota: 0
+- Nota: 1
+- No hay nada
 
 ## 12 - 59690 - Rios, Yanina Gisele
-- Nota: 0
+- Nota: 10
+- No esta instalado Express-session
 
 ## 13 - 58798 - Salazar, Santiago
 - Nota: 7
@@ -43,10 +48,14 @@
 - Son iguales #09, #10, #14
 
 ## 16 - 59265 - Cavanna, Victoria
-- Nota: 0
+- Nota: 10
+- Perfecto
+- Falta instalar jsonwebtoken y bcrytjs
 
 ## 17 - 59417 - Gómez Iturre, Joaquín
-- Nota: 0
+- Nota: 10
+- Diseño simple pero funciona
 
 ## 18 - 58725 - Garcia Bulacio, Micaela
-- Nota: 0
+- Nota: 9
+- Muestra formulario registrar y login en una misma pagina

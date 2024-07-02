@@ -29,7 +29,9 @@
 - Nota: 10
 
 ## 11 - 50657 - Ramirez, Giselle Evelyn
-- Nota: 0
+- Nota: 8
+- No edita en el lugar
+- No incrementa el producto
 
 ## 12 - 59690 - Rios, Yanina Gisele
 - Nota: 10
@@ -38,7 +40,7 @@
 - Nota: 10
 
 ## 14 - 58800 - Valdez, Miguel Angel
-- Nota: 0
+- Nota: 10
 
 ## 16 - 59265 - Cavanna, Victoria
 - Nota: 10

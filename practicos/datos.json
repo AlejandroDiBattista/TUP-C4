@@ -134,8 +134,8 @@
     "tp4": true,
     "tp5": true,
     "tp6": true,
-    "nota_tp6": 0,
-    "comentario_tp6": "",
+    "nota_tp6": 8,
+    "comentario_tp6": "No funciona;Importa de carpeta inexistente (model en lugar de controller);Usa variable 'usuario' en lugar de 'Usuario'",
     "nota_tp3": 3,
     "comentario_tp3": " No esta implementada ninguna funcionalidad"
   },
@@ -189,10 +189,12 @@
     "tp2": true,
     "tp3": true,
     "tp4": true,
-    "tp5": false,
+    "tp5": true,
     "tp6": true,
-    "nota_tp6": 0,
-    "comentario_tp6": ""
+    "nota_tp6": 1,
+    "comentario_tp6": "No hay nada",
+    "nota_tp3": 8,
+    "comentario_tp3": "No edita en el lugar;No incrementa el producto"
   },
   {
     "id": "C4-12",
@@ -208,8 +210,8 @@
     "tp4": true,
     "tp5": true,
     "tp6": true,
-    "nota_tp6": 0,
-    "comentario_tp6": "",
+    "nota_tp6": 10,
+    "comentario_tp6": "No esta instalado Express-session",
     "nota_tp3": 10,
     "comentario_tp3": ""
   },
@@ -246,7 +248,7 @@
     "tp4": false,
     "tp5": true,
     "tp6": true,
-    "nota_tp3": 0,
+    "nota_tp3": 10,
     "comentario_tp3": "",
     "nota_tp6": 7,
     "comentario_tp6": "Son iguales #09, #10, #14"
@@ -282,8 +284,8 @@
     "tp6": true,
     "nota_tp3": 10,
     "comentario_tp3": " Diferencias minima en el diseño",
-    "nota_tp6": 0,
-    "comentario_tp6": ""
+    "nota_tp6": 10,
+    "comentario_tp6": "Perfecto;Falta instalar jsonwebtoken y bcrytjs"
   },
   {
     "id": "C4-17",
@@ -299,8 +301,8 @@
     "tp4": true,
     "tp5": true,
     "tp6": true,
-    "nota_tp6": 0,
-    "comentario_tp6": "",
+    "nota_tp6": 10,
+    "comentario_tp6": "Diseño simple pero funciona",
     "nota_tp3": 9,
     "comentario_tp3": " Diferencias en el diseño"
   },
@@ -320,7 +322,7 @@
     "tp6": true,
     "nota_tp3": 8,
     "comentario_tp3": " La alta funciona solo algunas veces; Agrega el ID antes de agregar el producto",
-    "nota_tp6": 0,
-    "comentario_tp6": ""
+    "nota_tp6": 9,
+    "comentario_tp6": "Muestra formulario registrar y login en una misma pagina"
   }
 ]

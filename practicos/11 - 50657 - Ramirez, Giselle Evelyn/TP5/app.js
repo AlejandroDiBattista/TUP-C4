@@ -18,10 +18,12 @@ let datos = [
     { id: 10, nombre: 'Ricardo', apellido: 'Nuñez', edad: 41, borrado: true, actualizado: Date.now() },
 ];
 
+
 app.get('/personas', (req, res) => {
     const noBorrados = datos.filter(persona => !persona.borrado);
     res.status(200).json(noBorrados);
 });
+
 
 app.put('/personas/:id', (req, res) => {
     const id = parseInt(req.params.id, 10);
