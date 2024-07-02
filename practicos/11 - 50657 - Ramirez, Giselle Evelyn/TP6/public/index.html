@@ -1,54 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
-    <script src="https://unpkg.com/@mui/material@latest/umd/material-ui.development.js"></script>
-    <link rel="stylesheet" href="estilo.css" />
-    <script type="text/babel" src="main.jsx"></script>
-    <title>TP5</title>
-  </head>
 
-  <body>
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React App</title>
+  <!-- React and ReactDOM -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <!-- Babel standalone for in-browser transpilation -->
+  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+
+</head>
+
+<body>
     <div id="root"></div>
+
     <script type="text/babel">
-      const { useState, useEffect } = React;
-      const {
-        Button,
-        TextField,
-        Typography,
-        Container,
-        Box,
-        Card,
-        CardContent,
-      } = MaterialUI;
+        const { useState, useEffect } = React; 
+        const { Button,TextField, Typography, Conatiner, Box, Card, CardContent } = MaterialUI;
 
-      function App() {
-        return (
-          <Router>
-            <Container>
-              <nav>
-                <Link to="/">Home</Link>
-                <Link to="/register">Register</Link>
-                <Link to="/login">Login</Link>
-              </nav>
-              <Switch>
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
-                <Route path="/info" component={Info} />
-                <Route path="/" exact>
-                  <h1>Welcome to TP5</h1>
-                </Route>
-              </Switch>
-            </Container>
-          </Router>
-        );
-      }
 
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(<App />);
+
+        const root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<App />);
     </script>
-  </body>
+</body>
+
 </html>

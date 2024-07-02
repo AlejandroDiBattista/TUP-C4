@@ -1,0 +1,24 @@
+{
+  "name": "tp6",
+  "version": "1.0.0",
+  "main": "servidor.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node servidor.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/node": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@material-ui/core": "^4.12.4",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "react-router-dom": "^6.24.0"
+  }
+}
