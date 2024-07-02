@@ -1,340 +1,352 @@
-
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Enlaces a React, ReactDOM y Babel -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <!-- Iconos FontAwesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-  <title>Control de Inventario</title>
-  <style>
-    /* Estilos CSS */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
-    }
-
-    #root {
-      max-width: 1280px;
-      margin: 20px auto;
-    }
-
-    .flex {
-      display: flex;
-    }
-
-    .flex-col {
-      flex-direction: column;
-    }
-
-    .flex-row {
-      flex-direction: row;
-    }
-
-    .flex-center {
-      justify-content: center;
-      align-items: center;
-    }
-
-    .text-ellipsis {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .w-full {
-      width: 100%;
-    }
-
-    h1 {
-      font-size: 22px;
-      margin-right: 10px;
-    }
-
-    .card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px;
-      margin-bottom: 20px;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .quantity {
-      font-size: 32px;
-      color: blue;
-      margin: 0px 20px 0px 15px;
-      flex-shrink: 0;
-      max-width: 30%;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .details {
-      flex-grow: 1;
-      min-width: 0;
-    }
-
-    .name {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-
-    .code {
-      color: #555;
-    }
-
-    .edit-button,
-    .delete-button,
-    .add-button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 5px;
-      margin: 2px 0;
-    }
-
-    .edit-button i,
-    .delete-button i,
-    .add-button i {
-      font-size: 20px;
-      color: #000;
-      cursor: pointer;
-    }
-
-    .confirm-button,
-    .cancel-button {
-      margin-bottom: 8px;
-      background-color: transparent;
-      padding: 4px;
-      border: 1px solid #000;
-      border-radius: 8px;
-      box-sizing: border-box;
-      outline: none;
-      cursor: pointer;
-    }
-
-    input {
-      margin-bottom: 5px;
-      padding: 4px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-sizing: border-box;
-      outline: none;
-      width: 90%;
-    }
-
-    input:last-child{
-      margin-bottom: 0px;
-    }
-    
-    input:focus {
-      border-color: #aaa;
-    }
-
-    @media screen and (max-width: 768px) {
-      .card {
-        max-width: 80%;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <title>Inventario: 50694</title>
+    <style>
+      body {
+        font-family: 'Helvetica Neue', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #e0e0e0;
       }
-    }
-  </style>
-</head>
-<body>
-  <div id="root"></div>
 
-  <script type="text/babel">
-    const { createRoot } = ReactDOM;
-    const { useState, useEffect } = React;
+      #app-root {
+        max-width: 1200px;
+        margin: 30px auto;
+      }
 
-    const App = () => (
-      <main className="flex flex-center w-full">
-        <InventoryManager />
-      </main>
-    );
+      .flex {
+        display: flex;
+      }
 
-    const InventoryManager = () => {
-      const [products, setProducts] = useState(() => {
-        const storedProducts = localStorage.getItem("products");
-        return storedProducts ? JSON.parse(storedProducts) : [{ id: 1, name: "7up", code: "7799876543210", quantity: "31" }];
-      });
-      const [editingProductId, setEditingProductId] = useState(null);
-      const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+      .column {
+        flex-direction: column;
+      }
 
-      useEffect(() => {
-        localStorage.setItem("products", JSON.stringify(products));
-      }, [products]);
+      .row {
+        flex-direction: row;
+      }
 
-      const addProduct = () => {
-        const newId = products.length ? Math.max(...products.map(p => p.id)) + 1 : 1;
-        setProducts([...products, { id: newId, name: "", code: "", quantity: "1" }]);
-        setEditingProductId(newId);
-      };
+      .center {
+        justify-content: center;
+        align-items: center;
+      }
 
-      const saveProduct = (updatedProduct) => {
-        setProducts(products.map(p => (p.id === updatedProduct.id ? updatedProduct : p)));
-        setEditingProductId(null);
-      };
+      .ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-      const cancelEdit = (productId) => {
-        const product = products.find(p => p.id === productId);
-        if (!product.name && !product.code && product.quantity === "1") {
-          setProducts(products.filter(p => p.id !== productId));
+      .full-width {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-right: 15px;
+      }
+
+      .product-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        margin-bottom: 25px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 420px;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .pointer {
+        cursor: pointer;
+      }
+
+      .quantity-display {
+        font-size: 30px;
+        color: rgba(1, 25, 243, 0.945);
+        margin: 0px 15px 0px 20px;
+        flex-shrink: 0;
+        max-width: 30%;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .details-section {
+        flex-grow: 1;
+        min-width: 0;
+      }
+
+      .product-name {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .product-code {
+        color: #666;
+      }
+
+      .button-edit,
+      .button-delete,
+      .button-add {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 7px;
+        margin: 3px 0;
+      }
+
+      .button-edit i,
+      .button-delete i,
+      .button-add i {
+        font-size: 22px;
+        color: #333;
+        cursor: pointer;
+      }
+
+      .button-confirm,
+      .button-cancel {
+        margin-bottom: 10px;
+        background-color: transparent;
+        padding: 6px;
+        border: 1px solid #333;
+        border-radius: 10px;
+        box-sizing: border-box;
+        outline: none;
+        cursor: pointer;
+      }
+
+      input {
+        margin-bottom: 7px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-sizing: border-box;
+        outline: none;
+        width: 90%;
+      }
+
+      input:last-child{
+        margin-bottom: 0px;
+      }
+      
+      input:focus {
+        border-color: #888;
+      }
+
+      @media screen and (max-width: 768px) {
+        .product-card {
+          max-width: 85%;
         }
-        setEditingProductId(null);
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="app-root"></div>
+
+    <script type="text/babel">
+      const { createRoot } = ReactDOM;
+      const { useState } = React;
+
+      const MainApp = () => {
+        return (
+          <main className="flex center full-width">
+            <Inventory />
+          </main>
+        );
       };
 
-      const deleteProduct = (productId) => {
-        setDeleteConfirmation(productId);
-      };
+      const Inventory = () => {
+        const [editingProductIds, setEditingProductIds] = useState([]);
+        const [products, setProducts] = useState([
+          { id: 1, name: "7up", code: "7799876543210", quantity: 31 },
+        ]);
 
-      const confirmDelete = () => {
-        setProducts(products.filter(p => p.id !== deleteConfirmation));
-        setDeleteConfirmation(null);
-      };
+        const addProduct = () => {
+          const id = products.length > 0
+              ? Math.max(...products.map((product) => product.id)) + 1
+              : 1;
 
-      const cancelDelete = () => {
-        setDeleteConfirmation(null);
-      };
+          const newProduct = {
+            id,
+            name: "",
+            code: "",
+            quantity: 0,
+          };
 
-      const incrementQuantity = (productId) => {
-        setProducts(products.map(p => 
-          p.id === productId ? { ...p, quantity: Math.min(parseInt(p.quantity) + 1, 100).toString() } : p
-        ));
-      };
+          setProducts([...products, newProduct]);
+          setEditingProductIds([...editingProductIds, id]);
+        };
 
-      const sortedProducts = [...products].sort((a, b) => a.name.localeCompare(b.name));
+        const editProduct = (e, id) => {
+          e.stopPropagation();
+          setEditingProductIds([...editingProductIds, id]);
+        };
 
-      return (
-        <section className="flex flex-col flex-center w-full">
-          <div className="flex flex-row flex-center">
-            <h1>Control Depósito</h1>
-            <button className="add-button" onClick={addProduct}>
-              <i className="fa-regular fa-square-plus" />
-            </button>
-          </div>
-          {sortedProducts.map(product => (
-            <ProductCard
-              key={product.id}
-              product={product
+        const deleteProduct = (e, id) => {
+          e.stopPropagation();
+          setProducts(products.filter((product) => product.id !== id));
+        };
 
-}
-              isEditing={editingProductId === product.id}
-              onEdit={() => setEditingProductId(product.id)}
-              onDelete={() => deleteProduct(product.id)}
-              onSave={saveProduct}
-              onCancel={() => cancelEdit(product.id)}
-              onIncrement={() => incrementQuantity(product.id)}
-            />
-          ))}
-          {deleteConfirmation && (
-            <div className="delete-confirmation">
-              <p>¿Estás seguro de que deseas eliminar este producto?</p>
-              <button className="confirm-button" onClick={confirmDelete}>Sí</button>
-              <button className="cancel-button" onClick={cancelDelete}>No</button>
+        const saveProduct = (product) => {
+          setProducts(products.map((p) => (p.id === product.id ? product : p)));
+          setEditingProductIds(editingProductIds.filter((productId) => productId !== product.id));
+        };
+
+        const cancelEdit = (id) => {
+          const existingProduct = products.find((prod) => prod.id === id);
+
+          if (
+            existingProduct &&
+            existingProduct.name === "" &&
+            existingProduct.code === "" &&
+            existingProduct.quantity === 0
+          ) {
+            setProducts(products.filter((product) => product.id !== id));
+          }
+
+          setEditingProductIds(editingProductIds.filter((productId) => productId !== id));
+        };
+
+        const incrementQuantity = (productId) => {
+          setProducts(products.map((p) => p.id === productId ? { ...p, quantity: p.quantity + 1 } : p));
+        };
+
+        products.sort((a, b) => a.name.localeCompare(b.name));
+
+        return (
+          <section className="flex column center full-width">
+            <div className="flex row center">
+              <h1>Inventario de Productos</h1>
+              <button className="button-add" onClick={addProduct}>
+                <i className="fa-regular fa-square-plus" />
+              </button>
             </div>
-          )}
-        </section>
-      );
-    };
 
-    const ProductForm = ({ product, onSave, onCancel, isNameValid, isCodeValid }) => {
-      const [name, setName] = useState(product.name);
-      const [code, setCode] = useState(product.code);
-      const [quantity, setQuantity] = useState(product.quantity);
-
-      const handleSubmit = (e) => {
-        e.preventDefault();
-        onSave({ ...product, name, code, quantity });
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                isEditing={editingProductIds.includes(product.id)}
+                editProduct={(e) => editProduct(e, product.id)}
+                deleteProduct={(e) => deleteProduct(e, product.id)}
+                saveProduct={saveProduct}
+                cancelEdit={() => cancelEdit(product.id)}
+                incrementQuantity={() => incrementQuantity(product.id)}
+              />
+            ))}
+          </section>
+        );
       };
 
-      return (
-        <form onSubmit={handleSubmit} className="card">
-          <div className="flex flex-col w-full">
-            <input
-              type="text"
-              placeholder="Nombre"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              maxLength={30}
-              className={!isNameValid ? 'error' : ''}
-            />
-            <input
-              type="text"
-              minLength={13}
-              maxLength={13}
-              placeholder="Código EAN (13 dígitos)"
-              value={code}
-              onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))}
-              required
-              className={!isCodeValid ? 'error' : ''}
-            />
-            <input
-              type="number"
-              min={1}
-              max={100}
-              placeholder="Stock"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <button className="confirm-button" type="submit">
-              Aceptar
-            </button>
-            <button className="cancel-button" type="button" onClick={onCancel}>
-              Cancelar
-            </button>
-          </div>
-        </form>
-      );
-    };
+      const ProductForm = ({ product, saveProduct, cancelEdit }) => {
+        const [name, setName] = useState(product.name);
+        const [code, setCode] = useState(product.code);
+        const [quantity, setQuantity] = useState(product.quantity);
+        const isSubmitDisabled = name?.trim().length === 0 || code?.trim().length < 13 || quantity > 100;
 
-    const ProductCard = ({ product, isEditing, onEdit, onDelete, onSave, onCancel, onIncrement }) => (
-      isEditing ? (
-        <ProductForm
-          product={product}
-          onSave={onSave}
-          onCancel={onCancel}
-          isNameValid={product.name.trim()}
-          isCodeValid={/^\d{13}$/.test(product.code)}
-        />
-      ) : (
-        <article className="card" onClick={() => onIncrement(product.id)}>
-          <div className="quantity text-ellipsis">{product.quantity}</div>
-          <div className="details">
-            <div className="name text-ellipsis">{product.name}</div>
-            <div className="code text-ellipsis">{product.code}</div>
-          </div>
-          <div className="flex flex-col flex-center">
-            <button className="edit-button" onClick={(e) => { e.stopPropagation(); onEdit(); }}>
-              <i className="fa-regular fa-pen-to-square"></i>
-            </button>
-            <button className="delete-button" onClick={(e) => { e.stopPropagation(); onDelete(); }}>
-              <i className="fa-regular fa-trash-can"></i>
-            </button>
-          </div>
-        </article>
-      )
-    );
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          if (quantity <= 100) {
+            saveProduct({ ...product, name, code, quantity });
+          }
+        };
 
-    const root = createRoot(document.getElementById("root"));
-    root.render(<App />);
-  </script>
-</body>
+        const handleCodeChange = (e) => {
+          const value = e.target.value.replace(/\D/g, "");
+          setCode(value);
+        };
+
+        return (
+          <form onSubmit={handleSubmit} className="product-card">
+            <div className="flex column full-width">
+              <input
+                type="text"
+                name="name"
+                placeholder="Nombre"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <input
+                type="text"
+                minLength={13}
+                maxLength={13}
+                name="code"
+                placeholder="Codigo EAN (13 digitos)"
+                value={code}
+                onChange={handleCodeChange}
+                required
+              />
+              <input
+                type="number"
+                name="quantity"
+                placeholder="Cantidad"
+                min={0}
+                max={100}
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+                required
+              />
+            </div>
+            <div className="flex column">
+              <button
+                className="button-confirm"
+                type="submit"
+                disabled={isSubmitDisabled}
+              >
+                Guardar
+              </button>
+              <button className="button-cancel" onClick={cancelEdit}>
+                Cancelar
+              </button>
+            </div>
+          </form>
+        );
+      };
+
+      const ProductCard = ({ product, isEditing, editProduct, deleteProduct, saveProduct, cancelEdit, incrementQuantity }) => {
+        const { quantity, name, code } = product;
+        return isEditing ? (
+          <ProductForm
+            product={product}
+            saveProduct={saveProduct}
+            cancelEdit={cancelEdit}
+          />
+        ) : (
+          <article className="product-card pointer" onClick={incrementQuantity}>
+            <div className="quantity-display ellipsis">{quantity}</div>
+            <div className="details-section">
+              <div className="product-name ellipsis">{name}</div>
+              <div className="product-code ellipsis">{code}</div>
+            </div>
+            <div className="flex column center">
+              <button className="button-edit" onClick={editProduct}>
+                <i className="fa-regular fa-pen-to-square"></i>
+              </button>
+              <button className="button-delete" onClick={deleteProduct}>
+                <i className="fa-regular fa-trash-can"></i>
+              </button>
+            </div>
+          </article>
+        );
+      };
+
+      const root = createRoot(document.getElementById("app-root"));
+      root.render(<MainApp />);
+    </script>
+  </body>
 </html>
-
