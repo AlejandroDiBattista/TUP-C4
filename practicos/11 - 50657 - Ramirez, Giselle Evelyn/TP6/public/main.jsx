@@ -1,145 +1,154 @@
-import React, { useState, useEffect } from "react";
-import {  Button, TextField, Typography, Container } from "@material-ui/core";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+const { useState } = React;
+const { Button, TextField, Container, Typography, Box, CssBaseline } = MaterialUI;
 
-function Register() {
-const [username, setUsername] = useState("");
-const [password, setPassword] = useState("");
+function App() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [info, setInfo] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleRegister = async () => {
     try {
-      const response = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await response.text();
-      alert(data);
+      await axios.post('/register', { username, password });
+      alert('User registered successfully');
     } catch (error) {
-      console.error(error);
+      alert('Error registering user');
     }
-   };
-   return (
-   <Container>
-       <Typography variant="h4">Register</Typography>
-       <form onSubmit={handleSubmit}>
-         <TextField
-           label="Username"
-         value={username}
-        onChange={(e) => setUsername(e.target.value)}
-         fullWidth
-          margin="normal"
-         />
-         <TextField
-           label="Password"
-           type="password"
-           value={password}
-           onChange={(e) => setPassword(e.target.value)}
-           fullWidth
-           margin="normal"
-         />
-         <Button type="submit" variant="contained" color="primary">
-           Register
-         </Button>
-       </form>
-    </Container>
-   );
-}
-
-function Login() {
-   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await response.text();
-      if (data === "Login successful") {
-        window.location.href = "/info";
-      } else {
-        alert(data);
-      }
-     } catch (error) {
-      console.error(error);
-         }
   };
 
- return (
-   <Container>
-     <Typography variant="h4">Login</Typography>
-     <form onSubmit={handleSubmit}>
-       <TextField
-         label="Username"
-         value={username}
-         onChange={(e) => setUsername(e.target.value)}
-         fullWidth
-         margin="normal"
-       />
-       <TextField
-         label="Password"
-         type="password"
-         value={password}
-         onChange={(e) => setPassword(e.target.value)}
-         fullWidth
-         margin="normal"
-       />
-       <Button type="submit" variant="contained" color="primary">
-         Login
-       </Button>
-     </form>
-   </Container>
- );
- }
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('/login', { username, password });
+      if (response.data === 'Login successful') {
+        setIsLoggedIn(true);
+        alert('Login successful');
+      } else {
+        alert('Invalid credentials');
+      }
+    } catch (error) {
+      alert('Error logging in');
+    }
+  };
 
- function Info() {
-   const [user, setUser] = useState(null);
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setInfo(null);
+    alert('Logged out successfully');
+  };
 
-   useEffect(() => {
-     const fetchUser = async () => {
-       try {
-         const response = await fetch("http://localhost:3000/info");
-         const data = await response.json();
-         setUser(data.user);
-       } catch (error) {
-         console.error(error);
-       }
-     };
-    fetchUser();
-   }, []);
-
-   if (!user) {
-     return <Typography variant="h5">Please login to see this page.</Typography>;
-   }
+  const fetchInfo = async () => {
+    try {
+      const response = await axios.get('/info');
+      setInfo(response.data.user);
+    } catch (error) {
+      alert('Error fetching info or unauthorized');
+    }
+  };
 
   return (
-    <Container>
-      <Typography variant="h4">User Information</Typography>
-      <Typography>Welcome, {user}!</Typography>
-      <Button variant="contained" color="secondary" href="/logout">
-        Logout
-      </Button>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          Gestión de Sesión
+        </Typography>
+
+        <Box component="form" onSubmit={(e) => e.preventDefault()} sx={{ mt: 1 }}>
+          <Typography component="h2" variant="h6">
+            Register
+          </Typography>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Username"
+            autoFocus
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={handleRegister}
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Register
+          </Button>
+
+          <Typography component="h2" variant="h6">
+            Login
+          </Typography>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={handleLogin}
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Login
+          </Button>
+
+          {isLoggedIn && (
+            <Box>
+              <Button
+                fullWidth
+                variant="contained"
+                color="secondary"
+                onClick={fetchInfo}
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Get Info
+              </Button>
+              {info && <Typography>Logged in as: {info}</Typography>}
+              <Button
+                fullWidth
+                variant="contained"
+                color="secondary"
+                onClick={handleLogout}
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Logout
+              </Button>
+            </Box>
+          )}
+        </Box>
+      </Box>
     </Container>
   );
- }
-
- export default function App() {
-   return (
-     <Router>
-       <Switch>
-         <Route path="/" exact component={Login} />
-         <Route path="/register" component={Register} />
-         <Route path="/info" component={Info} />
-       </Switch>
-    </Router>
-  );
 }
+
+ReactDOM.render(<App />, document.getElementById('root'));
