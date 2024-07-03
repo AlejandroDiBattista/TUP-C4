@@ -99,7 +99,7 @@
     "nota_tp3": 10,
     "comentario_tp3": " Muy bien el uso de componentes y la estructura del proyecto.",
     "nota_tp6": 9,
-    "comentario_tp6": "Falta instalar jsonwebtoken;Son iguales #06, #13 (Express)"
+    "comentario_tp6": "Falta instalar jsonwebtoken"
   },
   {
     "id": "C4-07",

@@ -11,7 +11,6 @@
 ## 06 - 59093 - Ledesma, Facundo Osvaldo
 - Nota: 9
 - Falta instalar jsonwebtoken
-- Son iguales #06, #13 (Express)
 
 ## 07 - 59200 - López, Tiago Gabriel
 - Nota: 10
