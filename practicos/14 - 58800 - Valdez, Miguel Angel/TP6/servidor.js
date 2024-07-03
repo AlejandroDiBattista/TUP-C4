@@ -1,105 +1,84 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import cors from 'cors';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 const app = express();
-const usuarios = {}; 
-const SECRET_KEY = 'hola'; 
 
-app.use(morgan('dev'));
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.static('public'));
+app.use(morgan('dev')); // Loggea cada request en consola
+app.use(cookieParser()); // Para leer cookies
+app.use(express.json()); // Para leer JSONs
+app.use(express.static('public')); // Para servir archivos estáticos
 
-// Configurando CORS
-app.use(cors({
-  origin: 'http://127.0.0.1:5500',
-  credentials: true
-}));
+let usuarios = [];
 
-// Middleware para verificar el token
-const verificarToken = (req, res, next) => {
-  const token = req.cookies.token;
-  if (!token) {
-    return res.status(401).json({ mensaje: 'No autorizado' });
-  }
+// Generar token único
+function generarToken() {
+    return Math.random().toString().substring(2);
+}
 
-  jwt.verify(token, SECRET_KEY, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ mensaje: 'Token no válido' });
+// Middleware para validar usuario
+function validarUsuario(req, res, next) {
+    let token = req.cookies.token;
+    let usuario = usuarios.find(u => u.token === token);
+
+    if (usuario) {
+        req.usuario = usuario;
+        next();
+    } else {
+        res.status(401).send('Acceso no autorizado');
     }
-    req.usuario = decoded.usuario; 
-    next();
-  });
-};
+}
 
-// Ruta para registrar un usuario
-app.post('/api/registrar', (req, res) => {
-  const { usuario, contraseña } = req.body;
-  if (usuarios[usuario]) {
-    return res.json({ exito: false, mensaje: 'El usuario ya existe' });
-  }
-  bcrypt.hash(contraseña, 10, (err, hashedPassword) => {
-    if (err) {
-      return res.status(500).json({ exito: false, mensaje: 'Error interno' });
+// Ruta de registro
+app.post('/registrar', (req, res) => {
+    let { user, password } = req.body;
+
+    if (!user || !password) {
+        return res.status(400).send('Faltan datos. Por favor, completa todos los campos');
     }
-    usuarios[usuario] = { contraseña: hashedPassword };
-    res.json({ exito: true });
-  });
+
+    let existe = usuarios.find(u => u.user === user);
+    if (existe) {
+        return res.status(402).send("El usuario ya existe. Por favor, elige otro nombre");
+    }
+
+    usuarios.push({ user, password });
+    res.send('¡Registro exitoso! Ahora puedes iniciar sesión');
 });
 
-// Ruta para realizar el login
-app.post('/api/login', (req, res) => {
-  const { usuario, contraseña } = req.body;
+// Ruta de login
+app.post('/login', (req, res) => {
+    let { user, password } = req.body;
 
+    if (!user || !password) {
+        return res.status(400).send('Faltan datos. Por favor, completa todos los campos');
+    }
 
+    let usuario = usuarios.find(u => u.user === user && u.password === password);
+    if (usuario) {
+        let token = generarToken();
+        usuario.token = token;
+        res.cookie('token', token, { httpOnly: true });
+        return res.send("¡Inicio de sesión exitoso!");
+    }
 
-  const user = usuarios[usuario];
-  if (user) {
-    bcrypt.compare(contraseña, user.contraseña, (err, result) => { // Verificar
-      if (err || !result) {
-        return res.json({ exito: false });
-      }
-      const token = jwt.sign({ usuario }, SECRET_KEY, { expiresIn: '1h' });
-      // Configurar la cookie 'token' con SameSite=None y Secure=true
-      res.cookie('token', token, {
-        httpOnly: true, secure: true, sameSite: 'None'
-      });
-      res.json({ exito: true, token }); // Devolver también el token en la respuesta
-    });
-  } else {
-    res.json({ exito: false });
-  }
+    res.status(401).send('Usuario o contraseña incorrectos. Inténtalo de nuevo');
 });
 
-// Ruta para realizar el logout
-app.post('/api/logout', (req, res) => {
-  res.clearCookie('token', {
-    secure: true,  // Asegúrate de que tu servidor esté configurado para HTTPS
-    sameSite: 'None'
-  });
-  res.json({ exito: true });
+// Ruta de logout
+app.put('/logout', validarUsuario, (req, res) => {
+    let usuario = req.usuario;
+    delete usuario.token;
+    res.send('¡Cierre de sesión exitoso!');
 });
 
-// Ruta para obtener información sensible si el usuario está logueado
-app.get('/api/info', verificarToken, (req, res) => {
-  const usuario = req.usuario; 
-  if (usuarios[usuario]) {
-    res.json({ info: `Esta es información sensible para ${usuario}`, contraseña: usuarios[usuario].contraseña });
-  } else {
-    res.status(404).json({ info: 'Usuario no encontrado' });
-  }
+// Ruta para obtener información sensible
+app.get('/info', validarUsuario, (req, res) => {
+    const { user, password } = req.usuario;
+    res.json({ user, password });
 });
 
-// Ruta para obtener la lista de usuarios (solo para propósitos de demostración)
-app.get('/api/usuarios', (req, res) => {
-  res.json(usuarios);
-});
-
-// Iniciar el servidor en el puerto 3000
+// Iniciar el servidor
 app.listen(3000, () => {
-  console.log('Servidor iniciado en http://localhost:3000');
+    console.log('Servidor iniciado en http://localhost:3000');
 });
