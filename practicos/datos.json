@@ -12,7 +12,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": true,
-    "tp6": false
+    "tp6": false,
+    "estado": "libre"
   },
   {
     "id": "C4-02",
@@ -31,7 +32,8 @@
     "nota_tp3": 10,
     "comentario_tp3": " Pequeñas diferencias con el diseño original, pero cumple con los requerimientos.",
     "nota_tp6": 10,
-    "comentario_tp6": "Falta instalar jsonwebtoken"
+    "comentario_tp6": "Falta instalar jsonwebtoken",
+    "estado": "promocionado"
   },
   {
     "id": "C4-03",
@@ -50,7 +52,8 @@
     "nota_tp3": 10,
     "comentario_tp3": " Perfecto! Solo nombres en ingles, pero no es un problema.",
     "nota_tp6": 10,
-    "comentario_tp6": "Tuve cambiar direccion de sitio (127.0.0.1 a localhost)"
+    "comentario_tp6": "Tuve cambiar direccion de sitio (127.0.0.1 a localhost)",
+    "estado": "promocionado"
   },
   {
     "id": "C4-04",
@@ -65,7 +68,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "tp6": false
+    "tp6": false,
+    "estado": "libre"
   },
   {
     "id": "C4-05",
@@ -80,7 +84,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "tp6": false
+    "tp6": false,
+    "estado": "libre"
   },
   {
     "id": "C4-06",
@@ -99,7 +104,8 @@
     "nota_tp3": 10,
     "comentario_tp3": " Muy bien el uso de componentes y la estructura del proyecto.",
     "nota_tp6": 9,
-    "comentario_tp6": "Falta instalar jsonwebtoken"
+    "comentario_tp6": "Falta instalar jsonwebtoken",
+    "estado": "promocionado"
   },
   {
     "id": "C4-07",
@@ -118,7 +124,8 @@
     "nota_tp3": 9,
     "comentario_tp3": " No realiza la edicion en el lugar de mas de un producto",
     "nota_tp6": 10,
-    "comentario_tp6": "Falta instalar dotenv"
+    "comentario_tp6": "Falta instalar dotenv",
+    "estado": "promocionado"
   },
   {
     "id": "C4-08",
@@ -137,7 +144,8 @@
     "nota_tp6": 8,
     "comentario_tp6": "No funciona;Importa de carpeta inexistente (model en lugar de controller);Usa variable 'usuario' en lugar de 'Usuario'",
     "nota_tp3": 3,
-    "comentario_tp3": " No esta implementada ninguna funcionalidad"
+    "comentario_tp3": " No esta implementada ninguna funcionalidad",
+    "estado": "regular"
   },
   {
     "id": "C4-09",
@@ -156,7 +164,8 @@
     "nota_tp3": 9,
     "comentario_tp3": " No permite edición simultanea de productos; Al agregar no cierra el formulario",
     "nota_tp6": 7,
-    "comentario_tp6": "Son iguales #09, #14"
+    "comentario_tp6": "Son iguales #09, #14",
+    "estado": "regular"
   },
   {
     "id": "C4-10",
@@ -175,7 +184,8 @@
     "nota_tp3": 10,
     "comentario_tp3": "",
     "nota_tp6": 10,
-    "comentario_tp6": ""
+    "comentario_tp6": "",
+    "estado": "promocionado"
   },
   {
     "id": "C4-11",
@@ -194,7 +204,8 @@
     "nota_tp6": 1,
     "comentario_tp6": "No hay nada",
     "nota_tp3": 8,
-    "comentario_tp3": "No edita en el lugar;No incrementa el producto"
+    "comentario_tp3": "No edita en el lugar;No incrementa el producto",
+    "estado": "regular"
   },
   {
     "id": "C4-12",
@@ -213,7 +224,8 @@
     "nota_tp6": 10,
     "comentario_tp6": "No esta instalado Express-session",
     "nota_tp3": 10,
-    "comentario_tp3": ""
+    "comentario_tp3": "",
+    "estado": "promocionado"
   },
   {
     "id": "C4-13",
@@ -232,7 +244,8 @@
     "nota_tp3": 10,
     "comentario_tp3": "",
     "nota_tp6": 7,
-    "comentario_tp6": "Son iguales #06, #13 (Express)"
+    "comentario_tp6": "Son iguales #06, #13 (Express)",
+    "estado": "regular"
   },
   {
     "id": "C4-14",
@@ -251,7 +264,8 @@
     "nota_tp3": 10,
     "comentario_tp3": "",
     "nota_tp6": 7,
-    "comentario_tp6": "Son iguales #09, #14"
+    "comentario_tp6": "Son iguales #09, #14",
+    "estado": "regular"
   },
   {
     "id": "C4-15",
@@ -266,7 +280,8 @@
     "tp3": false,
     "tp4": false,
     "tp5": false,
-    "tp6": false
+    "tp6": false,
+    "estado": "libre"
   },
   {
     "id": "C4-16",
@@ -285,7 +300,8 @@
     "nota_tp3": 10,
     "comentario_tp3": " Diferencias minima en el diseño",
     "nota_tp6": 10,
-    "comentario_tp6": "Perfecto;Falta instalar jsonwebtoken y bcrytjs"
+    "comentario_tp6": "Perfecto;Falta instalar jsonwebtoken y bcrytjs",
+    "estado": "promocionado"
   },
   {
     "id": "C4-17",
@@ -304,7 +320,8 @@
     "nota_tp6": 10,
     "comentario_tp6": "Diseño simple pero funciona",
     "nota_tp3": 9,
-    "comentario_tp3": " Diferencias en el diseño"
+    "comentario_tp3": " Diferencias en el diseño",
+    "estado": "promocionado"
   },
   {
     "id": "C4-18",
@@ -323,6 +340,7 @@
     "nota_tp3": 8,
     "comentario_tp3": " La alta funciona solo algunas veces; Agrega el ID antes de agregar el producto",
     "nota_tp6": 9,
-    "comentario_tp6": "Muestra formulario registrar y login en una misma pagina"
+    "comentario_tp6": "Muestra formulario registrar y login en una misma pagina",
+    "estado": "regular"
   }
 ]
