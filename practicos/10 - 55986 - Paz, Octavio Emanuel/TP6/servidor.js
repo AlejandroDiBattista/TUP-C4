@@ -31,7 +31,6 @@ const verificarToken = (req, res, next) => {
   });
 };
 
-
 // Ruta para registrar
 app.post('/api/registrar', (req, res) => {
   const { usuario, contraseña } = req.body;
@@ -50,7 +49,6 @@ app.post('/api/registrar', (req, res) => {
   });
 });
 
-
 // Ruta para login
 app.post('/api/login', (req, res) => {
   const { usuario, contraseña } = req.body;
@@ -64,7 +62,10 @@ app.post('/api/login', (req, res) => {
         return res.status(400).json({ exito: false, mensaje: 'Contraseña incorrecta' });
       }
       const token = jwt.sign({ usuario }, SECRET_KEY, { expiresIn: '1h' });
-      res.cookie('token', token, { httpOnly: true });
+
+      res.cookie('token', token, {
+        httpOnly: true
+      });
       res.json({ exito: true });
     });
   } else {

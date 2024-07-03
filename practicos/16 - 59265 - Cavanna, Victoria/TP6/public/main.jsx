@@ -20,7 +20,7 @@ const App = () => {
 const NavBar = ({ setPage, autenticado, setAutenticado }) => {
     const handleLogout = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:3000/logout", {
+            const response = await fetch("/logout", {
                 method: "POST",
                 credentials: "include",
             });
@@ -96,7 +96,7 @@ const Login = ({ setPage, setAutenticado }) => {
         e.preventDefault();
         setError("");
         try {
-            const response = await fetch("http://127.0.0.1:3000/login", {
+            const response = await fetch("/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -167,7 +167,7 @@ const Registro = ({ setPage }) => {
         e.preventDefault();
         setError("");
         try {
-            const response = await fetch("http://127.0.0.1:3000/registro", {
+            const response = await fetch("/registro", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -253,7 +253,7 @@ const Informacion = ({ setPage }) => {
 
     const handleGetInfo = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:3000/getinfo", {
+            const response = await fetch("/getinfo", {
                 credentials: 'include',
             });
 

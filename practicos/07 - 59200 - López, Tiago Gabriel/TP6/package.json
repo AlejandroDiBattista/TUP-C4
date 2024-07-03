@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec node app/index.js"
-    
   },
   "keywords": [],
   "author": "",

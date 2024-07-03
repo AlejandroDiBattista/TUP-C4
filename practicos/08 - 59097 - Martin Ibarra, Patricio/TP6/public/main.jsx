@@ -41,7 +41,6 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
     };
 
     return (
@@ -71,5 +70,5 @@ function Info() {
     );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(<App />);

@@ -1,31 +1,56 @@
-# Evaluación TP3 - C4
+# Evaluación TP3 en C4
 
 ## 02 - 55505 - Chazarreta Robles, María
-- Aprobado: 
+- Nota: 10
+-  Pequeñas diferencias con el diseño original, pero cumple con los requerimientos.
 
 ## 03 - 50694 - Ferrari, Stefano
-- Aprobado: 
+- Nota: 10
+-  Perfecto! Solo nombres en ingles, pero no es un problema.
 
 ## 06 - 59093 - Ledesma, Facundo Osvaldo
-- Aprobado: 
+- Nota: 10
+-  Muy bien el uso de componentes y la estructura del proyecto.
 
 ## 07 - 59200 - López, Tiago Gabriel
-- Aprobado: 
+- Nota: 9
+-  No realiza la edicion en el lugar de mas de un producto
+
+## 08 - 59097 - Martin Ibarra, Patricio
+- Nota: 3
+-  No esta implementada ninguna funcionalidad
 
 ## 09 - 55466 - Medina, Álvaro Ignacio
-- Aprobado: 
+- Nota: 9
+-  No permite edición simultanea de productos
+-  Al agregar no cierra el formulario
 
 ## 10 - 55986 - Paz, Octavio Emanuel
-- Aprobado: 
+- Nota: 10
+
+## 11 - 50657 - Ramirez, Giselle Evelyn
+- Nota: 8
+- No edita en el lugar
+- No incrementa el producto
+
+## 12 - 59690 - Rios, Yanina Gisele
+- Nota: 10
 
 ## 13 - 58798 - Salazar, Santiago
-- Aprobado: 
+- Nota: 10
 
 ## 14 - 58800 - Valdez, Miguel Angel
-- Aprobado: 
+- Nota: 10
 
 ## 16 - 59265 - Cavanna, Victoria
-- Aprobado: 
+- Nota: 10
+-  Diferencias minima en el diseño
+
+## 17 - 59417 - Gómez Iturre, Joaquín
+- Nota: 9
+-  Diferencias en el diseño
 
 ## 18 - 58725 - Garcia Bulacio, Micaela
-- Aprobado: 
+- Nota: 8
+-  La alta funciona solo algunas veces
+-  Agrega el ID antes de agregar el producto

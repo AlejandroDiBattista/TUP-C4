@@ -15,10 +15,7 @@ app.use(express.json());    // Para leer JSONs
 app.use(express.static('public'));  // Para servir archivos estáticos
 
 app.use(
-    cors({
-      origin: "http://127.0.0.1:5500",
-      credentials: true,
-    })
+    cors({ credentials: true,})
 );
   
 app.options("*", cors());
@@ -27,7 +24,6 @@ const hashContrasenia = async (contrasenia) => {
     const salt = await bcryptjs.genSalt(10);
     return await bcryptjs.hash(contrasenia, salt);
 };
-
 
 const compararContrasenia = async (ingresada, hashContrasenia) => {
     return await bcryptjs.compare(ingresada, hashContrasenia);

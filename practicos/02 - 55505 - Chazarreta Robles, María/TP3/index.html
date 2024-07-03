@@ -1,362 +1,451 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Enlaces a React, ReactDOM y Babel -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 
+        nota: 10
+        observacion:
+        - Pequeñas diferencias con el diseño original, pero cumple con los requerimientos.
+    -->
+    <title>Control de Depósito</title>
+    <!-- Incluir React y React DOM -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Incluir Babel para compilar JSX en JavaScript -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Iconos FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-    <title>Legajo: 50694</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <style>
-      /* reset */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f0f0f0;
-      }
-
-      #root {
-        max-width: 1280px;
-        margin: 20px auto;
-      }
-
-      .flex {
-        display: flex;
-      }
-
-      .flex-col {
-        flex-direction: column;
-      }
-
-      .flex-row {
-        flex-direction: row;
-      }
-
-      .flex-center {
-        justify-content: center;
-        align-items: center;
-      }
-
-      .text-ellipsis {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .w-full {
-        width: 100%;
-      }
-
-      h1 {
-        font-size: 22px;
-        margin-right: 10px;
-      }
-
-      .card {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px;
-        margin-bottom: 20px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        width: 100%;
-        overflow: hidden;
-        cursor: pointer; 
-
-      .quantity {
-        font-size: 32px;
-        color: blue;
-        margin: 0px 20px 0px 15px;
-        flex-shrink: 0;
-        max-width: 30%;
-        text-align: center;
-        font-weight: bold;
-      }
-
-      .details {
-        flex-grow: 1;
-        min-width: 0;
-      }
-
-      .name {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 4px;
-      }
-
-      .code {
-        color: #555;
-      }
-
-      .edit-button,
-      .delete-button,
-      .add-button {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 5px;
-        margin: 2px 0;
-      }
-
-      .edit-button i,
-      .delete-button i,
-      .add-button i {
-        font-size: 20px;
-        color: #000;
-        cursor: pointer;
-      }
-
-      .confirm-button,
-      .cancel-button {
-        margin-bottom: 8px;
-        background-color: transparent;
-        padding: 4px;
-        border: 1px solid #000;
-        border-radius: 8px;
-        box-sizing: border-box;
-        outline: none;
-        cursor: pointer;
-      }
-
-      input {
-        margin-bottom: 5px;
-        padding: 4px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-sizing: border-box;
-        outline: none;
-        width: 90%;
-      }
-
-      input:last-child{
-        margin-bottom: 0px;
-      }
-      
-      input:focus {
-        border-color: #aaa;
-      }
-
-      @media screen and (max-width: 768px) {
-        .card {
-          max-width: 80%;
+        body {
+            font-family: Arial, Helvetica, sans-serif;
         }
-      }
 
+        .form-group {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .button {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .StyleButton {
+            border: 1px solid #000;
+            padding: 3px;
+        }
+
+        .input-error {
+            border: 1px solid red;
+        }
+
+        .form-inline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            /* Alineación vertical */
+        }
+
+        .form-inline {
+            flex: 1;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .product-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            width: 320px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Sombra suave alrededor de la card */
+
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            width: 320px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Sombra suave alrededor de la card */
+
+        }
+
+        .input-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-actions {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fuenteStock {
+            font-size: 50px;
+            color: blue;
+        }
+
+        .estiloAgregar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
     <div id="root"></div>
 
     <script type="text/babel">
-      const { createRoot } = ReactDOM;
-      const { useState } = React;
+        // Componente de React para la tarjeta de Control de Depósito
+        const DepositControlCard = () => {
+            // Estado local para almacenar los productos
+            const [products, setProducts] = React.useState([
+                { productName: "coca", eanCode: 3333333333333, stock: 2 },
+            ]);
+            // Estado local para los campos del formulario
+            const [productName, setProductName] = React.useState("");
+            const [eanCode, setEanCode] = React.useState("");
+            const [stock, setStock] = React.useState("");
+            // Estado local para manejar errores de validación
+            const [inputErrors, setInputErrors] = React.useState({
+                productName: false,
+                eanCode: false,
+                stock: false,
+            });
+            // Estado local para almacenar los productos seleccionados para editar
+            const [selectedProducts, setSelectedProducts] = React.useState([]);
+            // Estado local para controlar la visualización del formulario de agregar
+            const [showForm, setShowForm] = React.useState(false);
 
-      const App = () => {
-        return (
-          <main className="flex flex-center w-full">
-            <Deposito />
-          </main>
-        );
-      };
+            // Función para manejar la edición de un producto
+            const handleEditProduct = (index) => {
+                setSelectedProducts((prevSelectedProducts) =>
+                    prevSelectedProducts.includes(index)
+                        ? prevSelectedProducts
+                        : [...prevSelectedProducts, index]
+                );
+            };
 
-      const Deposito = () => {
-        const [listaIdProductosEditando, establecerListaIdProductosEditando] = useState([]);
-        const [listaProductos, establecerListaProductos] = useState([
-          { id: 1, nombre: "7up", codigo: "7799876543210", cantidad: "31" },
-        ]);
+            // Función para manejar la cancelación de la edición de un producto
+            const handleCancelEdit = (index) => {
+                setSelectedProducts((prevSelectedProducts) =>
+                    prevSelectedProducts.filter((i) => i !== index)
+                );
+            };
 
-        const manejarAgregar = () => {
-          const id = listaProductos.length > 0
-              ? Math.max(...listaProductos.map((producto) => producto.id)) + 1
-              : 1;
+            // Función para manejar la eliminación de un producto
+            const handleDeleteProduct = (index) => {
+                const updatedProducts = [...products];
+                updatedProducts.splice(index, 1);
+                setProducts(updatedProducts);
+            };
 
-          const item = {
-            id,
-            nombre: "",
-            codigo: "",
-            cantidad: "0",
-          };
+            // Función para mostrar el formulario de agregar producto
+            const showAddForm = () => {
+                setShowForm(true);
+                setProductName("");
+                setEanCode("");
+                setStock("");
+                setInputErrors({
+                    productName: false,
+                    eanCode: false,
+                    stock: false,
+                });
+            };
 
-          establecerListaProductos([...listaProductos, item]);
-          establecerListaIdProductosEditando([...listaIdProductosEditando, id]);
+            // Función para ocultar el formulario de agregar producto
+            const hideForm = () => {
+                setShowForm(false);
+                setProductName("");
+                setEanCode("");
+                setStock("");
+                setInputErrors({
+                    productName: false,
+                    eanCode: false,
+                    stock: false,
+                });
+            };
+
+            // Función para manejar el envío del formulario
+            const handleAddProduct = () => {
+                // Validar los campos antes de agregar el producto
+                let hasError = false;
+                const errors = {
+                    productName: false,
+                    eanCode: false,
+                    stock: false,
+                };
+
+                // Validar nombre del producto (no vacío)
+                if (productName.trim() === "") {
+                    alert("Ingrese un nombre válido.");
+                    errors.productName = true;
+                    hasError = true;
+                }
+
+                // Validar código EAN (exactamente 13 dígitos numéricos)
+                if (!/^\d{13}$/.test(eanCode)) {
+                    alert("Ingrese un código EAN válido.");
+                    errors.eanCode = true;
+                    hasError = true;
+                } else if (products.some((product) => product.eanCode === eanCode)) {
+                    alert("El código EAN ingresado ya existe.");
+                    errors.eanCode = true;
+                    hasError = true;
+                }
+
+                // Validar stock (debe ser un número mayor a cero y menor o igual a 100)
+                const stockNumber = Number(stock);
+                if (isNaN(stockNumber) || stockNumber <= 0 || stockNumber > 100) {
+                    alert(
+                        "Ingrese una cantidad válida (mayor a cero y menor o igual a 100)."
+                    );
+                    errors.stock = true;
+                    hasError = true;
+                }
+
+                // Mostrar errores si los hay
+                if (hasError) {
+                    setInputErrors(errors);
+                    return;
+                }
+
+                // Crear el nuevo producto
+                const newProduct = {
+                    productName: productName,
+                    eanCode: eanCode,
+                    stock: stockNumber,
+                };
+
+                setProducts((prevProducts) => {
+                    const updatedProducts = [...prevProducts, newProduct];
+                    updatedProducts.sort((a, b) =>
+                        a.productName.localeCompare(b.productName)
+                    );
+                    return updatedProducts;
+                });
+
+                // Ocultar formulario después de agregar
+                hideForm();
+            };
+
+            // Función para manejar el envío del formulario de edición
+            const handleSaveEdit = (index, updatedProduct) => {
+                setProducts((prevProducts) => {
+                    const updatedProducts = [...prevProducts];
+                    updatedProducts[index] = updatedProduct;
+                    updatedProducts.sort((a, b) =>
+                        a.productName.localeCompare(b.productName)
+                    );
+                    return updatedProducts;
+                });
+                handleCancelEdit(index);
+            };
+
+            // Función para incrementar el stock al hacer clic en la tarjeta del producto
+            const handleIncrementStock = (index) => {
+                setProducts((prevProducts) => {
+                    const updatedProducts = [...prevProducts];
+                    updatedProducts[index].stock += 1;
+                    return updatedProducts;
+                });
+            };
+
+            return (
+                <div>
+                    <div className="estiloAgregar">
+                        <h2>Control de Depósito</h2>
+                        <button className="button" onClick={showAddForm}>
+                            <i className="fa-regular fa-square-plus" />
+                        </button>
+                    </div>
+
+                    {!showForm && <div className="button-group"></div>}
+                    {showForm && (
+                        <div className="card">
+                            <div className="form-group">
+                                <div class="input-container">
+                                    <input
+                                        placeholder="Nombre"
+                                        type="text"
+                                        id="productName"
+                                        value={productName}
+                                        onChange={(e) => setProductName(e.target.value)}
+                                        className={inputErrors.productName ? "input-error" : ""}
+                                    />
+                                    <input
+                                        placeholder="Código EAN"
+                                        type="text"
+                                        id="eanCode"
+                                        value={eanCode}
+                                        onChange={(e) => {
+                                            if (e.target.value.length <= 13) {
+                                                setEanCode(e.target.value);
+                                            }
+                                        }}
+                                        className={inputErrors.eanCode ? "input-error" : ""}
+                                    />
+                                    <input
+                                        placeholder="Stock"
+                                        type="number"
+                                        id="stock"
+                                        value={stock}
+                                        onChange={(e) => setStock(e.target.value)}
+                                        className={inputErrors.stock ? "input-error" : ""}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="button-group">
+                                <button
+                                    className="button StyleButton"
+                                    onClick={handleAddProduct}
+                                >
+                                    Agregar
+                                </button>
+                                <button className="button StyleButton" onClick={hideForm}>
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="product-list">
+                        {products.map((product, index) => (
+                            <div
+                                key={index}
+                                className="product-card"
+                                onClick={() => handleIncrementStock(index)}
+                            >
+                                {selectedProducts.includes(index) ? (
+                                    <div className="form-group">
+                                        <div class="input-container">
+                                            <input
+                                                type="text"
+                                                value={product.productName}
+                                                onChange={(e) =>
+                                                    setProducts((prevProducts) => {
+                                                        const updatedProducts = [...prevProducts];
+                                                        updatedProducts[index].productName = e.target.value;
+                                                        return updatedProducts;
+                                                    })
+                                                }
+                                            />
+                                            <input
+                                                type="text"
+                                                value={product.eanCode}
+                                                onChange={(e) => {
+                                                    if (e.target.value.length <= 13) {
+                                                        setProducts((prevProducts) => {
+                                                            const updatedProducts = [...prevProducts];
+                                                            updatedProducts[index].eanCode = e.target.value;
+                                                            return updatedProducts;
+                                                        });
+                                                    }
+                                                }}
+                                            />
+                                            <input
+                                                type="number"
+                                                value={product.stock}
+                                                onChange={(e) =>
+                                                    setProducts((prevProducts) => {
+                                                        const updatedProducts = [...prevProducts];
+                                                        updatedProducts[index].stock = e.target.value;
+                                                        return updatedProducts;
+                                                    })
+                                                }
+                                            />
+                                        </div>
+
+                                        <div className="button-group">
+                                            <button
+                                                className="button StyleButton"
+                                                onClick={() => handleSaveEdit(index, product)}
+                                            >
+                                                Aceptar
+                                            </button>
+                                            <button
+                                                className="button StyleButton"
+                                                onClick={() => handleCancelEdit(index)}
+                                            >
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <div className="fuenteStock">{product.stock}</div>
+                                        <div>
+                                            <div><h2><b>{product.productName}</b></h2></div>
+                                            <div>{product.eanCode}</div>
+                                        </div>
+
+                                        <div className="product-actions">
+                                            <button
+                                                className="button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleEditProduct(index);
+                                                }}
+                                            >
+                                                <i className="fa-regular fa-pen-to-square" />
+                                            </button>
+                                            <button
+                                                className="button"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleDeleteProduct(index);
+                                                }}
+                                            >
+                                                <i className="fa-regular fa-trash-can" />
+                                            </button>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
         };
 
-        const manejarEditar = (id) => {
-          establecerListaIdProductosEditando([...listaIdProductosEditando, id]);
-        };
-
-        const manejarEliminar = (id) => {
-          establecerListaProductos(listaProductos.filter((producto) => producto.id !== id));
-        };
-
-        const manejarGuardar = (producto) => {
-          const productoExistente = listaProductos.find((producto) => producto.id === producto.id);
-
-          if (productoExistente) {
-            establecerListaProductos(listaProductos.map((p) => (p.id === producto.id ? producto : p)));
-          } else {
-            establecerListaProductos([...listaProductos, producto]);
-          }
-
-          establecerListaIdProductosEditando(listaIdProductosEditando.filter((idProducto) => idProducto !== producto.id));
-        };
-
-        const manejarCancelar = (id) => {
-          const productoExistente = listaProductos.find((producto) => producto.id === id);
-
-          
-          if (
-            productoExistente &&
-            productoExistente.nombre === "" &&
-            productoExistente.codigo === "" &&
-            productoExistente.cantidad === "0"
-          ) {
-            establecerListaProductos(listaProductos.filter((producto) => producto.id !== id));
-          }
-
-          establecerListaIdProductosEditando(listaIdProductosEditando.filter((idProducto) => idProducto !== id));
-        };
-
-        const manejarIncrementarCantidad = (id) => {
-          const productoActualizado = listaProductos.map((producto) => {
-            if (producto.id === id) {
-              return { ...producto, cantidad: String(Number(producto.cantidad) + 1) };
-            }
-            return producto;
-          });
-
-          establecerListaProductos(productoActualizado);
-        };
-
-        listaProductos.sort((a, b) => a.nombre.localeCompare(b.nombre));
-
-        return (
-          <section className="flex flex-col flex-center w-full">
-            <div className="flex flex-row flex-center">
-              <h1>Control Depósito</h1>
-              <button className="add-button" onClick={manejarAgregar}>
-                <i className="fa-regular fa-square-plus" />
-              </button>
-            </div>
-
-            {listaProductos.map((producto) => (
-              <Tarjeta
-                key={producto.id}
-                producto={producto}
-                estaEditando={listaIdProductosEditando?.includes(producto.id)}
-                manejarEditar={() => manejarEditar(producto.id)}
-                manejarEliminar={() => manejarEliminar(producto.id)}
-                manejarGuardar={manejarGuardar}
-                manejarCancelar={() => manejarCancelar(producto.id)}
-                manejarIncrementarCantidad={() => manejarIncrementarCantidad(producto.id)}
-              />
-            ))}
-          </section>
-        );
-      };
-
-      const Formulario = ({ producto, manejarGuardar, manejarCancelar }) => {
-        const [nombre, establecerNombre] = useState(producto.nombre);
-        const [codigo, establecerCodigo] = useState(producto.codigo);
-        const [cantidad, establecerCantidad] = useState(producto.cantidad);
-        const enviarDeshabilitado = nombre?.trim().length === 0 || codigo?.trim().length < 13;
-
-        const manejarEnvio = (e) => {
-          e.preventDefault();
-          manejarGuardar({ ...producto, nombre, codigo, cantidad });
-        };
-
-        const manejarCambioCodigo = (e) => {
-          
-          const valor = e.target.value.replace(/\D/g, "");
-          establecerCodigo(valor);
-        };
-
-        return (
-          <form onSubmit={manejarEnvio} className="card">
-            <div className="flex flex-col w-full">
-              <input
-                type="text"
-                nombre="nombre"
-                placeholder="Nombre"
-                valor={nombre}
-                onChange={(e) => establecerNombre(e.target.value)}
-                requerido
-              />
-              <input
-                type="text"
-                minLength={13}
-                maxLength={13}
-                nombre="codigo"
-                placeholder="Codigo EAM (13 digitos)"
-                valor={codigo}
-                onChange={manejarCambioCodigo}
-                requerido
-              />
-              <input
-                type="number"
-                nombre="cantidad"
-                placeholder="Stock"
-                min={0}
-                valor={cantidad}
-                onChange={(e) => establecerCantidad(e.target.value)}
-                requerido
-              />
-            </div>
-            <div className="flex flex-col">
-              <button
-                className="confirm-button"
-                type="submit"
-                disabled={enviarDeshabilitado}
-              >
-                Aceptar
-              </button>
-              <button className="cancel-button" onClick={manejarCancelar}>
-                Cancelar
-              </button>
-            </div>
-          </form>
-        );
-      };
-
-      const Tarjeta = ({ producto, estaEditando, manejarEditar, manejarEliminar, manejarGuardar, manejarCancelar, manejarIncrementarCantidad }) => {
-        const { cantidad, nombre, codigo } = producto;
-        return estaEditando ? (
-          <Formulario
-            producto={producto}
-            manejarGuardar={manejarGuardar}
-            manejarCancelar={manejarCancelar}
-          />
-        ) : (
-          <article className="card" onClick={() => manejarIncrementarCantidad(producto.id)}>
-            <div className="quantity text-ellipsis">{cantidad}</div>
-            <div className="details">
-              <div className="name text-ellipsis">{nombre}</div>
-              <div className="code text-ellipsis">{codigo}</div>
-            </div>
-            <div className="flex flex-col flex-center">
-              <button className="edit-button" onClick={(e) => { e.stopPropagation(); manejarEditar(); }}>
-                <i class="fa-regular fa-pen-to-square"></i>
-              </button>
-              <button className="delete-button" onClick={(e) => { e.stopPropagation(); manejarEliminar(); }}>
-                <i class="fa-regular fa-trash-can"></i>
-              </button>
-            </div>
-          </article>
-        );
-      };
-
-      const root = createRoot(document.getElementById("root"));
-      root.render(<App />);
+        // Renderizar el componente en el DOM
+        ReactDOM.render(<DepositControlCard />, document.getElementById("root"));
     </script>
-  </body>
+</body>
+
 </html>

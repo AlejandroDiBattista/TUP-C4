@@ -3,9 +3,8 @@ import session from "express-session";
 import bodyParser from "body-parser";
 import fs from "fs";
 
-const express = require("express");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

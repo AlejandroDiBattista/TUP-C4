@@ -1,6 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import Usuario from '../models/usuario.js';
+import Usuario from './controllers/usuario.js';
 import morgan
  from 'morgan';
 const app = express();
@@ -13,7 +13,7 @@ app.use(express.static('public'));  // Para servir archivos estáticos
 // Implementar las rutas necesarias
 
 app.get("/usuarios", Usuario.obtenerUsuarios);
-app.post('/registrar', usuario.registrar);
+app.post('/registrar', Usuario.registrar);
 app.post('/login', Usuario.login);
 app.put('logout', Usuario.validarUsuario, Usuario.logout);
 app.get('/info', Usuario.validarUsuario, Usuario.obtenerInfo);
