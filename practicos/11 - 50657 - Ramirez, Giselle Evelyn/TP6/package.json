@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node servidor.mjs",
-    "dev": "nodemon servidor.mjs",  
+    "dev": "nodemon servidor.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,13 +18,12 @@
     "@babel/node": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
     "@material-ui/core": "^4.12.4",
+    "axios": "^1.7.2",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"  
+    "nodemon": "^2.0.22"
   }
 }
-
-

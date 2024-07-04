@@ -23,15 +23,14 @@
 - Usa variable 'usuario' en lugar de 'Usuario'
 
 ## 09 - 55466 - Medina, Álvaro Ignacio
-- Nota: 7
-- Son iguales #09, #14
+- Nota: 9
 
 ## 10 - 55986 - Paz, Octavio Emanuel
 - Nota: 10
 
 ## 11 - 50657 - Ramirez, Giselle Evelyn
-- Nota: 1
-- No hay nada
+- Nota: 9
+- Faltaba importar Axios
 
 ## 12 - 59690 - Rios, Yanina Gisele
 - Nota: 10
@@ -42,8 +41,7 @@
 - Son iguales #06, #13 (Express)
 
 ## 14 - 58800 - Valdez, Miguel Angel
-- Nota: 7
-- Son iguales #09, #14
+- Nota: 9
 
 ## 16 - 59265 - Cavanna, Victoria
 - Nota: 10

@@ -12,7 +12,7 @@ function App() {
       await axios.post('/register', { username, password });
       alert('User registered successfully');
     } catch (error) {
-      alert('Error registering user');
+      alert(error.toString());
     }
   };
 
@@ -151,4 +151,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));

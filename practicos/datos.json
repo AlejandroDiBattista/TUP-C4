@@ -163,9 +163,9 @@
     "tp6": true,
     "nota_tp3": 9,
     "comentario_tp3": " No permite edición simultanea de productos; Al agregar no cierra el formulario",
-    "nota_tp6": 7,
-    "comentario_tp6": "Son iguales #09, #14",
-    "estado": "regular"
+    "nota_tp6": 9,
+    "comentario_tp6": "",
+    "estado": "promocionado"
   },
   {
     "id": "C4-10",
@@ -201,8 +201,8 @@
     "tp4": true,
     "tp5": true,
     "tp6": true,
-    "nota_tp6": 1,
-    "comentario_tp6": "No hay nada",
+    "nota_tp6": 9,
+    "comentario_tp6": "Faltaba importar Axios",
     "nota_tp3": 8,
     "comentario_tp3": "No edita en el lugar;No incrementa el producto",
     "estado": "regular"
@@ -263,8 +263,8 @@
     "tp6": true,
     "nota_tp3": 10,
     "comentario_tp3": "",
-    "nota_tp6": 7,
-    "comentario_tp6": "Son iguales #09, #14",
+    "nota_tp6": 9,
+    "comentario_tp6": "",
     "estado": "regular"
   },
   {

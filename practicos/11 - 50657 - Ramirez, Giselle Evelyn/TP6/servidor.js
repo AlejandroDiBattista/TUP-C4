@@ -1,6 +1,7 @@
 import express from "express";
 import session from "express-session";
 import bodyParser from "body-parser";
+import cors from "cors";
 import fs from "fs";
 
 const app = express();
@@ -8,6 +9,7 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 app.use(
   session({
     secret: "secret",
@@ -17,19 +19,22 @@ app.use(
 );
 app.use(express.static("public"));
 
+let usuarios = {};
 const readUsers = () => {
-  const data = fs.readFileSync("users.json", "utf8");
-  return JSON.parse(data);
+  return usuarios
+  // const data = fs.readFileSync("users.json", "utf8");
+  // return JSON.parse(data);
 };
 
 const writeUsers = (users) => {
-  fs.writeFileSync("users.json", JSON.stringify(users, null, 2));
+  usuarios = users;
+  // fs.writeFileSync("users.json", JSON.stringify(users, null, 2));
 };
 
 app.post("/register", (req, res) => {
   const { username, password } = req.body;
   const users = readUsers();
-
+  console.log(">>>",users, username, password)
   if (users[username]) {
     res.send("User already registered");
   } else {
@@ -68,8 +73,9 @@ app.get("/logout", (req, res) => {
   });
 });
 
-app.get("/", (req, res) => {
-  res.send("¡Hola, mundo!");
+app.get("/all", (req, res) => {
+  let users = readUsers();
+  res.json(users);
 });
 
 app.listen(port, () => {
