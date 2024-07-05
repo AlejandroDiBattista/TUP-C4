@@ -6,6 +6,7 @@
 >
 58725 - **Garcia Bulacio**, Micaela             
 > **Corregir TP3**
+>
 > *La alta funciona solo algunas veces*
 >
 > *Agrega el ID antes de agregar el producto*
@@ -13,6 +14,7 @@
 
 50657 - **Ramirez**, Giselle Evelyn             
 > **Corregir TP3**
+>
 > *No edita en el lugar*
 >
 > *No incrementa el producto*
