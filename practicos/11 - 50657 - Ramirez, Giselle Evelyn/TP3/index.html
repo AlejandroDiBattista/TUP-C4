@@ -1,280 +1,373 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Control de Depósito</title>
     <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
-        h1 {
-            text-align: center;
-        }
-        .product-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            background-color: #fff;
-        }
-        .product-info {
-            display: flex;
-            flex-direction: column;
-        }
-        .product-name {
-            font-weight: bold;
-            font-size: 18px;
-            color: #007bff;
-        }
-        .product-ean {
-            font-size: 14px;
-            color: #555;
-        }
-        .product-quantity {
-            font-size: 14px;
-            color: #555;
-        }
-        .product-actions {
-            display: flex;
-            align-items: center;
-        }
-        .edit-button, .delete-button, .increment-button {
-            cursor: pointer;
-            margin-left: 10px;
-        }
-        .edit-button:hover, .delete-button:hover, .increment-button:hover {
-            color: #007bff;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 10px;
-        }
-        .form-group input {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-top: 5px;
-        }
-        .form-group button {
-            padding: 10px;
-            background-color: #dbe1e8;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .form-group button:hover {
-            background-color: #0056b3;
-        }
-        .error-message {
-            color: rgb(231, 113, 113);
-            
-            margin-top: 10px;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+      }
+      h1 {
+        text-align: center;
+      }
+      .product-card {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        background-color: #fff;
+      }
+      .product-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .product-details {
+        display: flex;
+        flex-direction: column;
+      }
+      .product-name {
+        font-weight: bold;
+        font-size: 18px;
+        color: #007bff;
+      }
+      .product-ean {
+        font-size: 14px;
+        color: #555;
+      }
+      .product-quantity {
+        font-size: 14px;
+        color: #555;
+        cursor: pointer;
+      }
+      .product-actions {
+        display: flex;
+        align-items: center;
+      }
+      .edit-button,
+      .delete-button {
+        cursor: pointer;
+        margin-left: 10px;
+      }
+      .edit-button:hover,
+      .delete-button:hover {
+        color: #007bff;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+      }
+      .form-group input {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-top: 5px;
+      }
+      .form-group button {
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+      .form-group button:hover {
+        background-color: #0056b3;
+      }
+      .error-message {
+        color: rgb(231, 113, 113);
+        margin-top: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <div id="root" class="container"></div>
 
     <script>
-        const DatosProductos = [
-            { nombre: 'Coca-Cola', ean: '7799876543210', cantidad: 15 },
-            { nombre: 'Burgol', ean: '7791234567890', cantidad: 10 },
-            { nombre: 'Arroz Gallo', ean: '7793219876540', cantidad: 5 },
-            { nombre: 'Fideos Luchetti', ean: '7797894561230', cantidad: 20 },
-            { nombre: 'Fanta Naranja', ean: '7796543219870', cantidad: 8 },
-        ];
+      const DatosProductos = [
+        { nombre: "Coca-Cola", ean: "7799876543210", cantidad: 15 },
+        { nombre: "Burgol", ean: "7791234567890", cantidad: 10 },
+        { nombre: "Arroz Gallo", ean: "7793219876540", cantidad: 5 },
+        { nombre: "Fideos Luchetti", ean: "7797894561230", cantidad: 98 },
+        { nombre: "Fanta Naranja", ean: "7796543219870", cantidad: 8 },
+      ];
     </script>
 
-    <script type="text/babel">
-        class App extends React.Component {
-            constructor(props) {
-                super(props);
-                this.state = {
-                    products: DatosProductos.map(product => ({
-                        name: product.nombre,
-                        ean: product.ean,
-                        quantity: product.cantidad
-                    })),
-                    name: '',
-                    ean: '',
-                    editIndex: -1,
-                    isAdding: false,
-                    error: '',
-                };
-            }
-
-            handleChange = (e) => {
-                this.setState({ [e.target.name]: e.target.value });
-            };
-
-            validateEAN = (ean) => {
-                return ean.length <= 13;
-            };
-
-            startAdding = () => {
-                this.setState({
-                    name: '',
-                    ean: '',
-                    editIndex: -1,
-                    isAdding: true,
-                    error: '',
-                });
-            };
-
-            addProduct = () => {
-                const { name, ean, products } = this.state;
-                if (name && ean) {
-                    if (!this.validateEAN(ean)) {
-                        this.setState({ error: 'El código EAN no puede tener más de 13 dígitos.' });
-                        return;
-                    }
-                    this.setState({
-                        products: [...products, { name, ean, quantity: 1 }],
-                        name: '',
-                        ean: '',
-                        isAdding: false,
-                        error: '',
-                    });
-                }
-            };
-
-            editProduct = (index) => {
-                const product = this.state.products[index];
-                this.setState({
-                    name: product.name,
-                    ean: product.ean,
-                    editIndex: index,
-                    isAdding: true,
-                    error: '',
-                });
-            };
-
-            updateProduct = () => {
-                const { name, ean, products, editIndex } = this.state;
-                if (name && ean) {
-                    if (!this.validateEAN(ean)) {
-                        this.setState({ error: 'El código EAN no puede tener más de 13 dígitos.' });
-                        return;
-                    }
-                    products[editIndex] = { ...products[editIndex], name, ean };
-                    this.setState({
-                        products,
-                        name: '',
-                        ean: '',
-                        editIndex: -1,
-                        isAdding: false,
-                        error: '',
-                    });
-                }
-            };
-
-            cancelEdit = () => {
-                this.setState({
-                    name: '',
-                    ean: '',
-                    editIndex: -1,
-                    isAdding: false,
-                    error: '',
-                });
-            };
-
-            deleteProduct = (index) => {
-                const products = [...this.state.products];
-                products.splice(index, 1);
-                this.setState({ products });
-            };
-
-            incrementQuantity = (index) => {
-                const products = [...this.state.products];
-                if (products[index].quantity < 100) {
-                    products[index].quantity += 1;
-                    this.setState({ products });
-                }
-            };
-
-            render() {
-                return (
-                    <div>
-                        <h1>Control de Depósito</h1>
-                        {!this.state.isAdding ? (
-                            <button onClick={this.startAdding}>Agregar Producto</button>
-                        ) : (
-                            <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Nombre del producto"
-                                    value={this.state.name}
-                                    onChange={this.handleChange}
-                                />
-                                <input
-                                    type="text"
-                                    name="ean"
-                                    placeholder="Código EAN"
-                                    value={this.state.ean}
-                                    onChange={this.handleChange}
-                                />
-                                {this.state.editIndex === -1 ? (
-                                    <div>
-                                        <button onClick={this.addProduct}>Aceptar</button>
-                                        <button onClick={this.cancelEdit}>Cancelar</button>
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <button onClick={this.updateProduct}>Aceptar</button>
-                                        <button onClick={this.cancelEdit}>Cancelar</button>
-                                    </div>
-                                )}
-                                {this.state.error && <div className="error-message">{this.state.error}</div>}
-                            </div>
-                        )}
-                        <div>
-                            {this.state.products.sort((a, b) => a.name.localeCompare(b.name)).map((product, index) => (
-                                <div className="product-card" key={index}>
-                                    <div className="product-info">
-                                        <span className="product-name">{product.name}</span>
-                                        <span className="product-ean">{product.ean}</span>
-                                        <span className="product-quantity">Cantidad: {product.quantity}</span>
-                                    </div>
-                                    <div className="product-actions">
-                                        <span className="edit-button" onClick={() => this.editProduct(index)}>✏️</span>
-                                        <span className="delete-button" onClick={() => this.deleteProduct(index)}>🗑️</span>
-                                        <span className="increment-button" onClick={() => this.incrementQuantity(index)}>➕</span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                );
-            }
+<script type="text/babel">
+    class App extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          products: DatosProductos.map((product) => ({
+            name: product.nombre,
+            ean: product.ean,
+            quantity: product.cantidad,
+          })),
+          name: "",
+          ean: "",
+          quantity: 0,
+          editIndex: -1,
+          isEditing: false,
+          isAdding: false,
+          error: "",
+        };
+      }
+  
+      handleChange = (e) => {
+        let value = e.target.value;
+        if (e.target.name === "quantity") {
+          value = Math.max(0, Math.min(100, parseInt(value, 10) || 0));
         }
-
-        ReactDOM.render(<App />, document.getElementById('root'));
+        this.setState({ [e.target.name]: value });
+      };
+  
+      validateEAN = (ean) => {
+        return ean.length <= 13;
+      };
+  
+      toggleAddForm = () => {
+        this.setState((prevState) => ({
+          isAdding: !prevState.isAdding,
+          name: "",
+          ean: "",
+          quantity: 0,
+          error: "",
+        }));
+      };
+       /*NO mayor a 0 ni menos a 0 en quantity */
+      addProduct = () => {
+        const { name, ean, quantity, products } = this.state;
+        if (name && ean && quantity >= 0 && quantity <= 100) {
+          if (!this.validateEAN(ean)) {
+            this.setState({
+              error: "El código EAN no puede tener más de 13 dígitos.",
+            });
+            return;
+          }
+          const newProduct = {
+            name,
+            ean,
+            quantity: parseInt(quantity, 10),
+          };
+          this.setState({
+            products: [...products, newProduct],
+            name: "",
+            ean: "",
+            quantity: 0,
+            isAdding: false,
+            error: "",
+          });
+        } else {
+          this.setState({
+            error: "La cantidad debe estar entre 0 y 100.",
+          });
+        }
+      };
+  
+      startEditing = (index) => {
+        const product = this.state.products[index];
+        this.setState({
+          name: product.name,
+          ean: product.ean,
+          quantity: product.quantity,
+          editIndex: index,
+          isEditing: true,
+          error: "",
+        });
+      };
+  
+      updateProduct = () => {
+        const { name, ean, quantity, products, editIndex } = this.state;
+        if (name && ean && quantity >= 0 && quantity <= 100) {
+          if (!this.validateEAN(ean)) {
+            this.setState({
+              error: "El código EAN no puede tener más de 13 dígitos.",
+            });
+            return;
+          }
+          products[editIndex] = {
+            ...products[editIndex],
+            name,
+            ean,
+            quantity: parseInt(quantity, 10),
+          };
+          this.setState({
+            products,
+            name: "",
+            ean: "",
+            quantity: 0,
+            editIndex: -1,
+            isEditing: false,
+            error: "",
+          });
+        } else {
+          this.setState({
+            error: "La cantidad debe estar entre 0 y 100.",
+          });
+        }
+      };
+  
+      cancelEdit = () => {
+        this.setState({
+          name: "",
+          ean: "",
+          quantity: 0,
+          editIndex: -1,
+          isEditing: false,
+          error: "",
+        });
+      };
+  
+      deleteProduct = (index) => {
+        const products = [...this.state.products];
+        products.splice(index, 1);
+        this.setState({ products });
+      };
+  
+      incrementQuantity = (index) => {
+        const products = [...this.state.products];
+        if (products[index].quantity < 100) {
+          products[index].quantity += 1;
+          this.setState({ products });
+        }
+      };
+  
+      render() {
+        return (
+          <div>
+            <h1>Control de Depósito</h1>
+  
+            <button onClick={this.toggleAddForm}>+</button>
+  
+            {this.state.isAdding && (
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Nombre del producto"
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+                <input
+                  type="text"
+                  name="ean"
+                  placeholder="Código EAN"
+                  value={this.state.ean}
+                  onChange={this.handleChange}
+                />
+                <input
+                  type="number"
+                  name="quantity"
+                  placeholder="Cantidad"
+                  value={this.state.quantity}
+                  onChange={this.handleChange}
+                  min="0"
+                  max="100"
+                />
+                <div>
+                  <button onClick={this.addProduct}>Aceptar</button>
+                  <button onClick={this.toggleAddForm}>Cancelar</button>
+                </div>
+                {this.state.error && (
+                  <div className="error-message">{this.state.error}</div>
+                )}
+              </div>
+            )}
+            {this.state.products
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((product, index) => (
+                <div key={index} className="product-card">
+                  {this.state.isEditing && this.state.editIndex === index ? (
+                    <div className="form-group">
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Nombre del producto"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                      />
+                      <input
+                        type="text"
+                        name="ean"
+                        placeholder="Código EAN"
+                        value={this.state.ean}
+                        onChange={this.handleChange}
+                      />
+                      <input
+                        type="number"
+                        name="quantity"
+                        placeholder="Cantidad"
+                        value={this.state.quantity}
+                        onChange={this.handleChange}
+                        min="0"
+                        max="100"
+                      />
+                      <div>
+                        <button onClick={this.updateProduct}>Aceptar</button>
+                        <button onClick={this.cancelEdit}>Cancelar</button>
+                      </div>
+                      {this.state.error && (
+                        <div className="error-message">{this.state.error}</div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="product-info">
+                      <div className="product-details">
+                        <span className="product-name">{product.name}</span>
+                        <span className="product-ean">EAN: {product.ean}</span>
+                        <span
+                          className="product-quantity"
+                          onClick={() => this.incrementQuantity(index)}
+                        >
+                          Cantidad: {product.quantity}
+                        </span>
+                      </div>
+                      <div className="product-actions">
+                        <span
+                          className="edit-button"
+                          onClick={() => this.startEditing(index)}
+                        >
+                          ✏️
+                        </span>
+                        <span
+                          className="delete-button"
+                          onClick={() => this.deleteProduct(index)}
+                        >
+                          🗑️
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+          </div>
+        );
+      }
+    }
+    
+    ReactDOM.render(<App />, document.getElementById("root"));
     </script>
-</body>
+  </body>
 </html>
-
-
