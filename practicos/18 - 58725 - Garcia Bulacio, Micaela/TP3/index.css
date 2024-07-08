@@ -5,7 +5,7 @@ body {
     padding: 0;
 }
 
-.card {
+.card, .form-agregar {
     font-size: 20px;
     width: 300px;
     max-width: 500px;
@@ -14,11 +14,14 @@ body {
     border-radius: 15px;
     border: 1px solid #cccccc;
     background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.184);
+    position: relative;
+}
+
+.card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.184);
-    position: relative;
 }
 
 .card2 {
@@ -94,7 +97,6 @@ input {
     width: 70%;
     margin-bottom: 8px;
 }
-
 
 i {
     display: block;

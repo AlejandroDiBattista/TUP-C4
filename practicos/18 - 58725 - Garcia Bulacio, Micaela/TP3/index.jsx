@@ -1,4 +1,4 @@
-const { useState, useEffect } = React
+const { useState, useEffect } = React;
 
 const productosIniciales = [
     { id: 1, nombre: 'Cafe', codigo: '7799875443216', cantidad: 7, editando: false },
@@ -9,48 +9,55 @@ const productosIniciales = [
     { id: 6, nombre: 'Helado', codigo: '7796543219883', cantidad: 4, editando: false }
 ];
 
-function Agenda({ productos, editar, cancelarEdicion, borrar, agregar, agregarCant }) {
-    if (productos.length === 0) {
-        return (
-            <div className="Productos0">
-                <h1>No hay productos</h1>
-                <button className="agregarProd" onClick={agregar}><i className="fas fa-plus"></i></button>
-            </div>
-        )
-    }
+function Agenda({ productos, editar, cancelarEdicion, borrar, agregarCant, agregarProducto }) {
+    const ordenarAlfabeticamente = (productos) => {
+        return productos.slice().sort((a, b) => a.nombre.localeCompare(b.nombre));
+    };
 
-    function ordenAlfabetico(a, b) {
-        if (a.nombre < b.nombre) return -1
-        if (a.nombre > b.nombre) return 1
-        return 0
-    }
+    const [mostrarFormulario, setMostrarFormulario] = useState(false);
 
-    productos.sort(ordenAlfabetico)
+    const mostrarFormularioHandler = () => {
+        setMostrarFormulario(true);
+    };
+
+    const cancelarAgregar = () => {
+        setMostrarFormulario(false);
+    };
 
     return (
         <div className="agenda">
             <div className="titulo">
                 <h1>Control Depósito</h1>
-                <button className="agregarProd" onClick={agregar}><i className="fas fa-plus"></i></button>
+                {!mostrarFormulario && (
+                    <button className="agregarProd" onClick={mostrarFormularioHandler}>
+                        <i className="fas fa-plus"></i>
+                    </button>
+                )}
             </div>
-            {productos.map(producto => (
+            {mostrarFormulario && (
+                <AgregarProducto
+                    cancelarAgregar={cancelarAgregar}
+                    agregarProducto={agregarProducto}
+                    productos={productos}
+                />
+            )}
+            {ordenarAlfabeticamente(productos).map(producto => (
                 <div key={producto.id}>
-                    {producto.editando
-                        ?
+                    {producto.editando ? (
                         <EditarAgenda
                             producto={producto}
                             productos={productos}
-                            guardar={(p) => editar(p)}
+                            guardar={p => editar(p)}
                             cancelar={() => cancelarEdicion(producto)}
                         />
-                        :
+                    ) : (
                         <Mostrar
                             producto={producto}
                             editar={() => editar({ ...producto, editando: true })}
                             borrar={() => borrar(producto)}
                             agregarCant={() => agregarCant(producto)}
                         />
-                    }
+                    )}
                 </div>
             ))}
         </div>
@@ -59,19 +66,19 @@ function Agenda({ productos, editar, cancelarEdicion, borrar, agregar, agregarCa
 
 function Mostrar({ producto, editar, borrar, agregarCant }) {
     const handleClick = (e) => {
-        e.stopPropagation()
-        agregarCant()
-    }
+        e.stopPropagation();
+        agregarCant();
+    };
 
     const handleEditClick = (e) => {
-        e.stopPropagation()
-        editar()
-    }
+        e.stopPropagation();
+        editar();
+    };
 
     const handleDeleteClick = (e) => {
-        e.stopPropagation()
-        borrar()
-    }
+        e.stopPropagation();
+        borrar();
+    };
 
     return (
         <div className="card" onClick={handleClick}>
@@ -89,139 +96,219 @@ function Mostrar({ producto, editar, borrar, agregarCant }) {
 }
 
 function EditarAgenda({ producto, productos, guardar, cancelar }) {
-    const [nombre, setNombre] = useState(producto.nombre)
-    const [codigo, setCodigo] = useState(producto.codigo)
-    const [cantidad, setCantidad] = useState(producto.cantidad)
-    const [error, setError] = useState(false)
-    const [error2, setError2] = useState(false)
-    const [error3, setError3] = useState(false)
-    const [error4, setError4] = useState(false)
+    const [nombre, setNombre] = useState(producto.nombre);
+    const [codigo, setCodigo] = useState(producto.codigo);
+    const [cantidad, setCantidad] = useState(producto.cantidad);
+    const [error, setError] = useState(false);
+    const [error2, setError2] = useState(false);
+    const [error3, setError3] = useState(false);
+    const [error4, setError4] = useState(false);
+    const [error5, setError5] = useState(false);
 
     const cambiarNombre = (e) => {
-        setNombre(e.target.value)
-        setError(false)
-    }
+        setNombre(e.target.value);
+        setError(false);
+        setError4(false);
+    };
 
     const cambiarCodigo = (e) => {
-        setCodigo(e.target.value)
-        setError(false)
-        setError3(false)
-        setError4(false)
-        if (codigo.length > 12) return setCodigo(codigo.substring(0, codigo.length - 1))
-    }
+        const value = e.target.value;
+        setCodigo(value);
+        setError(false);
+        setError3(false);
+        setError5(false);
+        if (value.length > 13) {
+            setCodigo(value.substring(0, 13));
+        }
+    };
 
     const cambiarCantidad = (e) => {
-        setCantidad(e.target.value);
+        const value = parseInt(e.target.value);
+        setCantidad(value);
         setError(false);
         setError2(false);
-        if (parseInt(cantidad) <= 0) return setCantidad(1)
-    }
+        if (value < 0) {
+            setCantidad(0);
+        }
+    };
 
     const CodigoDuplicado = (codigo) => {
-        return productos.some(p => p.codigo === codigo && p.id !== producto.id)
-    }
+        return productos.some(p => p.codigo === codigo && p.id !== producto.id);
+    };
+
+    const NombreDuplicado = (nombre) => {
+        return productos.some(p => p.nombre === nombre && p.id !== producto.id);
+    };
 
     const guardarProducto = (e) => {
         e.preventDefault();
         if (nombre.trim() === '' || codigo.trim() === '' || cantidad === '') {
-           setError(true)
-           return
-          }
-        if (parseInt(cantidad) < 0) {
-            setError2(true)
-            return
+            setError(true);
+            return;
         }
-        if (codigo.length < 13) {
-            setError3(true)
-            return
+        if (cantidad < 0) {
+            setError2(true);
+            return;
+        }
+        if (codigo.length !== 13) {
+            setError3(true);
+            return;
+        }
+        if (NombreDuplicado(nombre)) {
+            setError4(true);
+            return;
         }
         if (CodigoDuplicado(codigo)) {
-            setError4(true)
-            return
+            setError5(true);
+            return;
         }
-        guardar({ ...producto, nombre, codigo, cantidad, editando: false })
-    }
+        guardar({ ...producto, nombre, codigo, cantidad, editando: false });
+    };
 
     const cancelarEdicion = (e) => {
-        e.preventDefault()
-        cancelar()
-    }
+        e.preventDefault();
+        cancelar();
+    };
 
     return (
         <div className="card2">
-            <form>
+            <form onSubmit={guardarProducto}>
                 <div className="input-1">
                     <div className="input-2">
-                        <div><input type="text" placeholder="Producto" onChange={cambiarNombre} value={nombre} /></div>
-                        <div><input type="text" placeholder="Código" onChange={cambiarCodigo} value={codigo} /></div>
-                        <div><input type="number" placeholder="Cantidad" onChange={cambiarCantidad} value={cantidad} /></div>
+                        <input type="text" placeholder="Producto" onChange={cambiarNombre} value={nombre} />
+                        <input type="text" placeholder="Código" onChange={cambiarCodigo} value={codigo} />
+                        <input type="number" placeholder="Cantidad" onChange={cambiarCantidad} value={cantidad} />
                     </div>
                 </div>
                 <div className="edit-buttons">
-                    <div className="bt1"><button className="btn" onClick={guardarProducto}>Aceptar</button></div>
-                    <div><button className="btn1" onClick={cancelarEdicion}>Cancelar</button></div>
+                    <button type="submit" className="btn-custom">Aceptar</button>
+                    <button type="button" className="btn-custom-cancel" onClick={cancelarEdicion}>Cancelar</button>
                 </div>
             </form>
             {error  && <p className="errores">Completa todos los campos</p>}
             {error2 && <p className="errores2">No pueden haber valores negativos</p>}
             {error3 && <p className="errores2">El código debe tener 13 dígitos</p>}
-            {error4 && <p className="errores2">El código ya existe</p>}
+            {error4 && <p className="errores2">El producto ya existe</p>}
+            {error5 && <p className="errores2">El código ya existe</p>}
+        </div>
+    );
+}
+function AgregarProducto({ cancelarAgregar, agregarProducto, productos }) {
+    const [nuevo, setNuevo] = useState({ nombre: '', codigo: '', cantidad: '' });
+    const [error, setError] = useState(false);
+    const [error2, setError2] = useState(false);
+    const [error3, setError3] = useState(false);
+
+    const handleCampo = (e) => {
+        const { name, value } = e.target;
+        setNuevo({ ...nuevo, [name]: value });
+    };
+
+    const ultimoId = () => {
+        return Math.max(...productos.map((product) => product.id), 0) + 1;
+    };
+
+    const agregarProductoNuevo = (e) => {
+        e.preventDefault();
+        if (nuevo.nombre && nuevo.codigo && nuevo.cantidad) {
+            if (/^\d{13}$/.test(nuevo.codigo.replace(/\s/g, ''))) {
+                if (!NombreDuplicado(nuevo.nombre) && !CodigoDuplicado(nuevo.codigo)) {
+                    agregarProducto({ id: ultimoId(),  ...nuevo, cantidad: parseInt(nuevo.cantidad)});
+                    setNuevo({ nombre: '', codigo: '', cantidad: '' });
+                    setError(false);
+                    setError2(false);
+                    setError3(false);
+                    cancelarAgregar();
+                } else {
+                    setError3(true); 
+                }
+            } else {
+                setError2(true); 
+            }
+        } else {
+            setError(true); 
+        }
+    };
+
+    const cancelar = () => {
+        setNuevo({ nombre: '', codigo: '', cantidad: '' });
+        cancelarAgregar();
+    };
+
+    const CodigoDuplicado = (codigo) => {
+        return productos.some(p => p.codigo === codigo);
+    };
+
+    const NombreDuplicado = (nombre) => {
+        return productos.some(p => p.nombre === nombre);
+    };
+
+    return (
+        <div className="form-agregar">
+            <form onSubmit={agregarProductoNuevo}>
+                <input type="text" name="nombre" placeholder="Producto" value={nuevo.nombre} onChange={handleCampo} />
+                <input type="text" name="codigo" placeholder="Código" value={nuevo.codigo} maxLength={13} onChange={handleCampo} />
+                <input type="number" name="cantidad" placeholder="Cantidad" value={nuevo.cantidad} min={0} onChange={handleCampo} />
+                <div className="edit-buttons">
+                    <button type="submit" className="btn-custom">Agregar</button>
+                    <button type="button" className="btn-custom-cancel" onClick={cancelar}>Cancelar</button>
+                </div>
+            </form>
+            {error && <p className="errores">Completa todos los campos</p>}
+            {error2 && <p className="errores2">El código debe tener 13 dígitos numéricos</p>}
+            {error3 && <p className="errores2">El producto o código ya existe</p>}
         </div>
     );
 }
 
-function App() {
+function Principal() {
     const [productos, setProductos] = useState(() => {
-        const savedProductos = localStorage.getItem('productos')
-        return savedProductos ? JSON.parse(savedProductos) : productosIniciales
-    })
+        const productosGuardados = localStorage.getItem('productos');
+        return productosGuardados ? JSON.parse(productosGuardados) : productosIniciales;
+    });
 
     useEffect(() => {
-        localStorage.setItem('productos', JSON.stringify(productos))
-    }, [productos])
+        localStorage.setItem('productos', JSON.stringify(productos));
+    }, [productos]);
 
-    const idNuevo = () => {
-        let ids = productos.map(p => p.id);
-        return ids.length > 0 ? Math.max(...ids) + 1 : 1
-    }
+    const editar = (productoActualizado) => {
+        setProductos(productos.map(producto =>
+            producto.id === productoActualizado.id ? productoActualizado : producto
+        ));
+    };
 
-    const editarProducto = (producto) => {
-        setProductos(productos.map(p => (p.id === producto.id ? producto : p)))
-    }
+    const cancelarEdicion = (producto) => {
+        setProductos(productos.map(p =>
+            p.id === producto.id ? { ...p, editando: false } : p
+        ));
+    };
 
-    const cancelarEdicionProd = (producto) => {
-        if (producto.nombre === '' && producto.codigo === '' && producto.cantidad === '') {
-            borrarProducto(producto);
-        } else {
-            setProductos(productos.map(p => (p.id === producto.id ? { ...p, editando: false } : p)))
-        }
-    }
+    const borrar = (producto) => {
+        setProductos(productos.filter(p => p.id !== producto.id));
+    };
 
-    const borrarProducto = (producto) => {
-        setProductos(productos.filter(p => p.id !== producto.id))
-    }
+    const agregarCant = (producto) => {
+        setProductos(productos.map(p =>
+            p.id === producto.id ? { ...p, cantidad: p.cantidad + 1 } : p
+        ));
+    };
 
-    const agregarProducto = () => {
-        const nuevoProducto = { id: idNuevo(), nombre: '', codigo: '', cantidad: '', editando: true }
-        setProductos([...productos, nuevoProducto])
-    }
-
-    const agregarCantidad = (producto) => {
-        setProductos(productos.map(p => (p.id === producto.id ? { ...producto, cantidad: parseInt(producto.cantidad) + 1 } : p)))
-    }
+    const agregarProducto = (nuevoProducto) => {
+        setProductos([...productos, nuevoProducto]);
+    };
 
     return (
-        <div>
+        <div className="principal">
             <Agenda
                 productos={productos}
-                editar={editarProducto}
-                cancelarEdicion={cancelarEdicionProd}
-                borrar={borrarProducto}
-                agregar={agregarProducto}
-                agregarCant={agregarCantidad}
+                editar={editar}
+                cancelarEdicion={cancelarEdicion}
+                borrar={borrar}
+                agregarCant={agregarCant}
+                agregarProducto={agregarProducto}
             />
         </div>
     );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<Principal />, document.getElementById('root'));
