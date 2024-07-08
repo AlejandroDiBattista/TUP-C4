@@ -215,7 +215,7 @@
     "comentario_tp6": "Faltaba importar Axios",
     "nota_tp3": 9,
     "comentario_tp3": "No edita en el lugar",
-    "estado": "recuperar",
+    "estado": "promocionado",
     "subio": "28-Jun 08:20"
   },
   {
@@ -358,7 +358,7 @@
     "comentario_tp3": "",
     "nota_tp6": 9,
     "comentario_tp6": "Muestra formulario registrar y login en una misma pagina",
-    "estado": "recuperar",
+    "estado": "promocionado",
     "subio": "21-Jun 23:39"
   }
 ]
