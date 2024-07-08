@@ -3,9 +3,9 @@
 
 ## RECUPERACIÓN
 > [!NOTE]
-> Estos alumnos tienen hasta el lunes 8 para presentar las correcciones
+> Estos alumnos tienen hasta el *miercoles 10* para presentar las correcciones
 >
-58800 - **Valdez**, Miguel Angel                
+58800 - **Valdez**, Miguel Angel                  <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="6" height="6"> <img src="./material/rojo.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="6" height="6">
 > **Presentar: TP4**
 >
 
