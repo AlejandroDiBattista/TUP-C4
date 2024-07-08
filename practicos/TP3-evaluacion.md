@@ -29,9 +29,8 @@
 - Nota: 10
 
 ## 11 - 50657 - Ramirez, Giselle Evelyn
-- Nota: 8
+- Nota: 9
 - No edita en el lugar
-- No incrementa el producto
 
 ## 12 - 59690 - Rios, Yanina Gisele
 - Nota: 10
@@ -51,6 +50,4 @@
 - Diferencias en el diseño
 
 ## 18 - 58725 - Garcia Bulacio, Micaela
-- Nota: 8
-- La alta funciona solo algunas veces
-- Agrega el ID antes de agregar el producto
+- Nota: 9

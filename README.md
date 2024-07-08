@@ -1,36 +1,19 @@
-# Resultado Final
+# Resultado Final - Comisión 4
 (Seguimos revisando material, puede haber cambios)
 
-## RECUPERACIÓN
-> [!NOTE]
-> Estos alumnos tienen hasta el lunes 8 para presentar las correcciones
->
-58725 - **Garcia Bulacio**, Micaela             
-> **Corregir TP3**
->
-> *La alta funciona solo algunas veces*
->
-> *Agrega el ID antes de agregar el producto*
->
-
-50657 - **Ramirez**, Giselle Evelyn             
-> **Corregir TP3**
->
-> *No edita en el lugar*
->
-> *No incrementa el producto*
->
 
 
 #### Promocionados
 1. 59265 - **Cavanna**, Victoria                   
 1. 55505 - **Chazarreta Robles**, María            
 1. 50694 - **Ferrari**, Stefano                    
+1. 58725 - **Garcia Bulacio**, Micaela             
 1. 59417 - **Gómez Iturre**, Joaquín               
 1. 59093 - **Ledesma**, Facundo Osvaldo            
 1. 59200 - **López**, Tiago Gabriel                
 1. 55466 - **Medina**, Álvaro Ignacio              
 1. 55986 - **Paz**, Octavio Emanuel                
+1. 50657 - **Ramirez**, Giselle Evelyn             
 1. 59690 - **Rios**, Yanina Gisele                 
 
 #### Regulares
