@@ -24,7 +24,7 @@
 1. 59690 - **Rios**, Yanina Gisele                   <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="6" height="6"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="6" height="6">
 
 #### Regulares
-1. 59097 - **Martin Ibarra**, Patricio               <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/amarillo.png" width="6" height="6">
+1. 59097 - **Martin Ibarra**, Patricio               <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/rojo.png" width="6" height="6"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/amarillo.png" width="6" height="6">
 1. 58798 - **Salazar**, Santiago                     <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="6" height="6"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/verde.png" width="4" height="4"> <img src="./material/amarillo.png" width="6" height="6">
 
 #### Libres
