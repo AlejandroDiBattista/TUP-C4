@@ -1,13 +1,94 @@
 body {
-    background-color: #ccc;
-    height: 100vh;
+    background-color: #e0e0e0; /* Un mejor tono de gris */
+    font-family: Arial, sans-serif;
 }
 
-#root {
+.contenedor {
+    max-width: 400px;
     margin: 0 auto;
-    max-width: 500px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.titulo{
+
+.arriba {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.encabezado {
+    width: 100%;
+    text-align: center; /* Centrar el título */
+    background-color: #d3d3d3; /* Fondo del título */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.encabezado h1 {
+    margin: 0;
+    color: #333;
+}
+
+.enlaces-ciudades ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.enlaces-ciudades a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.enlaces-ciudades a:hover {
+    color: #004b9c;
+}
+
+.formulario-busqueda {
     justify-content: center;
+    margin: 20px 0;
+}
+
+.input-busqueda {
+    padding: 18px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 90%;
+    outline: none;
+}
+
+.tarjeta-clima {
+    width: 100%;
+    background-color: #f9f9f9;
+    padding: 1px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.tarjeta-clima img {
+    width: 150px; /* Ajuste del tamaño del ícono */
+    height: 150px;
+    background-color: #bbdcff;
+    border-radius: 5px;
+}
+
+.tarjeta-clima p {
+    margin: 10px 0;
+}
+
+.nombre-ciudad {
+    font-size: 28px;
+    margin: 5px;
+}
+
+.temperatura-ciudad {
+    font-size: 22px;
 }
