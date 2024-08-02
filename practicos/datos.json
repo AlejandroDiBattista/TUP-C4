@@ -14,7 +14,8 @@
     "tp5": true,
     "tp6": false,
     "estado": "libre",
-    "subio": "No subido"
+    "subio": "No subido",
+    "nota": 1
   },
   {
     "id": "C4-02",
@@ -35,7 +36,8 @@
     "nota_tp6": 10,
     "comentario_tp6": "Falta instalar jsonwebtoken",
     "estado": "promocionado",
-    "subio": "21-Jun 22:57"
+    "subio": "21-Jun 22:57",
+    "nota": 10
   },
   {
     "id": "C4-03",
@@ -56,7 +58,8 @@
     "nota_tp6": 10,
     "comentario_tp6": "Tuve cambiar direccion de sitio (127.0.0.1 a localhost)",
     "estado": "promocionado",
-    "subio": "11-Jun 21:53"
+    "subio": "11-Jun 21:53",
+    "nota": 10
   },
   {
     "id": "C4-04",
@@ -73,7 +76,8 @@
     "tp5": false,
     "tp6": false,
     "estado": "libre",
-    "subio": "No subido"
+    "subio": "No subido",
+    "nota": 1
   },
   {
     "id": "C4-05",
@@ -90,7 +94,8 @@
     "tp5": false,
     "tp6": false,
     "estado": "libre",
-    "subio": "No subido"
+    "subio": "No subido",
+    "nota": 1
   },
   {
     "id": "C4-06",
@@ -111,7 +116,8 @@
     "nota_tp6": 9,
     "comentario_tp6": "Falta instalar jsonwebtoken",
     "estado": "promocionado",
-    "subio": "20-Jun 15:13"
+    "subio": "20-Jun 15:13",
+    "nota": 10
   },
   {
     "id": "C4-07",
@@ -132,7 +138,8 @@
     "nota_tp6": 10,
     "comentario_tp6": "Falta instalar dotenv",
     "estado": "promocionado",
-    "subio": "20-Jun 18:49"
+    "subio": "20-Jun 18:49",
+    "nota": 10
   },
   {
     "id": "C4-08",
@@ -153,7 +160,8 @@
     "nota_tp3": 3,
     "comentario_tp3": "No esta implementada ninguna funcionalidad",
     "estado": "regular",
-    "subio": "20-Jun 06:55"
+    "subio": "20-Jun 06:55",
+    "nota": 6
   },
   {
     "id": "C4-09",
@@ -174,7 +182,8 @@
     "nota_tp6": 9,
     "comentario_tp6": "",
     "estado": "promocionado",
-    "subio": "21-Jun 22:32"
+    "subio": "21-Jun 22:32",
+    "nota": 9
   },
   {
     "id": "C4-10",
@@ -195,7 +204,8 @@
     "nota_tp6": 10,
     "comentario_tp6": "",
     "estado": "promocionado",
-    "subio": "20-Jun 04:53"
+    "subio": "20-Jun 04:53",
+    "nota": 10
   },
   {
     "id": "C4-11",
@@ -216,7 +226,8 @@
     "nota_tp3": 9,
     "comentario_tp3": "No edita en el lugar",
     "estado": "promocionado",
-    "subio": "28-Jun 08:20"
+    "subio": "28-Jun 08:20",
+    "nota": 9
   },
   {
     "id": "C4-12",
@@ -237,7 +248,8 @@
     "nota_tp3": 10,
     "comentario_tp3": "",
     "estado": "promocionado",
-    "subio": "20-Jun 11:29"
+    "subio": "20-Jun 11:29",
+    "nota": 10
   },
   {
     "id": "C4-13",
@@ -258,7 +270,8 @@
     "nota_tp6": 7,
     "comentario_tp6": "Son iguales #06, #13 (Express)",
     "estado": "regular",
-    "subio": "21-Jun 19:46"
+    "subio": "21-Jun 19:46",
+    "nota": 8
   },
   {
     "id": "C4-14",
@@ -279,7 +292,8 @@
     "nota_tp6": 9,
     "comentario_tp6": "",
     "estado": "promocionado",
-    "subio": "21-Jun 21:22"
+    "subio": "21-Jun 21:22",
+    "nota": 10
   },
   {
     "id": "C4-15",
@@ -296,7 +310,8 @@
     "tp5": false,
     "tp6": false,
     "estado": "libre",
-    "subio": "No subido"
+    "subio": "No subido",
+    "nota": 1
   },
   {
     "id": "C4-16",
@@ -317,7 +332,8 @@
     "nota_tp6": 10,
     "comentario_tp6": "Perfecto;Falta instalar jsonwebtoken y bcrytjs",
     "estado": "promocionado",
-    "subio": "21-Jun 17:43"
+    "subio": "21-Jun 17:43",
+    "nota": 10
   },
   {
     "id": "C4-17",
@@ -338,7 +354,8 @@
     "nota_tp3": 9,
     "comentario_tp3": "Diferencias en el diseño",
     "estado": "promocionado",
-    "subio": "21-Jun 22:21"
+    "subio": "21-Jun 22:21",
+    "nota": 10
   },
   {
     "id": "C4-18",
@@ -359,6 +376,7 @@
     "nota_tp6": 9,
     "comentario_tp6": "Muestra formulario registrar y login en una misma pagina",
     "estado": "promocionado",
-    "subio": "21-Jun 23:39"
+    "subio": "21-Jun 23:39",
+    "nota": 9
   }
 ]
